@@ -10,6 +10,7 @@ services:
   #   links:
   #     - api
   api:
+    container_name: 'connthass-api'
     build: ./api
     volumes:
       - ./api:/go/api
@@ -17,11 +18,12 @@ services:
       - '18888:8080'
     links:
       - db
-  # db:
-  #   build: ./db
-  #   volumes:
-  #     - ./db/data:/var/lib/mysql
-  #   ports:
-  #     - '33306:3306'
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=root
+  db:
+    container_name: 'connthass-db'
+    build: ./db
+    volumes:
+      - ./db/data:/var/lib/mysql
+    ports:
+      - '33306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root

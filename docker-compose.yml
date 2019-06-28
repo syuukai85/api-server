@@ -1,0 +1,27 @@
+version: '3'
+services:
+  # web:
+  #   build: ./web
+  #   volumes:
+  #     - ./web:/app
+  #   tty: true
+  #   ports:
+  #     - '14000:4000'
+  #   links:
+  #     - api
+  api:
+    build: ./api
+    volumes:
+      - ./api:/go/api
+    ports:
+      - '18888:8080'
+    links:
+      - db
+  # db:
+  #   build: ./db
+  #   volumes:
+  #     - ./db/data:/var/lib/mysql
+  #   ports:
+  #     - '33306:3306'
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root

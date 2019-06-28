@@ -1,9 +1,10 @@
 version: '3'
 services:
-  # web:
+  # frontend:
+  #   container_name: 'connthass-frontend'
   #   build: ./web
   #   volumes:
-  #     - ./web:/app
+  #     - ./frontend:/app
   #   tty: true
   #   ports:
   #     - '14000:4000'

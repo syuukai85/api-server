@@ -7,5 +7,5 @@ type Entry struct {
 	gorm.Model
 	UserID   uint
 	EventID  uint
-	StatusID uint
+	StateID uint
 }

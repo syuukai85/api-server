@@ -60,8 +60,10 @@ func GetDB() *gorm.DB {
 func autoMigrate() {
 	db.AutoMigrate(
 		entity.User{},
+		entity.Likes{},
 		entity.Category{},
 		entity.Event{},
+		entity.EventCategory{},
 		entity.Role{},
 		entity.Entry{},
 		entity.EntryState{},

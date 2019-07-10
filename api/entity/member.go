@@ -2,7 +2,7 @@ package entity
 
 import "github.com/jinzhu/gorm"
 
-// Member is relational table
+// Member グループに所属するメンバーの関連テーブル
 type Member struct {
 	gorm.Model
 	GroupID uint

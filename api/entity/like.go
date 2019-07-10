@@ -2,8 +2,8 @@ package entity
 
 import "github.com/jinzhu/gorm"
 
-// Likes is relational table
-type Likes struct {
+// Like 好きなカテゴリの関連テーブル
+type Like struct {
 	gorm.Model
 	UserID     uint
 	CategoryID uint

@@ -2,7 +2,7 @@ package entity
 
 import "github.com/jinzhu/gorm"
 
-// Role is describe user role
+// Role イベント、グループ、システムの権限
 type Role struct {
 	gorm.Model
 	Name string `gorm:"size:50"`

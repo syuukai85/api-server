@@ -2,7 +2,7 @@ package entity
 
 import "github.com/jinzhu/gorm"
 
-// EventCategory is relational table
+// EventCategory イベントカテゴリ
 type EventCategory struct {
 	gorm.Model
 	EventID    uint

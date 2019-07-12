@@ -1,13 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
-import axios from 'axios';
-
+import * as Api from 'typescript-fetch-api';
 import './App.css';
 
 const App: React.FC = () => {
   const handleClick = async () => {
-    const response = await axios.get(`http://localhost:18888/`);
-    console.log(response);
+    const EventApi = new Api.EventApi();
+    const event = await EventApi.getEventById({ eventId: 0 });
+    console.log(event);
   };
   return (
     <div className="App">

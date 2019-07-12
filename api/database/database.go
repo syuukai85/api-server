@@ -57,33 +57,38 @@ func autoMigrate() {
 		entity.Category{},
 		entity.Event{},
 		entity.EventCategory{},
-		entity.Role{},
+		entity.AppRole{},
+		entity.SysRole{},
 		entity.EntryEvent{},
-		entity.Role{},
 		entity.Group{},
 		entity.Member{},
 		entity.CheckedEvent{},
 		entity.Bookmark{},
+		entity.Venue{},
 	)
 
-	db.Model(entity.User{}).AddForeignKey("role_id", "roles(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.User{}).AddForeignKey("sys_role_id", "sys_roles(id)", "RESTRICT", "CASCADE")
 
-	db.Model(entity.Bookmark{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.Bookmark{}).AddForeignKey("event_id", "events(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.Bookmark{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+	db.Model(entity.Bookmark{}).AddForeignKey("event_id", "events(id)", "CASCADE", "CASCADE")
 
-	db.Model(entity.CheckedEvent{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.CheckedEvent{}).AddForeignKey("event_id", "events(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.CheckedEvent{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+	db.Model(entity.CheckedEvent{}).AddForeignKey("event_id", "events(id)", "CASCADE", "CASCADE")
 
-	db.Model(entity.EntryEvent{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.EntryEvent{}).AddForeignKey("event_id", "events(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.EntryEvent{}).AddForeignKey("role_id", "roles(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.EntryEvent{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+	db.Model(entity.EntryEvent{}).AddForeignKey("event_id", "events(id)", "CASCADE", "CASCADE")
+	db.Model(entity.EntryEvent{}).AddForeignKey("app_role_id", "app_roles(id)", "RESTRICT", "CASCADE")
 
-	db.Model(entity.Member{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.Member{}).AddForeignKey("role_id", "roles(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.Like{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+	db.Model(entity.Like{}).AddForeignKey("category_id", "categories(id)", "CASCADE", "CASCADE")
 
-	db.Model(entity.Like{}).AddForeignKey("user_id", "users(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.Like{}).AddForeignKey("category_id", "categories(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.EventCategory{}).AddForeignKey("event_id", "events(id)", "CASCADE", "CASCADE")
+	db.Model(entity.EventCategory{}).AddForeignKey("category_id", "categories(id)", "CASCADE", "CASCADE")
 
-	db.Model(entity.EventCategory{}).AddForeignKey("event_id", "events(id)", "RESTRICT", "RESTRICT")
-	db.Model(entity.EventCategory{}).AddForeignKey("category_id", "categories(id)", "RESTRICT", "RESTRICT")
+	db.Model(entity.Member{}).AddForeignKey("user_id", "users(id)", "CASCADE", "CASCADE")
+	db.Model(entity.Member{}).AddForeignKey("app_role_id", "app_roles(id)", "RESTRICT", "CASCADE")
+	db.Model(entity.Member{}).AddForeignKey("group_id", "`groups`(id)", "CASCADE", "CASCADE")
+
+	db.Model(entity.Event{}).AddForeignKey("group_id", "`groups`(id)", "SET NULL", "CASCADE")
+	db.Model(entity.Event{}).AddForeignKey("venue_id", "venues(id)", "SET NULL", "CASCADE")
 }

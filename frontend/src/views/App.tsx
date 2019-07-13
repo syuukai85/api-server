@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from '../state/store';
-import LoginPage from './components/login/LoginPage';
+import LoginPage from './components/auth/LoginPage';
 
 const store = configureStore();
 

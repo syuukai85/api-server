@@ -23,6 +23,7 @@ const updateLoginState = (dispatch: Redux.Dispatch) => {
       return;
     }
     dispatch(actions.isLogin(user));
+    dispatch(push('/'));
   });
 };
 

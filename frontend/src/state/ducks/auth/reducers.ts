@@ -16,7 +16,7 @@ const initialState = {
 
 const auth = (state: AppState = initialState, action: AuthAction): AppState => {
   switch (action.type) {
-    case ActionTypes.IS_LOGIN: {
+    case ActionTypes.SAVE_LOGIN_USER: {
       return Object.assign({}, state, {
         uid: action.payload.uid,
         displayName: action.payload.displayName,

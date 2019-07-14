@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { Action } from 'redux';
 
 interface IsLoginAction extends Action {
-  type: typeof ActionTypes.IS_LOGIN;
+  type: typeof ActionTypes.SAVE_LOGIN_USER;
   payload: {
     uid: string;
     displayName: string | null;
@@ -13,7 +13,7 @@ interface IsLoginAction extends Action {
 
 const isLogin = (user: firebase.User): IsLoginAction => {
   return {
-    type: ActionTypes.IS_LOGIN,
+    type: ActionTypes.SAVE_LOGIN_USER,
     payload: {
       displayName: user.displayName,
       email: user.email,

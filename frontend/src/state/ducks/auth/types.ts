@@ -1,4 +1,4 @@
 export enum ActionTypes {
-  IS_LOGIN = 'IS_LOGIN',
+  SAVE_LOGIN_USER = 'SAVE_LOGIN_USER',
   LOGOUT = 'LOGOUT'
 }

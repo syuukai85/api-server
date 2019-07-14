@@ -18,13 +18,22 @@ const loginGoogle = async (dispatch: Redux.Dispatch) => {
 };
 
 const updateLoginState = (dispatch: Redux.Dispatch) => {
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      return;
+  console.log('pass to update Login State');
+  dispatch(actions.startLoading());
+  firebase.auth().onAuthStateChanged(
+    user => {
+      if (!user) {
+        dispatch(actions.endLoading());
+        return;
+      }
+      dispatch(actions.isLogin(user));
+      console.log('change!');
+      dispatch(actions.endLoading());
+    },
+    error => {
+      console.log(error);
     }
-    dispatch(actions.isLogin(user));
-    dispatch(push('/'));
-  });
+  );
 };
 
 export default { loginGoogle, updateLoginState };

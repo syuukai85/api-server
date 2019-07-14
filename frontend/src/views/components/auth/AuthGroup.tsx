@@ -3,15 +3,20 @@ import { Redirect } from 'react-router-dom';
 
 interface Props {
   uid: string;
+  isLoading: boolean;
+  // TODO: append react children type
   children: any;
   updateLoginState: () => void;
 }
 
-const AuthGroupContainer: React.FC<Props> = (props: Props) => {
+const AuthGroup: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     props.updateLoginState();
-  }, [props]);
+  }, []);
+  if (props.isLoading) {
+    return <div>loading....</div>;
+  }
   return props.uid !== null ? props.children : <Redirect to={'/login'} />;
 };
 
-export default AuthGroupContainer;
+export default AuthGroup;

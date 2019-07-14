@@ -7,13 +7,15 @@ interface State {
   authState: {
     auth: {
       uid: string;
+      isLoading: boolean;
     };
   };
 }
 
 const mapStateToProps = (state: State) => {
   return {
-    uid: state.authState.auth.uid
+    uid: state.authState.auth.uid,
+    isLoading: state.authState.auth.isLoading
   };
 };
 

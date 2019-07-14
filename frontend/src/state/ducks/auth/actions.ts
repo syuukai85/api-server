@@ -2,6 +2,30 @@ import { ActionTypes } from './types';
 import firebase from 'firebase';
 import { Action } from 'redux';
 
+interface StartLoadingAction {
+  type: typeof ActionTypes.START_LOADING;
+  isLoading: boolean;
+}
+
+const startLoading = (): StartLoadingAction => {
+  return {
+    type: ActionTypes.START_LOADING,
+    isLoading: true
+  };
+};
+
+interface EndLoadingAction {
+  type: typeof ActionTypes.END_LOADING;
+  isLoading: boolean;
+}
+
+const endLoading = (): EndLoadingAction => {
+  return {
+    type: ActionTypes.END_LOADING,
+    isLoading: false
+  };
+};
+
 interface IsLoginAction extends Action {
   type: typeof ActionTypes.SAVE_LOGIN_USER;
   payload: {
@@ -32,5 +56,9 @@ const logout = (): LogoutAction => {
   };
 };
 
-export default { isLogin, logout };
-export type AuthAction = IsLoginAction | LogoutAction;
+export default { startLoading, endLoading, isLogin, logout };
+export type AuthAction =
+  | IsLoginAction
+  | LogoutAction
+  | StartLoadingAction
+  | EndLoadingAction;

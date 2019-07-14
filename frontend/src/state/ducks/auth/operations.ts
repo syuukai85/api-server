@@ -1,5 +1,6 @@
 import firebase from '../../../firebase/firebase';
 import Redux from 'redux';
+import { push } from 'connected-react-router';
 import actions from './actions';
 
 const loginGoogle = async (dispatch: Redux.Dispatch) => {
@@ -13,6 +14,16 @@ const loginGoogle = async (dispatch: Redux.Dispatch) => {
     });
   if (response.user === null) throw new Error('response user is not found');
   dispatch(actions.isLogin(response.user));
+  dispatch(push('/'));
 };
 
-export default { loginGoogle };
+const updateLoginState = (dispatch: Redux.Dispatch) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      return;
+    }
+    dispatch(actions.isLogin(user));
+  });
+};
+
+export default { loginGoogle, updateLoginState };

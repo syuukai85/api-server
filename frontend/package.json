@@ -8,6 +8,7 @@
     "@types/node": "12.0.10",
     "@types/react": "16.8.22",
     "@types/react-dom": "16.8.4",
+    "@types/redux": "^3.6.0",
     "axios": "^0.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -15,13 +16,14 @@
     "typescript-fetch-api": "file:gen/api",
     "redux": "^4.0.4",
     "reselect": "^4.0.0",
-    "typescript": "3.4.5"
+    "typescript": "3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api": "rm -rf gen/api && openapi-generator generate --input-spec ../../api-docs/swagger/openapi.yaml --generator-name typescript-fetch --output gen/api --config api.json && cd gen/api && npm install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^0.0.16-4.0.3"
   }
 }

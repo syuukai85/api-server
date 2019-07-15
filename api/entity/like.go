@@ -1,10 +1,8 @@
 package entity
 
-import "github.com/jinzhu/gorm"
-
 // Like 好きなカテゴリの関連テーブル
 type Like struct {
-	gorm.Model
+	Base
 	UserID     uint
 	CategoryID uint
 }

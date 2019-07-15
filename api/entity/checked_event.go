@@ -1,10 +1,8 @@
 package entity
 
-import "github.com/jinzhu/gorm"
-
 // CheckedEvent 参照済みイベント
 type CheckedEvent struct {
-	gorm.Model
+	Base
 	UserID  uint
 	EventID uint
 }

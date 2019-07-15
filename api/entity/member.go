@@ -1,10 +1,8 @@
 package entity
 
-import "github.com/jinzhu/gorm"
-
 // Member グループに所属するメンバーの関連テーブル
 type Member struct {
-	gorm.Model
+	Base
 	GroupID   uint
 	UserID    uint
 	AppRoleID uint

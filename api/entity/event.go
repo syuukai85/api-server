@@ -1,22 +1,18 @@
 package entity
 
-import (
-	"time"
-
-	"github.com/jinzhu/gorm"
-)
+import "time"
 
 // Event 例）勉強会、LT、懇親会
 type Event struct {
-	gorm.Model
-	title            string `gorm:"size:50"`
-	Description      string `gorm:"size:5000"`
+	Base
+	BaseColor
+	title            string `gorm:"size:50;not null"`
+	Description      string
 	Capacity         uint
-	ColorCode        string `gorm:"size:7"`
-	ImageURL         string `gorm:"size:255"`
-	QRCodeURL        string `gorm:"size:255"`
-	HoldStartDate    time.Time
-	HoldEndDate      time.Time
+	ImageURL         string    `gorm:"size:255"`
+	QRCodeURL        string    `gorm:"size:255"`
+	HoldStartDate    time.Time `gorm:"not null"`
+	HoldEndDate      time.Time `gorm:"not null"`
 	RecruitStartDate time.Time
 	RecruitEndDate   time.Time
 	GroupID          uint

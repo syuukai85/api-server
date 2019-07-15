@@ -41,7 +41,7 @@ func getConnectionString() string {
 	} else {
 		dbargs = ""
 	}
-	return fmt.Sprintf("%s:%s@%s([%s]:%s)/%s%s",
+	return fmt.Sprintf("%s:%s@%s(%s:%s)/%s%s",
 		user, pass, protocol, host, port, dbname, dbargs)
 }
 

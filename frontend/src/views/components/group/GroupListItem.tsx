@@ -14,13 +14,18 @@ const useStyles = makeStyles(theme => ({
   },
   inline: {
     display: 'inline'
+  },
+  listItem: {
+    '&:hover': {
+      backgroundColor: '#e1f5fe'
+    }
   }
 }));
 
 const GroupListItem: React.FC = () => {
   const classes = useStyles({});
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem className={classes.listItem} alignItems="flex-start">
       <ListItemAvatar>
         <Avatar alt="Remy Sharp" src="https://placehold.jp/150x150.png" />
       </ListItemAvatar>

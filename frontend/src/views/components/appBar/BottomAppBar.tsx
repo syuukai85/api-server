@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 const BottomAppBar: React.FC = () => {
   const classes = useStyles({});
   return (
-    <AppBar position="fixed" color="primary" className={classes.appBar}>
+    <AppBar position="sticky" color="primary" className={classes.appBar}>
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="Open drawer">
           <MenuIcon />

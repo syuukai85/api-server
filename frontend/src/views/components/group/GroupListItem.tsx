@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+/**
+ * グループ列内の行
+ */
 const GroupListItem: React.FC = () => {
   const classes = useStyles({});
   return (

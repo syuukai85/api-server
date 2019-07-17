@@ -16,6 +16,9 @@ const useStyles = makeStyles({
   }
 });
 
+/**
+ * 画面下のApp Bar
+ */
 const BottomAppBar: React.FC = () => {
   const classes = useStyles({});
   return (

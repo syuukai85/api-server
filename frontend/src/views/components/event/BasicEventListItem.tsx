@@ -36,6 +36,9 @@ const useStyles = makeStyles({
   }
 });
 
+/**
+ * Eventの基本となるリスト
+ */
 const BasicEventListItem: React.FC = () => {
   const classes = useStyles({});
   return (

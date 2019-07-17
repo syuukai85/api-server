@@ -5,6 +5,9 @@ import EventList from '../event/EventList';
 import BottomAppBar from '../appBar/BottomAppBar';
 import GroupList from '../group/GroupList';
 
+/**
+ * Home画面
+ */
 const HomePage: React.FC = () => {
   return (
     <>

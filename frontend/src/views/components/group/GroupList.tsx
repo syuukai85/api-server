@@ -10,6 +10,9 @@ interface Props {
   title: string;
 }
 
+/**
+ * グループリスト
+ */
 const GroupList: React.FC<Props> = (props: Props) => {
   return (
     <List>

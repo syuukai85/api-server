@@ -5,6 +5,9 @@ import Divider from '@material-ui/core/Divider';
 
 const logo = require('../../logo.svg');
 
+/**
+ * お布施を行うイベント行
+ */
 const EnrollmentEventListItem: React.FC = () => {
   return (
     <Grid xs={12}>

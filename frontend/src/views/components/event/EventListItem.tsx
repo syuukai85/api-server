@@ -13,9 +13,15 @@ const useStyles = makeStyles({
 });
 
 interface Props {
+  // 表示の切り替えに利用
   type: 'basic' | 'enrollment';
 }
 
+/**
+ * EventListのItem
+ * 内部でtypeを親から受け取り分岐を行っているが、標準的に使われる想定のComponent(Basic)とは別に
+ * 今回お布施として投げ銭から受け取る実装も追加しているため、切り替えをtypeを利用して分岐
+ */
 const EventListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (

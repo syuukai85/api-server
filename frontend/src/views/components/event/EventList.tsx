@@ -11,6 +11,9 @@ interface Props {
   type: 'basic' | 'enrollment';
 }
 
+/**
+ * イベントリスト
+ */
 const EventList: React.FC<Props> = (props: Props) => {
   return (
     <List>

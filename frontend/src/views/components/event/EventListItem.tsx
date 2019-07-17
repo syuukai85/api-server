@@ -11,12 +11,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const logo = require('../../logo.svg');
 
 const useStyles = makeStyles({
-  date: {
-    fontSize: '60px'
-  },
-  time: {
-    fontSize: '17px'
-  },
   eventContainer: {
     height: '200px'
   },
@@ -28,13 +22,18 @@ const useStyles = makeStyles({
   },
   category: {
     margin: '5px'
+  },
+  listItem: {
+    '&:hover': {
+      backgroundColor: '#e1f5fe'
+    }
   }
 });
 
 const EventListItem: React.FC = () => {
   const classes = useStyles({});
   return (
-    <ListItem>
+    <ListItem className={classes.listItem}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={3}>
           <Box textAlign="left" fontSize={60}>

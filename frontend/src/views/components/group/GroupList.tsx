@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,20 +6,15 @@ import List from '@material-ui/core/List';
 import GroupListItem from './GroupListItem';
 import Divider from '@material-ui/core/Divider';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
-}));
+interface Props {
+  title: string;
+}
 
-const GroupList: React.FC = () => {
-  const classes = useStyles({});
+const GroupList: React.FC<Props> = (props: Props) => {
   return (
-    <List className={classes.root}>
+    <List>
       <Card>
-        <CardHeader title="グループ一覧" />
+        <CardHeader title={props.title} />
         <CardContent>
           <Divider />
           {[1, 2, 3, 4, 1, 2].map((v, i, arr) => {

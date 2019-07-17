@@ -11,10 +11,10 @@ const HomePage: React.FC = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
-            <EventList title="新着イベント一覧(最新5件)" type="basic" />
+            <EventList title="新着イベント (最新X件)" type="basic" />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <GroupList />
+            <GroupList title="新着グループ (最新X件)" />
             <EventList title="お布施" type="enrollment" />
           </Grid>
         </Grid>

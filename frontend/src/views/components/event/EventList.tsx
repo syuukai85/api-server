@@ -24,7 +24,6 @@ const EventList: React.FC = () => {
                 </>
               );
             }
-            return <EventListItem />;
           })}
         </CardContent>
       </Card>

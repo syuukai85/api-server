@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
-            <EventList />
+            <EventList title="新着イベント一覧(最新5件)" />
           </Grid>
           <Grid item xs={12} sm={4}>
             <GroupList />

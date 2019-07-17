@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles({
@@ -28,9 +27,6 @@ const BottomAppBar: React.FC = () => {
         <div className={classes.grow} />
         <IconButton color="inherit">
           <SearchIcon />
-        </IconButton>
-        <IconButton edge="end" color="inherit">
-          <MoreIcon />
         </IconButton>
       </Toolbar>
     </AppBar>

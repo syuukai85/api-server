@@ -20,7 +20,7 @@ const GroupList: React.FC<Props> = (props: Props) => {
         <CardHeader title={props.title} />
         <CardContent>
           <Divider />
-          {[1, 2, 3, 4, 1, 2].map((v, i, arr) => {
+          {[1, 2, 3, 4, 5].map((v, i, arr) => {
             if (arr.length - 1 === i) {
               return <GroupListItem />;
             } else {

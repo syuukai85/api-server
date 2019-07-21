@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Event } from 'typescript-fetch-api';
 import oparations from '../../../state/ducks/events/operations';
 import EventList from '../../components/event/EventList';
 import Redux from 'redux';

@@ -1,29 +1,28 @@
 import React from 'react';
-import * as Api from 'typescript-fetch-api';
-import './App.css';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import configureStore, { history } from '../state/store';
+import LoginPage from './components/auth/LoginPage';
+import HomePage from './components/home/HomePage';
+import AuthGroupContainer from './containers/auth/AuthGroupContainer';
+
+const store = configureStore();
 
 const App: React.FC = () => {
-  const handleClick = async () => {
-    const EventApi = new Api.EventApi();
-    const event = await EventApi.getEventById({ eventId: 0 });
-    console.log(event);
-  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleClick}
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route exact path="/login" component={LoginPage} />
+          <AuthGroupContainer>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+            </Switch>
+          </AuthGroupContainer>
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
   );
 };
 

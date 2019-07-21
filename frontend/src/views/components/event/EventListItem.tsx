@@ -28,7 +28,7 @@ const EventListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
     <ListItem className={classes.listItem}>
-      {props.type === 'basic' && <BasicEventListItem />}
+      {props.type === 'basic' && <BasicEventListItem event={props.event} />}
       {props.type === 'enrollment' && <EnrollmentEventListItem />}
     </ListItem>
   );

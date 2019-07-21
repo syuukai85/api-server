@@ -32,11 +32,11 @@ const EventList: React.FC<Props> = (props: Props) => {
           {/* TODO: eventのリストから値を取得する必要があるが、一旦配列は仮置き */}
           {props.events.map((event: Event, i: number) => {
             if (props.events.length - 1 === i) {
-              return <EventListItem event={event} type={props.type} />;
+              return <EventListItem key={i} event={event} type={props.type} />;
             }
             return (
               <>
-                <EventListItem event={event} type={props.type} />
+                <EventListItem key={i} event={event} type={props.type} />
                 <Divider />
               </>
             );

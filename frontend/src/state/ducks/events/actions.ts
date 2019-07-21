@@ -1,27 +1,27 @@
 import { ActionTypes } from './types';
 import { Event } from 'typescript-fetch-api';
 
-interface SearchRequestNewlyEventAction {
+interface SearchRequestRecentlyAddedEventAction {
   type: typeof ActionTypes.REQUEST_NEWLY_EVENT;
   isLoading: boolean;
 }
 
-const searchNewlyEvent = (): SearchRequestNewlyEventAction => {
+const searchRecentlyAddedEvent = (): SearchRequestRecentlyAddedEventAction => {
   return {
     type: ActionTypes.REQUEST_NEWLY_EVENT,
     isLoading: true
   };
 };
 
-interface SearchSuccessNewlyEventAction {
+interface SearchSuccessRecentlyAddedEventAction {
   type: typeof ActionTypes.SUCCESS_NEWLY_EVENT;
   isLoading: boolean;
   events: Array<Event>;
 }
 
-const searchSuccessNewlyEvent = (
+const searchSuccessRecentlyAddedEvent = (
   events: Array<Event>
-): SearchSuccessNewlyEventAction => {
+): SearchSuccessRecentlyAddedEventAction => {
   return {
     type: ActionTypes.SUCCESS_NEWLY_EVENT,
     isLoading: true,
@@ -29,13 +29,13 @@ const searchSuccessNewlyEvent = (
   };
 };
 
-interface SearchErrorNewlyEventAction {
+interface SearchErrorRecentlyAddedEventAction {
   type: typeof ActionTypes.ERROR_NEWLY_EVENT;
   isLoading: boolean;
   error: Error;
 }
 
-const searchErrorNewlyEvent = (error: Error): SearchErrorNewlyEventAction => {
+const searchErrorRecentlyAddedEvent = (error: Error): SearchErrorRecentlyAddedEventAction => {
   return {
     type: ActionTypes.ERROR_NEWLY_EVENT,
     isLoading: false,
@@ -44,12 +44,12 @@ const searchErrorNewlyEvent = (error: Error): SearchErrorNewlyEventAction => {
 };
 
 export default {
-  searchNewlyEvent,
-  searchSuccessNewlyEvent,
-  searchErrorNewlyEvent
+  searchRecentlyAddedEvent,
+  searchSuccessRecentlyAddedEvent,
+  searchErrorRecentlyAddedEvent
 };
 
 export type EventAction =
-  | SearchRequestNewlyEventAction
-  | SearchSuccessNewlyEventAction
-  | SearchErrorNewlyEventAction;
+  | SearchRequestRecentlyAddedEventAction
+  | SearchSuccessRecentlyAddedEventAction
+  | SearchErrorRecentlyAddedEventAction;

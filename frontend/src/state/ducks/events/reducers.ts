@@ -3,15 +3,15 @@ import { Event } from 'typescript-fetch-api';
 import { EventAction } from './actions';
 import { ActionTypes } from './types';
 
-interface NewlyEventState {
+interface RecentlyAddedEventState {
   events: Array<Event>;
   isLoading: boolean;
 }
 
-const newlyEvent = (
-  state: NewlyEventState = { events: [], isLoading: true },
+const recentlyAddedEvent = (
+  state: RecentlyAddedEventState = { events: [], isLoading: true },
   action: EventAction
-): NewlyEventState => {
+): RecentlyAddedEventState => {
   switch (action.type) {
     case ActionTypes.REQUEST_NEWLY_EVENT: {
       return Object.assign({}, state, {
@@ -36,5 +36,5 @@ const newlyEvent = (
   }
 };
 
-const eventsReducer = combineReducers({ newlyEvent });
+const eventsReducer = combineReducers({ recentlyAddedEvent });
 export default eventsReducer;

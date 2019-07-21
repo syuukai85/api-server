@@ -6,7 +6,7 @@ import Redux from 'redux';
 
 interface State {
   eventsState: {
-    newlyEvent: {
+    recentlyAddedEvent: {
       events: Array<Event>;
       isLoading: boolean;
     };
@@ -15,14 +15,14 @@ interface State {
 
 const mapStateToProps = (state: State) => {
   return {
-    events: state.eventsState.newlyEvent.events,
-    isLoading: state.eventsState.newlyEvent.isLoading
+    events: state.eventsState.recentlyAddedEvent.events,
+    isLoading: state.eventsState.recentlyAddedEvent.isLoading
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    searchEvent: () => oparations.searchNewlyEvent(dispatch)
+    searchEvent: () => oparations.searchRecentlyAddedEvent(dispatch)
   };
 };
 

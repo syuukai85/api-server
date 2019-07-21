@@ -5,7 +5,7 @@ import { ActionTypes } from './types';
 
 let api = new EventApi();
 
-function* searchNewlyEvent() {
+function* searchRecentlyAddedEvent() {
   const searchEvents = (req: SearchEventsRequest) => {
     return api
       .searchEvents(req)
@@ -14,11 +14,11 @@ function* searchNewlyEvent() {
   };
   try {
     const events = yield call(searchEvents, {});
-    yield put(actions.searchSuccessNewlyEvent(events));
+    yield put(actions.searchSuccessRecentlyAddedEvent(events));
   } catch (error) {
-    yield put(actions.searchErrorNewlyEvent(error));
+    yield put(actions.searchErrorRecentlyAddedEvent(error));
   }
 }
 
-const sagas = [takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchNewlyEvent)];
+const sagas = [takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchRecentlyAddedEvent)];
 export default sagas;

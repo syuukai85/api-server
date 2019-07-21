@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
+import { Event } from 'typescript-fetch-api';
 import BasicEventListItem from './BasicEventListItem';
 import EnrollmentEventListItem from './EnrollmentEventListItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
 interface Props {
   // 表示の切り替えに利用
   type: 'basic' | 'enrollment';
+  event: Event;
 }
 
 /**

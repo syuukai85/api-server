@@ -139,7 +139,7 @@ export class UserApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/user/{name}/new_events`.replace(`{${"name"}}`, encodeURIComponent(String(requestParameters.name))),
+            path: `/user/{name}/newEvents`.replace(`{${"name"}}`, encodeURIComponent(String(requestParameters.name))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -167,6 +167,10 @@ export class UserApi extends runtime.BaseAPI {
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
+        }
 
         const response = await this.request({
             path: `/user/{name}`.replace(`{${"name"}}`, encodeURIComponent(String(requestParameters.name))),

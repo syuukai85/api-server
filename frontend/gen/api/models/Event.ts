@@ -16,6 +16,15 @@ import {
     Category,
     CategoryFromJSON,
     CategoryToJSON,
+    Group,
+    GroupFromJSON,
+    GroupToJSON,
+    User,
+    UserFromJSON,
+    UserToJSON,
+    Venue,
+    VenueFromJSON,
+    VenueToJSON,
 } from './';
 
 /**
@@ -30,12 +39,6 @@ export interface Event {
      * @memberof Event
      */
     id?: number;
-    /**
-     * 
-     * @type {Array<Category>}
-     * @memberof Event
-     */
-    categories?: Array<Category>;
     /**
      * 
      * @type {string}
@@ -54,15 +57,98 @@ export interface Event {
      * @memberof Event
      */
     capacity?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Event
+     */
+    colorCode?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Event
+     */
+    imageUrl?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Event
+     */
+    qrCodeUrl?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Event
+     */
+    holdStartDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Event
+     */
+    holdEndDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Event
+     */
+    recruitStartDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Event
+     */
+    recruitEndDate?: Date;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof Event
+     */
+    organizer?: Array<User>;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof Event
+     */
+    entries?: Array<User>;
+    /**
+     * 
+     * @type {Array<Category>}
+     * @memberof Event
+     */
+    categories?: Array<Category>;
+    /**
+     * 
+     * @type {Group}
+     * @memberof Event
+     */
+    group?: Group;
+    /**
+     * 
+     * @type {Venue}
+     * @memberof Event
+     */
+    venue?: Venue;
 }
 
 export function EventFromJSON(json: any): Event {
     return {
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'categories': !exists(json, 'categories') ? undefined : (json['categories'] as Array<any>).map(CategoryFromJSON),
         'title': json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'capacity': !exists(json, 'capacity') ? undefined : json['capacity'],
+        'colorCode': !exists(json, 'colorCode') ? undefined : json['colorCode'],
+        'imageUrl': !exists(json, 'imageUrl') ? undefined : json['imageUrl'],
+        'qrCodeUrl': !exists(json, 'qrCodeUrl') ? undefined : json['qrCodeUrl'],
+        'holdStartDate': !exists(json, 'holdStartDate') ? undefined : new Date(json['holdStartDate']),
+        'holdEndDate': !exists(json, 'holdEndDate') ? undefined : new Date(json['holdEndDate']),
+        'recruitStartDate': !exists(json, 'recruitStartDate') ? undefined : new Date(json['recruitStartDate']),
+        'recruitEndDate': !exists(json, 'recruitEndDate') ? undefined : new Date(json['recruitEndDate']),
+        'organizer': !exists(json, 'organizer') ? undefined : (json['organizer'] as Array<any>).map(UserFromJSON),
+        'entries': !exists(json, 'entries') ? undefined : (json['entries'] as Array<any>).map(UserFromJSON),
+        'categories': !exists(json, 'categories') ? undefined : (json['categories'] as Array<any>).map(CategoryFromJSON),
+        'group': !exists(json, 'group') ? undefined : GroupFromJSON(json['group']),
+        'venue': !exists(json, 'venue') ? undefined : VenueFromJSON(json['venue']),
     };
 }
 
@@ -72,10 +158,21 @@ export function EventToJSON(value?: Event): any {
     }
     return {
         'id': value.id,
-        'categories': value.categories === undefined ? undefined : (value.categories as Array<any>).map(CategoryToJSON),
         'title': value.title,
         'description': value.description,
         'capacity': value.capacity,
+        'colorCode': value.colorCode,
+        'imageUrl': value.imageUrl,
+        'qrCodeUrl': value.qrCodeUrl,
+        'holdStartDate': value.holdStartDate === undefined ? undefined : value.holdStartDate.toISOString(),
+        'holdEndDate': value.holdEndDate === undefined ? undefined : value.holdEndDate.toISOString(),
+        'recruitStartDate': value.recruitStartDate === undefined ? undefined : value.recruitStartDate.toISOString(),
+        'recruitEndDate': value.recruitEndDate === undefined ? undefined : value.recruitEndDate.toISOString(),
+        'organizer': value.organizer === undefined ? undefined : (value.organizer as Array<any>).map(UserToJSON),
+        'entries': value.entries === undefined ? undefined : (value.entries as Array<any>).map(UserToJSON),
+        'categories': value.categories === undefined ? undefined : (value.categories as Array<any>).map(CategoryToJSON),
+        'group': GroupToJSON(value.group),
+        'venue': VenueToJSON(value.venue),
     };
 }
 

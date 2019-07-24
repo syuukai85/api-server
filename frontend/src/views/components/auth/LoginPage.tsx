@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import GoogleButtonContainer from '../../containers/auth/GoogleLoginContainer';
+import GoogleLoginButtonContainer from '../../containers/auth/GoogleLoginButtonContainer';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
       <Typography className={styles.title} variant="h1">
         Connthass
       </Typography>
-      <GoogleButtonContainer />
+      <GoogleLoginButtonContainer />
     </Container>
   );
 };

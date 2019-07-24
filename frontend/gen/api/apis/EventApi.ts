@@ -52,7 +52,7 @@ export interface GetEventByIdRequest {
 
 export interface SearchEventsRequest {
     fields?: string;
-    query?: number;
+    query?: string;
     page?: number;
     perPage?: number;
 }

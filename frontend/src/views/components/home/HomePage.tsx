@@ -16,13 +16,13 @@ const HomePage: React.FC = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <RecentlyAddedEventListContainer
-              title="新着イベント (最新X件)"
+              title="新着イベント"
               type="basic"
             />
             <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <GroupList title="新着グループ (最新X件)" />
+            <GroupList title="新着グループ" />
             {/* <EventList title="お布施" type="enrollment" /> */}
           </Grid>
         </Grid>

@@ -36,6 +36,42 @@ export interface InlineObject {
      * @memberof InlineObject
      */
     capacity?: string;
+    /**
+     * イベントの画像
+     * @type {string}
+     * @memberof InlineObject
+     */
+    imageUrl?: string;
+    /**
+     * 投げ銭用のQRコード
+     * @type {string}
+     * @memberof InlineObject
+     */
+    qrCodeUrl?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InlineObject
+     */
+    holdStartDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InlineObject
+     */
+    holdEndDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InlineObject
+     */
+    recruitStartDate?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof InlineObject
+     */
+    recruitEndDate?: Date;
 }
 
 export function InlineObjectFromJSON(json: any): InlineObject {
@@ -43,6 +79,12 @@ export function InlineObjectFromJSON(json: any): InlineObject {
         'title': !exists(json, 'title') ? undefined : json['title'],
         'description': !exists(json, 'description') ? undefined : json['description'],
         'capacity': !exists(json, 'capacity') ? undefined : json['capacity'],
+        'imageUrl': !exists(json, 'imageUrl') ? undefined : json['imageUrl'],
+        'qrCodeUrl': !exists(json, 'qrCodeUrl') ? undefined : json['qrCodeUrl'],
+        'holdStartDate': !exists(json, 'holdStartDate') ? undefined : new Date(json['holdStartDate']),
+        'holdEndDate': !exists(json, 'holdEndDate') ? undefined : new Date(json['holdEndDate']),
+        'recruitStartDate': !exists(json, 'recruitStartDate') ? undefined : new Date(json['recruitStartDate']),
+        'recruitEndDate': !exists(json, 'recruitEndDate') ? undefined : new Date(json['recruitEndDate']),
     };
 }
 
@@ -54,6 +96,12 @@ export function InlineObjectToJSON(value?: InlineObject): any {
         'title': value.title,
         'description': value.description,
         'capacity': value.capacity,
+        'imageUrl': value.imageUrl,
+        'qrCodeUrl': value.qrCodeUrl,
+        'holdStartDate': value.holdStartDate === undefined ? undefined : value.holdStartDate.toISOString(),
+        'holdEndDate': value.holdEndDate === undefined ? undefined : value.holdEndDate.toISOString(),
+        'recruitStartDate': value.recruitStartDate === undefined ? undefined : value.recruitStartDate.toISOString(),
+        'recruitEndDate': value.recruitEndDate === undefined ? undefined : value.recruitEndDate.toISOString(),
     };
 }
 

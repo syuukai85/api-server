@@ -17,30 +17,49 @@ import {
     Event,
     EventFromJSON,
     EventToJSON,
+    InlineObject,
+    InlineObjectFromJSON,
+    InlineObjectToJSON,
+    InlineObject1,
+    InlineObject1FromJSON,
+    InlineObject1ToJSON,
+    InlineResponse200,
+    InlineResponse200FromJSON,
+    InlineResponse200ToJSON,
 } from '../models';
+
+export interface AddBookmarkRequest {
+    eventId: string;
+}
 
 export interface AddEventRequest {
     Event: Event;
 }
 
-export interface DeletePetRequest {
+export interface DeleteEventRequest {
     eventId: number;
-    api_key?: string;
+}
+
+export interface EntryEventRequest {
+    eventId: number;
+    InlineObject1?: InlineObject1;
 }
 
 export interface GetEventByIdRequest {
     eventId: number;
+    fields?: string;
+}
+
+export interface SearchEventsRequest {
+    fields?: string;
+    query?: string;
+    page?: number;
+    perPage?: number;
 }
 
 export interface UpdateEventRequest {
-    Event: Event;
-}
-
-export interface UpdateEventWithFormRequest {
     eventId: number;
-    title?: string;
-    description?: string;
-    capacity?: string;
+    InlineObject?: InlineObject;
 }
 
 /**
@@ -49,9 +68,44 @@ export interface UpdateEventWithFormRequest {
 export class EventApi extends runtime.BaseAPI {
 
     /**
+     * bookmarks関連テーブルにレコードを追加します
+     * イベントを「お気に入り」に追加する
+     */
+    async addBookmarkRaw(requestParameters: AddBookmarkRequest): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.eventId === null || requestParameters.eventId === undefined) {
+            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling addBookmark.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/event/{eventId}/bookmark`.replace(`{${"eventId"}}`, encodeURIComponent(String(requestParameters.eventId))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * bookmarks関連テーブルにレコードを追加します
+     * イベントを「お気に入り」に追加する
+     */
+    async addBookmark(requestParameters: AddBookmarkRequest): Promise<void> {
+        await this.addBookmarkRaw(requestParameters);
+    }
+
+    /**
      * イベントを追加する
      */
-    async addEventRaw(requestParameters: AddEventRequest): Promise<runtime.ApiResponse<void>> {
+    async addEventRaw(requestParameters: AddEventRequest): Promise<runtime.ApiResponse<Event>> {
         if (requestParameters.Event === null || requestParameters.Event === undefined) {
             throw new runtime.RequiredError('Event','Required parameter requestParameters.Event was null or undefined when calling addEvent.');
         }
@@ -62,13 +116,8 @@ export class EventApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("event_auth", ["write:events", "read:events"]);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -79,39 +128,31 @@ export class EventApi extends runtime.BaseAPI {
             body: EventToJSON(requestParameters.Event),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EventFromJSON(jsonValue));
     }
 
     /**
      * イベントを追加する
      */
-    async addEvent(requestParameters: AddEventRequest): Promise<void> {
-        await this.addEventRaw(requestParameters);
+    async addEvent(requestParameters: AddEventRequest): Promise<Event> {
+        const response = await this.addEventRaw(requestParameters);
+        return await response.value();
     }
 
     /**
      * 特定のイベントを削除する
      */
-    async deletePetRaw(requestParameters: DeletePetRequest): Promise<runtime.ApiResponse<void>> {
+    async deleteEventRaw(requestParameters: DeleteEventRequest): Promise<runtime.ApiResponse<void>> {
         if (requestParameters.eventId === null || requestParameters.eventId === undefined) {
-            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling deletePet.');
+            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling deleteEvent.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (requestParameters.api_key !== undefined && requestParameters.api_key !== null) {
-            headerParameters['api_key'] = String(requestParameters.api_key);
-        }
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("event_auth", ["write:events", "read:events"]);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -127,8 +168,47 @@ export class EventApi extends runtime.BaseAPI {
     /**
      * 特定のイベントを削除する
      */
-    async deletePet(requestParameters: DeletePetRequest): Promise<void> {
-        await this.deletePetRaw(requestParameters);
+    async deleteEvent(requestParameters: DeleteEventRequest): Promise<void> {
+        await this.deleteEventRaw(requestParameters);
+    }
+
+    /**
+     * entry_eventsの関連テーブルにレコードを追加する
+     * 参加者を追加する
+     */
+    async entryEventRaw(requestParameters: EntryEventRequest): Promise<runtime.ApiResponse<InlineResponse200>> {
+        if (requestParameters.eventId === null || requestParameters.eventId === undefined) {
+            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling entryEvent.');
+        }
+
+        const queryParameters: runtime.HTTPQuery = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/event/{eventId}/entry`.replace(`{${"eventId"}}`, encodeURIComponent(String(requestParameters.eventId))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InlineObject1ToJSON(requestParameters.InlineObject1),
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse200FromJSON(jsonValue));
+    }
+
+    /**
+     * entry_eventsの関連テーブルにレコードを追加する
+     * 参加者を追加する
+     */
+    async entryEvent(requestParameters: EntryEventRequest): Promise<InlineResponse200> {
+        const response = await this.entryEventRaw(requestParameters);
+        return await response.value();
     }
 
     /**
@@ -142,10 +222,14 @@ export class EventApi extends runtime.BaseAPI {
 
         const queryParameters: runtime.HTTPQuery = {};
 
+        if (requestParameters.fields !== undefined) {
+            queryParameters['fields'] = requestParameters.fields;
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["api_key"] = this.configuration.apiKey("api_key"); // api_key authentication
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
         }
 
         const response = await this.request({
@@ -168,11 +252,59 @@ export class EventApi extends runtime.BaseAPI {
     }
 
     /**
-     * 作成済みのイベントを更新する
+     * 記事の一覧を作成日時の降順で返します。
+     * イベントを検索する
      */
-    async updateEventRaw(requestParameters: UpdateEventRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.Event === null || requestParameters.Event === undefined) {
-            throw new runtime.RequiredError('Event','Required parameter requestParameters.Event was null or undefined when calling updateEvent.');
+    async searchEventsRaw(requestParameters: SearchEventsRequest): Promise<runtime.ApiResponse<Array<Event>>> {
+        const queryParameters: runtime.HTTPQuery = {};
+
+        if (requestParameters.fields !== undefined) {
+            queryParameters['fields'] = requestParameters.fields;
+        }
+
+        if (requestParameters.query !== undefined) {
+            queryParameters['query'] = requestParameters.query;
+        }
+
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
+        }
+
+        if (requestParameters.perPage !== undefined) {
+            queryParameters['perPage'] = requestParameters.perPage;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/events`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        });
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(EventFromJSON));
+    }
+
+    /**
+     * 記事の一覧を作成日時の降順で返します。
+     * イベントを検索する
+     */
+    async searchEvents(requestParameters: SearchEventsRequest): Promise<Array<Event>> {
+        const response = await this.searchEventsRaw(requestParameters);
+        return await response.value();
+    }
+
+    /**
+     * 特定のイベントを更新する
+     */
+    async updateEventRaw(requestParameters: UpdateEventRequest): Promise<runtime.ApiResponse<Event>> {
+        if (requestParameters.eventId === null || requestParameters.eventId === undefined) {
+            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling updateEvent.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -181,83 +313,27 @@ export class EventApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("event_auth", ["write:events", "read:events"]);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const response = await this.request({
-            path: `/event`,
-            method: 'PUT',
-            headers: headerParameters,
-            query: queryParameters,
-            body: EventToJSON(requestParameters.Event),
-        });
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * 作成済みのイベントを更新する
-     */
-    async updateEvent(requestParameters: UpdateEventRequest): Promise<void> {
-        await this.updateEventRaw(requestParameters);
-    }
-
-    /**
-     * 特定のイベントを更新する
-     */
-    async updateEventWithFormRaw(requestParameters: UpdateEventWithFormRequest): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.eventId === null || requestParameters.eventId === undefined) {
-            throw new runtime.RequiredError('eventId','Required parameter requestParameters.eventId was null or undefined when calling updateEventWithForm.');
-        }
-
-        const queryParameters: runtime.HTTPQuery = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            if (typeof this.configuration.accessToken === 'function') {
-                headerParameters["Authorization"] = this.configuration.accessToken("event_auth", ["write:events", "read:events"]);
-            } else {
-                headerParameters["Authorization"] = this.configuration.accessToken;
-            }
-        }
-
-        const formData = new FormData();
-        if (requestParameters.title !== undefined) {
-            formData.append('title', requestParameters.title as any);
-        }
-
-        if (requestParameters.description !== undefined) {
-            formData.append('description', requestParameters.description as any);
-        }
-
-        if (requestParameters.capacity !== undefined) {
-            formData.append('capacity', requestParameters.capacity as any);
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-KEY"] = this.configuration.apiKey("X-API-KEY"); // ApiKeyAuth authentication
         }
 
         const response = await this.request({
             path: `/event/{eventId}`.replace(`{${"eventId"}}`, encodeURIComponent(String(requestParameters.eventId))),
-            method: 'POST',
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: formData,
+            body: InlineObjectToJSON(requestParameters.InlineObject),
         });
 
-        return new runtime.VoidApiResponse(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => EventFromJSON(jsonValue));
     }
 
     /**
      * 特定のイベントを更新する
      */
-    async updateEventWithForm(requestParameters: UpdateEventWithFormRequest): Promise<void> {
-        await this.updateEventWithFormRaw(requestParameters);
+    async updateEvent(requestParameters: UpdateEventRequest): Promise<Event> {
+        const response = await this.updateEventRaw(requestParameters);
+        return await response.value();
     }
 
 }

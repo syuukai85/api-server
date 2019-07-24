@@ -15,45 +15,37 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Categorize
+ * @interface Venue
  */
-export interface Categorize {
+export interface Venue {
     /**
      * 
      * @type {number}
-     * @memberof Categorize
+     * @memberof Venue
      */
     id?: number;
     /**
      * 
-     * @type {number}
-     * @memberof Categorize
+     * @type {string}
+     * @memberof Venue
      */
-    eventId?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Categorize
-     */
-    categoryId?: number;
+    name: string;
 }
 
-export function CategorizeFromJSON(json: any): Categorize {
+export function VenueFromJSON(json: any): Venue {
     return {
         'id': !exists(json, 'id') ? undefined : json['id'],
-        'eventId': !exists(json, 'eventId') ? undefined : json['eventId'],
-        'categoryId': !exists(json, 'categoryId') ? undefined : json['categoryId'],
+        'name': json['name'],
     };
 }
 
-export function CategorizeToJSON(value?: Categorize): any {
+export function VenueToJSON(value?: Venue): any {
     if (value === undefined) {
         return undefined;
     }
     return {
         'id': value.id,
-        'eventId': value.eventId,
-        'categoryId': value.categoryId,
+        'name': value.name,
     };
 }
 

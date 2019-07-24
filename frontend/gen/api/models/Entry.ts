@@ -15,37 +15,37 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface User
+ * @interface Entry
  */
-export interface User {
-    /**
-     * 
-     * @type {number}
-     * @memberof User
-     */
-    id?: number;
+export interface Entry {
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof Entry
      */
     name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Entry
+     */
+    role?: string;
 }
 
-export function UserFromJSON(json: any): User {
+export function EntryFromJSON(json: any): Entry {
     return {
-        'id': !exists(json, 'id') ? undefined : json['id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'role': !exists(json, 'role') ? undefined : json['role'],
     };
 }
 
-export function UserToJSON(value?: User): any {
+export function EntryToJSON(value?: Entry): any {
     if (value === undefined) {
         return undefined;
     }
     return {
-        'id': value.id,
         'name': value.name,
+        'role': value.role,
     };
 }
 

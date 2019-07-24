@@ -12,40 +12,38 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Entry,
+    EntryFromJSON,
+    EntryToJSON,
+} from './';
+
 /**
  * 
  * @export
- * @interface Tag
+ * @interface InlineObject1
  */
-export interface Tag {
+export interface InlineObject1 {
     /**
      * 
-     * @type {number}
-     * @memberof Tag
+     * @type {Array<Entry>}
+     * @memberof InlineObject1
      */
-    id?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof Tag
-     */
-    name?: string;
+    entries?: Array<Entry>;
 }
 
-export function TagFromJSON(json: any): Tag {
+export function InlineObject1FromJSON(json: any): InlineObject1 {
     return {
-        'id': !exists(json, 'id') ? undefined : json['id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'entries': !exists(json, 'entries') ? undefined : (json['entries'] as Array<any>).map(EntryFromJSON),
     };
 }
 
-export function TagToJSON(value?: Tag): any {
+export function InlineObject1ToJSON(value?: InlineObject1): any {
     if (value === undefined) {
         return undefined;
     }
     return {
-        'id': value.id,
-        'name': value.name,
+        'entries': value.entries === undefined ? undefined : (value.entries as Array<any>).map(EntryToJSON),
     };
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import WelcomeBoard from '../../components/welcome/WelcomeBoard';
 import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
 import BottomAppBar from '../appBar/BottomAppBar';
 import GroupList from '../group/GroupList';
@@ -18,6 +19,7 @@ const HomePage: React.FC = () => {
               title="新着イベント (最新X件)"
               type="basic"
             />
+            <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
             <GroupList title="新着グループ (最新X件)" />

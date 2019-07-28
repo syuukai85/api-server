@@ -3,8 +3,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import WelcomeBoard from '../../components/welcome/WelcomeBoard';
 import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
+import RecentlyAddedGroupListContainer from '../../containers/group/RecentlyAddedGroupListContainer';
 import BottomAppBar from '../appBar/BottomAppBar';
-import GroupList from '../group/GroupList';
 
 /**
  * Home画面
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
             <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <GroupList title="新着グループ" />
+            <RecentlyAddedGroupListContainer title="新着グループ" />
             {/* <EventList title="お布施" type="enrollment" /> */}
           </Grid>
         </Grid>

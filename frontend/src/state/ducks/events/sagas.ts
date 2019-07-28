@@ -31,7 +31,8 @@ function* searchRecentlyFinishedEvent() {
   try {
     const events = yield call(searchEvents, {
       // TODO: 検索条件のformatをどうする？
-      query: `holdEndDate>${moment(new Date()).format('YYYY-MM-DD hh:mm:ss')}`,
+      // 開催が終了していて、現在ログインしているユーザーが参加したイベントを表示
+      query: `holdEndDate>${moment(new Date()).format('YYYY-MM-DD-hh-mm-ss')}`,
       perPage: 5
     });
     yield put(actions.searchSuccessRecentlyFinishedEvent(events));

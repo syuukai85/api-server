@@ -13,12 +13,14 @@ function* searchRecentlyAddedEvent() {
       .catch(error => error);
   };
   try {
-    const events = yield call(searchEvents, {});
+    const events = yield call(searchEvents, { perPage: 5 });
     yield put(actions.searchSuccessRecentlyAddedEvent(events));
   } catch (error) {
     yield put(actions.searchErrorRecentlyAddedEvent(error));
   }
 }
 
-const sagas = [takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchRecentlyAddedEvent)];
+const sagas = [
+  takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchRecentlyAddedEvent)
+];
 export default sagas;

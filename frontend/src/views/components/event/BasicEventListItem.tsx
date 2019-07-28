@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
-const logo = require('../../logo.svg');
-
 const useStyles = makeStyles({
   eventContainer: {
     height: '200px'

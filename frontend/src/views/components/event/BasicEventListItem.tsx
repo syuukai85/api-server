@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: '#e1f5fe'
     }
+  },
+  image: {
+    width: '100%',
+    marginTop: '10px'
   }
 });
 
@@ -68,7 +72,7 @@ const BasicEventListItem: React.FC<Props> = (props: Props) => {
             <CategoryChips categories={props.event.categories} />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <img src={logo} alt="" />
+            <img className={classes.image} src={props.event.imageUrl} alt="" />
           </Grid>
         </Grid>
       </Grid>

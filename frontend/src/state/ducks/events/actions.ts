@@ -35,7 +35,9 @@ interface SearchErrorRecentlyAddedEventAction {
   error: Error;
 }
 
-const searchErrorRecentlyAddedEvent = (error: Error): SearchErrorRecentlyAddedEventAction => {
+const searchErrorRecentlyAddedEvent = (
+  error: Error
+): SearchErrorRecentlyAddedEventAction => {
   return {
     type: ActionTypes.ERROR_NEWLY_EVENT,
     isLoading: false,
@@ -43,13 +45,65 @@ const searchErrorRecentlyAddedEvent = (error: Error): SearchErrorRecentlyAddedEv
   };
 };
 
-export default {
-  searchRecentlyAddedEvent,
-  searchSuccessRecentlyAddedEvent,
-  searchErrorRecentlyAddedEvent
-};
-
-export type EventAction =
+export type RecentlyAddedEventAction =
   | SearchRequestRecentlyAddedEventAction
   | SearchSuccessRecentlyAddedEventAction
   | SearchErrorRecentlyAddedEventAction;
+
+interface SearchRequestRecentlyFinishedEventAction {
+  type: typeof ActionTypes.REQUEST_FINISHED_EVENT;
+  isLoading: boolean;
+}
+
+const searchRecentlyFinishedEvent = (): SearchRequestRecentlyFinishedEventAction => {
+  return {
+    type: ActionTypes.REQUEST_FINISHED_EVENT,
+    isLoading: true
+  };
+};
+
+interface SearchSuccessRecentlyFinishedEventAction {
+  type: typeof ActionTypes.SUCCESS_FINISHED_EVENT;
+  isLoading: boolean;
+  events: Array<Event>;
+}
+
+const searchSuccessRecentlyFinishedEvent = (
+  events: Array<Event>
+): SearchSuccessRecentlyFinishedEventAction => {
+  return {
+    type: ActionTypes.SUCCESS_FINISHED_EVENT,
+    isLoading: true,
+    events
+  };
+};
+
+interface SearchErrorRecentlyFinishedEventAction {
+  type: typeof ActionTypes.ERROR_FINISHED_EVENT;
+  isLoading: boolean;
+  error: Error;
+}
+
+const searchErrorRecentlyFinishedEvent = (
+  error: Error
+): SearchErrorRecentlyFinishedEventAction => {
+  return {
+    type: ActionTypes.ERROR_FINISHED_EVENT,
+    isLoading: false,
+    error
+  };
+};
+
+export type RecentlyFinishedEventAction =
+  | SearchRequestRecentlyFinishedEventAction
+  | SearchSuccessRecentlyFinishedEventAction
+  | SearchErrorRecentlyFinishedEventAction;
+
+export default {
+  searchRecentlyAddedEvent,
+  searchSuccessRecentlyAddedEvent,
+  searchErrorRecentlyAddedEvent,
+  searchRecentlyFinishedEvent,
+  searchSuccessRecentlyFinishedEvent,
+  searchErrorRecentlyFinishedEvent
+};

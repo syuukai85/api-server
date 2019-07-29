@@ -1,12 +1,34 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import WelcomeBoard from '../../components/welcome/WelcomeBoard';
+import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
+import BottomAppBar from '../appBar/BottomAppBar';
+import GroupList from '../group/GroupList';
 
+/**
+ * Home画面
+ */
 const HomePage: React.FC = () => {
   return (
-    <Container fixed>
-      <Typography variant="h1">Homepage</Typography>
-    </Container>
+    <>
+      <Container>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={8}>
+            <RecentlyAddedEventListContainer
+              title="新着イベント"
+              type="basic"
+            />
+            <WelcomeBoard />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <GroupList title="新着グループ" />
+            {/* <EventList title="お布施" type="enrollment" /> */}
+          </Grid>
+        </Grid>
+      </Container>
+      <BottomAppBar />
+    </>
   );
 };
 

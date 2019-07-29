@@ -10,10 +10,10 @@ interface Props {
 }
 
 const AuthGroup: React.FC<Props> = (props: Props) => {
-  const effectFunc = () => {
+  const effectFn = () => {
     props.updateLoginState();
   };
-  useEffect(effectFunc, []);
+  useEffect(effectFn, []);
   if (props.isLoading) {
     return <div>loading....</div>;
   }

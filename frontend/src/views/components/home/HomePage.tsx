@@ -1,7 +1,8 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import EventList from '../event/EventList';
+import WelcomeBoard from '../../components/welcome/WelcomeBoard';
+import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
 import BottomAppBar from '../appBar/BottomAppBar';
 import GroupList from '../group/GroupList';
 
@@ -14,11 +15,15 @@ const HomePage: React.FC = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
-            <EventList title="新着イベント (最新X件)" type="basic" />
+            <RecentlyAddedEventListContainer
+              title="新着イベント"
+              type="basic"
+            />
+            <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <GroupList title="新着グループ (最新X件)" />
-            <EventList title="お布施" type="enrollment" />
+            <GroupList title="新着グループ" />
+            {/* <EventList title="お布施" type="enrollment" /> */}
           </Grid>
         </Grid>
       </Container>

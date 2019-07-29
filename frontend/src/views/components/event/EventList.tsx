@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import EventListItem from './EventListItem';
+import { Event } from 'typescript-fetch-api';
 import List from '@material-ui/core/List';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,30 +11,50 @@ import Divider from '@material-ui/core/Divider';
 interface Props {
   title: string;
   type: 'basic' | 'enrollment';
+  searchEvent: () => void;
+  events: Array<Event>;
+  isLoading: boolean;
+  error?: Error;
 }
 
 /**
  * イベントリスト
  */
 const EventList: React.FC<Props> = (props: Props) => {
+  const effectFn = () => {
+    props.searchEvent();
+  };
+
+  useEffect(effectFn, []);
+
+  const renderItems = (events: Array<Event>, error?: Error) => {
+    const isExistsError = error !== void 0;
+    if (isExistsError)
+      return (
+        <Box bgcolor="error.main" color="error.contrastText">
+          データ取得失敗しました
+        </Box>
+      );
+    return events.map((event: Event, i: number) => {
+      if (props.events.length - 1 === i) {
+        return <EventListItem key={i} event={event} type={props.type} />;
+      }
+      return (
+        <>
+          <EventListItem key={i} event={event} type={props.type} />
+          <Divider />
+        </>
+      );
+    });
+  };
+
   return (
     <List>
       <Card>
         <CardHeader title={props.title} />
         <CardContent>
           <Divider />
-          {/* TODO: eventのリストから値を取得する必要があるが、一旦配列は仮置き */}
-          {[1, 2, 3, 4, 5].map((_, i, arr) => {
-            if (arr.length - 1 === i) {
-              return <EventListItem type={props.type} />;
-            }
-            return (
-              <>
-                <EventListItem type={props.type} />
-                <Divider />
-              </>
-            );
-          })}
+          {renderItems(props.events, props.error)}
         </CardContent>
       </Card>
     </List>

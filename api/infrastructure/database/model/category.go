@@ -1,4 +1,4 @@
-package entity
+package model
 
 // Category 例）Go, React, もくもく
 type Category struct {

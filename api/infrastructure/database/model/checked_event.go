@@ -1,4 +1,4 @@
-package entity
+package model
 
 // CheckedEvent 参照済みイベント
 type CheckedEvent struct {

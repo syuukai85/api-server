@@ -1,4 +1,4 @@
-package entity
+package model
 
 // AppRole イベント、グループ、システムの権限
 type AppRole struct {

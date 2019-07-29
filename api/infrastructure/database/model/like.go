@@ -1,4 +1,4 @@
-package entity
+package model
 
 // Like 好きなカテゴリの関連テーブル
 type Like struct {

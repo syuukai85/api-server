@@ -1,4 +1,4 @@
-package entity
+package model
 
 // Group is イベントとユーザの集まり
 type Group struct {

@@ -1,4 +1,4 @@
-package entity
+package model
 
 // User is connthass account
 type User struct {

@@ -1,4 +1,4 @@
-package entity
+package model
 
 // Venue イベントの開催場所
 type Venue struct {

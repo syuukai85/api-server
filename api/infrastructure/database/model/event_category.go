@@ -1,4 +1,4 @@
-package entity
+package model
 
 // EventCategory イベントカテゴリ
 type EventCategory struct {

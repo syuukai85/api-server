@@ -1,4 +1,4 @@
-package entity
+package model
 
 // Member グループに所属するメンバーの関連テーブル
 type Member struct {

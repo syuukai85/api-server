@@ -9,6 +9,7 @@ interface State {
     recentlyAddedEvent: {
       events: Array<Event>;
       isLoading: boolean;
+      error: Error;
     };
   };
 }
@@ -16,7 +17,8 @@ interface State {
 const mapStateToProps = (state: State) => {
   return {
     events: state.eventsState.recentlyAddedEvent.events,
-    isLoading: state.eventsState.recentlyAddedEvent.isLoading
+    isLoading: state.eventsState.recentlyAddedEvent.isLoading,
+    error: state.eventsState.recentlyAddedEvent.error
   };
 };
 

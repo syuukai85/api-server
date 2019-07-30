@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
+import ErrorMessageAlert from '../alert/ErrorMessageAlert';
 import { Group } from 'typescript-fetch-api';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,6 +13,7 @@ interface Props {
   searchGroup: () => void;
   groups: Array<Group>;
   isLoading: boolean;
+  error?: Error;
 }
 
 /**
@@ -22,24 +24,32 @@ const GroupList: React.FC<Props> = (props: Props) => {
     props.searchGroup();
   };
   useEffect(effectFn, []);
+
+  const renderItems = (groups: Array<Group>, error?: Error) => {
+    const isExistsError = error !== void 0;
+    if (isExistsError)
+      return <ErrorMessageAlert messageText="データ取得失敗しました" />;
+    return groups.map((group: Group, i: number) => {
+      if (props.groups.length - 1 === i) {
+        return <GroupListItem key={i} group={group} />;
+      } else {
+        return (
+          <>
+            <GroupListItem key={i} group={group} />
+            <Divider />
+          </>
+        );
+      }
+    });
+  };
+
   return (
     <List>
       <Card>
         <CardHeader title={props.title} />
         <CardContent>
           <Divider />
-          {props.groups.map((group: Group, i: number) => {
-            if (props.groups.length - 1 === i) {
-              return <GroupListItem key={i} group={group} />;
-            } else {
-              return (
-                <>
-                  <GroupListItem key={i} group={group} />
-                  <Divider />
-                </>
-              );
-            }
-          })}
+          {renderItems(props.groups, props.error)}
         </CardContent>
       </Card>
     </List>

@@ -9,6 +9,7 @@ interface State {
     recentlyAddedGroup: {
       groups: Array<Group>;
       isLoading: boolean;
+      error: Error;
     };
   };
 }
@@ -16,7 +17,8 @@ interface State {
 const mapStateToProps = (state: State) => {
   return {
     groups: state.groupsState.recentlyAddedGroup.groups,
-    isLoading: state.groupsState.recentlyAddedGroup.isLoading
+    isLoading: state.groupsState.recentlyAddedGroup.isLoading,
+    error: state.groupsState.recentlyAddedGroup.error
   };
 };
 

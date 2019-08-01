@@ -6,7 +6,7 @@ import "time"
 type Event struct {
 	Base
 	BaseColor
-	title            string `gorm:"size:50;not null"`
+	Title            string `gorm:"size:50;not null"`
 	Description      string
 	Capacity         uint
 	ImageURL         string    `gorm:"size:255"`
@@ -17,4 +17,7 @@ type Event struct {
 	RecruitEndDate   time.Time
 	GroupID          uint
 	VenueID          uint
+	Bookmarks        []Bookmark
+	EntryEvents      []EntryEvent
+	EventCategories  []EventCategory
 }

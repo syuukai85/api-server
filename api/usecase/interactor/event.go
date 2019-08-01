@@ -1,43 +1,40 @@
 package interactor
 
-
 import (
 	"github.com/connthass/connthass/api/usecase/port"
-	"github.com/connthass/connthass/api/entity"
-)
-
-import (
+	"github.com/connthass/connthass/api/usecase/port/repository"
+	"github.com/connthass/connthass/api/usecase/port/server"
 )
 
 type Event struct {
-  OutputPort port.EventOutputPort
-  Repository port.EventRepository
+	OutputPort      server.EventOutputPort
+	EventRepository repository.EventRepository
 }
 
 func NewEvent(
-  outputPort port.EventOutputPort,
-  repository port.EventRepository,
+	outputPort server.EventOutputPort,
+	eventRepository repository.EventRepository,
 ) *Event {
-  return &Event{
-    OutputPort: outputPort,
-    Repository: repository,
-  }
+	return &Event{
+		OutputPort:      outputPort,
+		EventRepository: eventRepository,
+	}
 }
 
 // Input Port の実装
-func (e *Event) SearchEvents(params *port.SearchEventsRequestParams) (*port.SearchEventsResponse, port.Error) {
-  res, err := e.EventRepository.FindAll()
-  if err != nil {
-    return nil, err
-  }
-  // Output Port の使用
-  return e.OutputPort.SearchEvents(res)
+func (e *Event) SearchEvents(params *server.SearchEventsRequestParams) (*server.SearchEventsResponse, port.Error) {
+	res, err := e.EventRepository.SearchEvents(params.Fields, params.Query, params.Page, params.PerPage)
+	if err != nil {
+		return nil, err
+	}
+	// Output Port の使用
+	return e.OutputPort.SearchEvents(res)
 }
 
-func (e *Event) GetEventByID(params *port.GetEventByID) (*port.GetEventByIDResponse, port.Error) {
-  res, err := e.EventRepository.Find(params.DataSourceID)
-  if err != nil {
-    return nil, err
-  }
-  return e.OutputPort.GetEventByID(res)
+func (e *Event) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, port.Error) {
+	res, err := e.EventRepository.FindByID(params.EventID)
+	if err != nil {
+		return nil, err
+	}
+	return e.OutputPort.GetEventByID(res)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+
 	"github.com/connthass/connthass/api/infrastructure/waf"
 	"github.com/joho/godotenv"
 )

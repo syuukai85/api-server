@@ -1,28 +1,28 @@
-interface/presenter/http.go
-
 package presenter
 
 import (
+	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/usecase/port"
+	"github.com/connthass/connthass/api/usecase/port/server"
 )
 
 type HTTPPresenter struct {
-  port.EventOutputPort
+	server.EventOutputPort
 }
 
 func NewHTTPPresenter() *HTTPPresenter {
-  return &HTTPPresenter{}
+	return &HTTPPresenter{}
 }
 
 // Output Port の実装
-func (p *HTTPPresenter) SearchEvents(events []entity.Event) (*port.SearchEventsResponse, port.Error) {
-	res := &port.SearchEventsResponse{}
-	res.Events = datasources
+func (p *HTTPPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, port.Error) {
+	res := &server.SearchEventsResponse{}
+	res.Events = events
 	return res, nil
-  }
-  
-  func (p *HTTPPresenter) GetEventByID(event *entity.Event) (*port.GetEventByIDResponse, port.Error) {
-	res := &port.GetEventByIDResponse{}
+}
+
+func (p *HTTPPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, port.Error) {
+	res := &server.GetEventByIDResponse{}
 	res.Event = event
 	return res, nil
-  }
+}

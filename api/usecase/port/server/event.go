@@ -1,4 +1,4 @@
-package port
+package server
 
 import (
 	"github.com/connthass/connthass/api/entity"
@@ -15,11 +15,18 @@ type EventInputPort interface {
 }
 
 type SearchEventsRequestParams struct {
-	SearchParams entity.SearchParams
+	Fields  entity.Fields
+	Query   entity.Query
+	Page    entity.Page
+	PerPage entity.PerPage
 }
 
 type GetEventByIDRequestParams struct {
 	EventID entity.EventID
+}
+
+type GetEventByID struct {
+	EventID string `uri:"eventId" binding:"required"`
 }
 
 /*
@@ -36,5 +43,5 @@ type SearchEventsResponse struct {
 }
 
 type GetEventByIDResponse struct {
-	Events entity.Event
+	Event *entity.Event
 }

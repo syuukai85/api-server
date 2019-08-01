@@ -8,4 +8,5 @@ type Group struct {
 	Description string
 	Domain      string `gorm:"size:64;not null"`
 	ImageURL    string `gorm:"size:255"`
+	Members     []Member
 }

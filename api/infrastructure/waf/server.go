@@ -1,7 +1,7 @@
 package waf
 
 import (
-	"github.com/connthass/connthass/infrastructure/controller"
+	"github.com/connthass/connthass/api/interface/controller"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,14 +16,18 @@ func newServer() (*Server, error) {
 }
 
 func (s *Server) setRouter() {
+
 	v1 := s.engine.Group("/v1")
 	events := v1.Group("/events")
 	{
-		events.GET("/", s.searchEvents(controller.EventController))
+		eventController := controller.NewEventController()
+		events.GET("/", s.searchEvents(eventController))
 	}
 
 	event := v1.Group("/event")
 	{
+		eventController := controller.NewEventController()
+		event.GET("/:eventId", s.getEventByID(eventController))
 	}
 }
 

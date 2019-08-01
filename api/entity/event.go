@@ -4,21 +4,29 @@ import (
 	"time"
 )
 
+type Fields []string
+
+type Query string
+
+type Page int
+
+type PerPage int
+
 type EventID string
 
-// Event 例）勉強会、LT、懇親会
+// Event 簡略化のためjsonタグを記載
 type Event struct {
-	ID EventID
-	ColorCode string
-	Title            string
-	Description      string
-	Capacity         uint
-	ImageURL         string
-	QRCodeURL        string
-	HoldStartDate    time.Time
-	HoldEndDate      time.Time
-	RecruitStartDate time.Time
-	RecruitEndDate   time.Time
-	GroupID          string
-	VenueID          string
+	ID               EventID   `json:"id"`
+	ColorCode        string    `json:"colorCode"`
+	Title            string    `json:"title"`
+	Description      string    `json:"description"`
+	Capacity         uint      `json:"capacity"`
+	ImageURL         string    `json:"imageUrl"`
+	QRCodeURL        string    `json:"qrCodeUrl"`
+	HoldStartDate    time.Time `json:"holdStartDate"`
+	HoldEndDate      time.Time `json:"holdEndDate"`
+	RecruitStartDate time.Time `json:"recruitStartDate"`
+	RecruitEndDate   time.Time `json:"recruitEndDate"`
+	GroupID          string    `json:"groupId"`
+	VenueID          string    `json:"venueId"`
 }

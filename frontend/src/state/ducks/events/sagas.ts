@@ -11,7 +11,9 @@ function* searchRecentlyAddedEvent() {
     return api
       .searchEvents(req)
       .then(events => events)
-      .catch(error => error);
+      .catch(error => {
+        throw new Error(error.message);
+      });
   };
   try {
     const events = yield call(searchEvents, { perPage: 5 });

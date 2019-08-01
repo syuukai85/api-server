@@ -10,7 +10,9 @@ function* searchRecentlyAddedGroup() {
     return api
       .searchGroups(req)
       .then(groups => groups)
-      .catch(error => error);
+      .catch(error => {
+        throw new Error(error);
+      });
   };
   try {
     const groups = yield call(searchGroups, { perPage: 5 });

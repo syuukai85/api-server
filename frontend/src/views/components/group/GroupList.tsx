@@ -7,6 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
 import GroupListItem from './GroupListItem';
 import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  contentDivider: {
+    marginBottom: '15px'
+  }
+});
 
 interface Props {
   title: string;
@@ -20,6 +27,7 @@ interface Props {
  * グループリスト
  */
 const GroupList: React.FC<Props> = (props: Props) => {
+  const classes = useStyles({});
   const effectFn = () => {
     props.searchGroup();
   };
@@ -48,7 +56,7 @@ const GroupList: React.FC<Props> = (props: Props) => {
       <Card>
         <CardHeader title={props.title} />
         <CardContent>
-          <Divider />
+          <Divider className={classes.contentDivider} />
           {renderItems(props.groups, props.error)}
         </CardContent>
       </Card>

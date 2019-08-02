@@ -10,8 +10,8 @@ import (
  *  └─ Interactor で実装、Controller で使用される
  */
 type EventInputPort interface {
-	SearchEvents(*SearchEventsRequestParams) port.Error
-	GetEventByID(*GetEventByIDRequestParams) port.Error
+	SearchEvents(*SearchEventsRequestParams) (*SearchEventsResponse, port.Error)
+	GetEventByID(*GetEventByIDRequestParams) (*GetEventByIDResponse, port.Error)
 }
 
 type SearchEventsRequestParams struct {

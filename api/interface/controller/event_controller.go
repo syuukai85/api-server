@@ -28,5 +28,5 @@ func (ec *EventController) SearchEvents(params *server.SearchEventsRequestParams
 
 func (ec *EventController) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, port.Error) {
 	// Input Port の使用
-	return ec.Inputserver.GetEventByID(params)
+	return ec.InputPort.GetEventByID(params)
 }

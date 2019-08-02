@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import WelcomeBoard from '../../components/welcome/WelcomeBoard';
 import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
+import RecentlyFinishedEventListContainer from '../../containers/event/RecentlyFinishedEventListContainer';
 import RecentlyAddedGroupListContainer from '../../containers/group/RecentlyAddedGroupListContainer';
 import BottomAppBar from '../appBar/BottomAppBar';
 
@@ -23,7 +24,10 @@ const HomePage: React.FC = () => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <RecentlyAddedGroupListContainer title="新着グループ" />
-            {/* <EventList title="お布施" type="enrollment" /> */}
+            <RecentlyFinishedEventListContainer
+              title="お布施"
+              type="enrollment"
+            />
           </Grid>
         </Grid>
       </Container>

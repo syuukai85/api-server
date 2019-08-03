@@ -25,7 +25,7 @@ const getEventIdFromRouter = createSelector(
     });
     const id =
       match === null || match.params === null || match.params.id === null
-        ? null
+        ? ''
         : match.params.id;
     return id;
   }

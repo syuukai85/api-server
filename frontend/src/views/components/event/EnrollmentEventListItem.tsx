@@ -24,7 +24,6 @@ const completeStumpImg = require('../../../images/event/completeStump.png');
  */
 const EnrollmentEventListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
-  const holdEndDate = moment(props.event.holdEndDate).format('MM/DD');
   return (
     <Grid xs={12}>
       <Grid item xs={12}>

@@ -18,7 +18,9 @@ const searchEvents = (req: SearchEventsRequest) => {
 function* searchEvent(action: SearchRequestEventAction) {
   try {
     // TODO: 検索条件のformatをどうする？
-    const events = yield call(searchEvents, { query: `id:${action.eventId}` });
+    const events = yield call(searchEvents, {
+      query: `eventId:${action.eventId}`
+    });
     yield put(actions.searchSuccessEvent(events[0]));
   } catch (error) {
     yield put(actions.searchErrorEvent(error));

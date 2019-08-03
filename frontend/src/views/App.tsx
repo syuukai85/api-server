@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from '../state/store';
 import LoginScene from './scenes/LoginScene';
 import HomeScene from './scenes/HomeScene';
+import EventDetailScene from './scenes/event/DetailScene';
 import AuthGroupContainer from './containers/auth/AuthGroupContainer';
 
 const store = configureStore();
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <AuthGroupContainer>
             <Switch>
               <Route exact path="/" component={HomeScene} />
+              <Route exact path="/events/:id" component={EventDetailScene} />
             </Switch>
           </AuthGroupContainer>
         </Switch>

@@ -25,7 +25,7 @@ const completeStumpImg = require('../../../images/event/completeStump.png');
 const EnrollmentEventListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
-    <Grid xs={12}>
+    <Grid item xs={12}>
       <Grid item xs={12}>
         <Typography variant="h5">{props.event.title}</Typography>
         <Divider />

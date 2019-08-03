@@ -5,4 +5,8 @@ const searchRecentlyAddedEvent = async (dispatch: Redux.Dispatch) => {
   dispatch(actions.searchRecentlyAddedEvent());
 };
 
-export default { searchRecentlyAddedEvent };
+const searchRecentlyFinishedEvent = async (dispatch: Redux.Dispatch) => {
+  dispatch(actions.searchRecentlyFinishedEvent());
+};
+
+export default { searchRecentlyAddedEvent, searchRecentlyFinishedEvent };

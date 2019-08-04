@@ -1,6 +1,34 @@
 import React, { useEffect } from 'react';
 import { Event } from 'typescript-fetch-api';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import Loading from '../loading/Loading';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+
+interface ColorProps {
+  backgroundColor: string;
+}
+
+const useStyles = makeStyles(theme => ({
+  header: (props: ColorProps) => ({
+    width: '100%',
+    height: '80vh',
+    backgroundColor: props.backgroundColor
+  }),
+  headerContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  fab: {
+    margin: theme.spacing(1),
+    width: '200px'
+  }
+}));
 
 interface Props {
   id: string;
@@ -11,12 +39,37 @@ interface Props {
 }
 
 const EventDetail: React.FC<Props> = (props: Props) => {
+  const bgColor =
+    props.event.colorCode !== void 0 ? props.event.colorCode : '#000';
+  const classes = useStyles({ backgroundColor: bgColor });
   const effectFn = () => {
     props.searchEvent(props.id);
   };
   useEffect(effectFn, []);
   if (props.isLoading) return <Loading />;
-  return <div>Event Detail</div>;
+  return (
+    <div className={classes.header}>
+      <Container>
+        <Grid item xs={12}>
+          <div className={classes.headerContainer}>
+            <img src={props.event.imageUrl} />
+            <Typography variant="h2" gutterBottom>
+              {props.event.title}
+            </Typography>
+            <Fab
+              color="primary"
+              variant="extended"
+              aria-label="delete"
+              className={classes.fab}
+            >
+              <NavigationIcon />
+              参加
+            </Fab>
+          </div>
+        </Grid>
+      </Container>
+    </div>
+  );
 };
 
 export default EventDetail;

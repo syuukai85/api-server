@@ -2,18 +2,17 @@ import React, { useEffect } from 'react';
 import { Event } from 'typescript-fetch-api';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Loading from '../loading/Loading';
+import Loading from '../../loading/Loading';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Fab from '@material-ui/core/Fab';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import Markdown from 'markdown-to-jsx';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import AssignButton from './AssignButton';
 
 interface ColorProps {
   backgroundColor: string;
@@ -81,15 +80,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
             <Box textAlign="center" className={classes.headerContainer}>
               <img className={classes.eventImage} src={props.event.imageUrl} />
               <Typography variant="h2">{props.event.title}</Typography>
-              <Fab
-                color="primary"
-                variant="extended"
-                aria-label="delete"
-                className={classes.fab}
-              >
-                <NavigationIcon className={classes.assignButtonIcon} />
-                参加
-              </Fab>
+              <AssignButton />
             </Box>
           </Grid>
         </Container>
@@ -124,15 +115,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
       <Container>
         <Grid item xs={12}>
           <Box textAlign="center">
-            <Fab
-              color="primary"
-              variant="extended"
-              aria-label="delete"
-              className={classes.fab}
-            >
-              <NavigationIcon className={classes.assignButtonIcon} />
-              参加
-            </Fab>
+            <AssignButton />
           </Box>
         </Grid>
       </Container>

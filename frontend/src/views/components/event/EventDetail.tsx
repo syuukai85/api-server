@@ -6,6 +6,10 @@ import Loading from '../loading/Loading';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import NavigationIcon from '@material-ui/icons/Navigation';
 
 interface ColorProps {
@@ -36,6 +40,14 @@ const useStyles = makeStyles(theme => ({
   },
   assignButtonIcon: {
     marginRight: '15px'
+  },
+  recruitRequirementsContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  table: {
+    width: '60%',
+    marginTop: '15px'
   }
 }));
 
@@ -54,30 +66,50 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   const effectFn = () => {
     props.searchEvent(props.id);
   };
+  console.log(props.event);
   useEffect(effectFn, []);
   if (props.isLoading) return <Loading />;
   return (
-    <div className={classes.header}>
-      <Container>
-        <Grid item xs={12}>
-          <div className={classes.headerContainer}>
-            <img className={classes.eventImage} src={props.event.imageUrl} />
-            <Typography variant="h2" gutterBottom>
-              {props.event.title}
-            </Typography>
-            <Fab
-              color="primary"
-              variant="extended"
-              aria-label="delete"
-              className={classes.fab}
-            >
-              <NavigationIcon className={classes.assignButtonIcon} />
-              参加
-            </Fab>
-          </div>
-        </Grid>
-      </Container>
-    </div>
+    <>
+      <div className={classes.header}>
+        <Container>
+          <Grid item xs={12}>
+            <div className={classes.headerContainer}>
+              <img className={classes.eventImage} src={props.event.imageUrl} />
+              <Typography variant="h2">{props.event.title}</Typography>
+              <Fab
+                color="primary"
+                variant="extended"
+                aria-label="delete"
+                className={classes.fab}
+              >
+                <NavigationIcon className={classes.assignButtonIcon} />
+                参加
+              </Fab>
+            </div>
+          </Grid>
+        </Container>
+      </div>
+      <Grid item xs={12} className={classes.recruitRequirementsContainer}>
+        <Table className={classes.table}>
+          <TableBody>
+            <TableRow key={1}>
+              <TableCell component="th" scope="row">
+                募集人数
+              </TableCell>
+              <TableCell align="right">
+                <Typography variant="h5">
+                  {props.event.entries !== void 0
+                    ? props.event.entries.length
+                    : 0}
+                  /{props.event.capacity}人
+                </Typography>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Grid>
+    </>
   );
 };
 

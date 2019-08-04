@@ -1,5 +1,4 @@
 import React from 'react';
-import { Event } from 'typescript-fetch-api';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -19,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     backgroundColor: props.backgroundColor
   }),
-  eventImage: {
+  headerImage: {
     marginBottom: '50px',
     width: '50%'
   },
@@ -30,20 +29,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props {
-  event: Event;
+  title: string;
+  colorCode?: string;
+  imageUrl?: string;
 }
 
 const DetailHeader: React.FC<Props> = (props: Props) => {
-  const bgColor =
-    props.event.colorCode !== void 0 ? props.event.colorCode : '#000';
+  const bgColor = props.colorCode !== void 0 ? props.colorCode : '#000';
   const classes = useStyles({ backgroundColor: bgColor });
   return (
     <div className={classes.header}>
       <Container>
         <Grid item xs={12}>
           <Box textAlign="center" className={classes.headerContainer}>
-            <img className={classes.eventImage} src={props.event.imageUrl} />
-            <Typography variant="h2">{props.event.title}</Typography>
+            <img className={classes.headerImage} src={props.imageUrl} />
+            <Typography variant="h2">{props.title}</Typography>
             <AssignButton />
           </Box>
         </Grid>

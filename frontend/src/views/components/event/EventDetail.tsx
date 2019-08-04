@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import AssignButton from '../detail/AssignButton';
 import DetailHeader from '../detail/DetailHeader';
-import RecruitRequirements from '../detail/RecruitRequirements';
+import RecruitRequirements from './RecruitRequirements';
 import Description from '../detail/Description';
 
 interface Props {
@@ -25,7 +25,11 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   if (props.isLoading) return <Loading />;
   return (
     <>
-      <DetailHeader event={props.event} />
+      <DetailHeader
+        title={props.event.title}
+        colorCode={props.event.colorCode}
+        imageUrl={props.event.imageUrl}
+      />
       <RecruitRequirements event={props.event} />
       <Description description={props.event.description} />
       <Container>

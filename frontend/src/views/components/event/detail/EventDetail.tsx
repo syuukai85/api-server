@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import AssignButton from './AssignButton';
 import EventHeader from './EventHeader';
+import RecruitRequirements from './RecruitRequirements';
 
 const useStyles = makeStyles(theme => ({
   recruitRequirementsContainer: {
@@ -50,25 +51,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   return (
     <>
       <EventHeader event={props.event} />
-      <Grid item xs={12} className={classes.recruitRequirementsContainer}>
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow key={1}>
-              <TableCell component="th" scope="row">
-                募集人数
-              </TableCell>
-              <TableCell align="right">
-                <Typography variant="h5">
-                  {props.event.entries !== void 0
-                    ? props.event.entries.length
-                    : 0}
-                  /{props.event.capacity}人
-                </Typography>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </Grid>
+      <RecruitRequirements event={props.event} />
       <Container>
         <Grid item xs={12}>
           <Paper className={classes.descriptionPaper}>

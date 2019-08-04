@@ -11,6 +11,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import Markdown from 'markdown-to-jsx';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 
 interface ColorProps {
   backgroundColor: string;
@@ -29,13 +32,11 @@ const useStyles = makeStyles(theme => ({
     width: '50%'
   },
   headerContainer: {
-    display: 'flex',
-    alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center'
   },
   fab: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     width: '200px'
   },
   assignButtonIcon: {
@@ -48,6 +49,10 @@ const useStyles = makeStyles(theme => ({
   table: {
     width: '60%',
     marginTop: '15px'
+  },
+  descriptionPaper: {
+    padding: theme.spacing(3, 2),
+    margin: theme.spacing(3, 2)
   }
 }));
 
@@ -74,7 +79,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
       <div className={classes.header}>
         <Container>
           <Grid item xs={12}>
-            <div className={classes.headerContainer}>
+            <Box textAlign="center" className={classes.headerContainer}>
               <img className={classes.eventImage} src={props.event.imageUrl} />
               <Typography variant="h2">{props.event.title}</Typography>
               <Fab
@@ -86,7 +91,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
                 <NavigationIcon className={classes.assignButtonIcon} />
                 参加
               </Fab>
-            </div>
+            </Box>
           </Grid>
         </Container>
       </div>
@@ -109,6 +114,29 @@ const EventDetail: React.FC<Props> = (props: Props) => {
           </TableBody>
         </Table>
       </Grid>
+      <Container>
+        <Grid item xs={12}>
+          <Paper className={classes.descriptionPaper}>
+            <Typography variant="h5">説明</Typography>
+            <Markdown>{props.event.description}</Markdown>
+          </Paper>
+        </Grid>
+      </Container>
+      <Container>
+        <Grid item xs={12}>
+          <Box textAlign="center">
+            <Fab
+              color="primary"
+              variant="extended"
+              aria-label="delete"
+              className={classes.fab}
+            >
+              <NavigationIcon className={classes.assignButtonIcon} />
+              参加
+            </Fab>
+          </Box>
+        </Grid>
+      </Container>
     </>
   );
 };

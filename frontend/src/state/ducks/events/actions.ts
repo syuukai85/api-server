@@ -24,7 +24,7 @@ interface SearchSuccessEventAction {
 const searchSuccessEvent = (event: Event): SearchSuccessEventAction => {
   return {
     type: ActionTypes.SUCCESS_EVENT,
-    isLoading: true,
+    isLoading: false,
     event
   };
 };
@@ -71,7 +71,7 @@ const searchSuccessRecentlyAddedEvent = (
 ): SearchSuccessRecentlyAddedEventAction => {
   return {
     type: ActionTypes.SUCCESS_NEWLY_EVENT,
-    isLoading: true,
+    isLoading: false,
     events
   };
 };
@@ -120,7 +120,7 @@ const searchSuccessRecentlyFinishedEvent = (
 ): SearchSuccessRecentlyFinishedEventAction => {
   return {
     type: ActionTypes.SUCCESS_FINISHED_EVENT,
-    isLoading: true,
+    isLoading: false,
     events
   };
 };

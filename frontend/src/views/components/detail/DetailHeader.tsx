@@ -33,7 +33,7 @@ interface Props {
   event: Event;
 }
 
-const EventHeader: React.FC<Props> = (props: Props) => {
+const DetailHeader: React.FC<Props> = (props: Props) => {
   const bgColor =
     props.event.colorCode !== void 0 ? props.event.colorCode : '#000';
   const classes = useStyles({ backgroundColor: bgColor });
@@ -52,4 +52,4 @@ const EventHeader: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default EventHeader;
+export default DetailHeader;

@@ -13,34 +13,9 @@ import Markdown from 'markdown-to-jsx';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import AssignButton from './AssignButton';
-
-interface ColorProps {
-  backgroundColor: string;
-}
+import EventHeader from './EventHeader';
 
 const useStyles = makeStyles(theme => ({
-  header: (props: ColorProps) => ({
-    width: '100%',
-    height: '80vh',
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: props.backgroundColor
-  }),
-  eventImage: {
-    marginBottom: '50px',
-    width: '50%'
-  },
-  headerContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-  fab: {
-    margin: theme.spacing(2),
-    width: '200px'
-  },
-  assignButtonIcon: {
-    marginRight: '15px'
-  },
   recruitRequirementsContainer: {
     display: 'flex',
     justifyContent: 'center'
@@ -74,17 +49,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   if (props.isLoading) return <Loading />;
   return (
     <>
-      <div className={classes.header}>
-        <Container>
-          <Grid item xs={12}>
-            <Box textAlign="center" className={classes.headerContainer}>
-              <img className={classes.eventImage} src={props.event.imageUrl} />
-              <Typography variant="h2">{props.event.title}</Typography>
-              <AssignButton />
-            </Box>
-          </Grid>
-        </Container>
-      </div>
+      <EventHeader event={props.event} />
       <Grid item xs={12} className={classes.recruitRequirementsContainer}>
         <Table className={classes.table}>
           <TableBody>

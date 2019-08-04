@@ -71,7 +71,6 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   const effectFn = () => {
     props.searchEvent(props.id);
   };
-  console.log(props.event);
   useEffect(effectFn, []);
   if (props.isLoading) return <Loading />;
   return (

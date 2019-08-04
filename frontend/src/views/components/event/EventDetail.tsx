@@ -16,8 +16,14 @@ const useStyles = makeStyles(theme => ({
   header: (props: ColorProps) => ({
     width: '100%',
     height: '80vh',
+    display: 'flex',
+    alignItems: 'center',
     backgroundColor: props.backgroundColor
   }),
+  eventImage: {
+    marginBottom: '50px',
+    width: '50%'
+  },
   headerContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -27,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   fab: {
     margin: theme.spacing(1),
     width: '200px'
+  },
+  assignButtonIcon: {
+    marginRight: '15px'
   }
 }));
 
@@ -52,7 +61,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
       <Container>
         <Grid item xs={12}>
           <div className={classes.headerContainer}>
-            <img src={props.event.imageUrl} />
+            <img className={classes.eventImage} src={props.event.imageUrl} />
             <Typography variant="h2" gutterBottom>
               {props.event.title}
             </Typography>
@@ -62,7 +71,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
               aria-label="delete"
               className={classes.fab}
             >
-              <NavigationIcon />
+              <NavigationIcon className={classes.assignButtonIcon} />
               参加
             </Fab>
           </div>

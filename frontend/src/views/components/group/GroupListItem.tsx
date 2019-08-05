@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Group } from 'typescript-fetch-api';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -22,18 +23,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+interface Props {
+  group: Group;
+}
+
 /**
  * グループ列内の行
  */
-const GroupListItem: React.FC = () => {
+const GroupListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
     <ListItem className={classes.listItem} alignItems="flex-start">
       <ListItemAvatar>
-        <Avatar alt="Remy Sharp" src="https://placehold.jp/150x150.png" />
+        <Avatar src={props.group.imagePath} />
       </ListItemAvatar>
       <ListItemText
-        primary="Brunch this weekend?"
+        primary={props.group.name}
         secondary={
           <React.Fragment>
             <Typography
@@ -42,9 +47,8 @@ const GroupListItem: React.FC = () => {
               className={classes.inline}
               color="textPrimary"
             >
-              Ali Connors
+              {props.group.description}
             </Typography>
-            {" — I'll be in your neighborhood doing errands this…"}
           </React.Fragment>
         }
       />

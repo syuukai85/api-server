@@ -1,11 +1,8 @@
 package waf
 
 import (
-	"log"
 	"github.com/connthass/connthass/api/interface/controller"
-	"github.com/connthass/connthass/api/infrastructure/database"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 type Server struct {
@@ -13,12 +10,6 @@ type Server struct {
 }
 
 func newServer() (*Server, error) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	database.Init()
 	return &Server{
 		engine: gin.Default(),
 	}, nil

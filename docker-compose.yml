@@ -11,15 +11,6 @@ services:
       - CHOKIDAR_USEPOLLING=true
     links:
       - api
-  api:
-    container_name: 'connthass-api'
-    build: ./api
-    volumes:
-      - ./api:/go/api
-    ports:
-      - '18888:8080'
-    links:
-      - db
   db:
     container_name: 'connthass-db'
     build: ./db
@@ -29,3 +20,12 @@ services:
       - '33306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=root
+  api:
+    container_name: 'connthass-api'
+    build: ./api
+    volumes:
+      - ./api:/go/api
+    ports:
+      - '18888:8080'
+    links:
+      - db

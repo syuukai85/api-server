@@ -16,8 +16,10 @@ type Event struct {
 	RecruitStartDate time.Time
 	RecruitEndDate   time.Time
 	GroupID          uint
-	VenueID          uint
-	Bookmarks        []Bookmark
-	EntryEvents      []EntryEvent
-	EventCategories  []EventCategory
+	VenueID          uint       `gorm:"not null"`
+	Group            Group      `gorm:"foreignkey:GroupID;association_foreignkey:Refer"`
+	Venue            Venue      `gorm:"foreignkey:VenueID;association_foreignkey:Refer"`
+	Bookmarks        []User     `gorm:"many2many:bookmarks`
+	Entries          []User     `gorm:"many2many:entry_events;"`
+	Categories       []Category `gorm:"many2many:event_categories;"`
 }

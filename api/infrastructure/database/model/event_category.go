@@ -3,6 +3,6 @@ package model
 // EventCategory イベントカテゴリ
 type EventCategory struct {
 	Base
-	EventID    uint
-	CategoryID uint
+	CategoryID uint `gorm:"not null;unique_index:idx_event_id_category_id"`
+	EventID    uint `gorm:"not null;unique_index:idx_event_id_category_id"`
 }

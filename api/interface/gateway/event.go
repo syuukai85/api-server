@@ -1,8 +1,6 @@
 package gateway
 
 import (
-	// "fmt"
-
 	"strconv"
 
 	"github.com/connthass/connthass/api/entity"
@@ -33,11 +31,32 @@ func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page enti
 }
 
 func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
-	event := model.Event{}
+	var event model.Event
+	var group model.Group
+	var venue model.Venue
+
+	var entityCategories []entity.Category
+	var entityEntries []entity.User
+	var entityOrganizer []entity.User
 
 	primaryKey, _ := strconv.Atoi(string(eventID))
-	if err := e.db.First(&event, primaryKey).Error; err != nil {
-		return &entity.Event{}, nil
+	firstEvent := e.db.First(&event, primaryKey)
+
+	firstEvent.Related(&group)
+	firstEvent.Related(&venue)
+
+	entityGroup := entity.Group{
+		ID:          entity.GroupID(group.ID),
+		Name:        group.Name,
+		Description: group.Description,
+		Domain:      group.Domain,
+		ColorCode:   group.ColorCode,
+		ImageURL:    group.ImageURL,
+	}
+
+	entityVenue := entity.Venue{
+		ID:   entity.VenueID(venue.ID),
+		Name: venue.Name,
 	}
 
 	entityEvent := &entity.Event{
@@ -52,6 +71,11 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
 		HoldEndDate:      event.HoldEndDate,
 		RecruitStartDate: event.RecruitStartDate,
 		RecruitEndDate:   event.RecruitEndDate,
+		Group:            entityGroup,
+		Venue:            entityVenue,
+		Entries: entityEntries,
+		Organizer: entityOrganizer,
+		Categories: entityCategories,
 	}
 
 	return entityEvent, nil

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
-import ErrorMessageAlert from '../alert/ErrorMessageAlert';
+import ErrorMessageAlert from '../error/ErrorMessageAlert';
 import { Group } from 'typescript-fetch-api';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';

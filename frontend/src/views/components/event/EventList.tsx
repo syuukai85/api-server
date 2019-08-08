@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import EventListItem from './EventListItem';
-import ErrorMessageAlert from '../alert/ErrorMessageAlert';
+import ErrorMessageAlert from '../error/ErrorMessageAlert';
 import { Event } from 'typescript-fetch-api';
 import List from '@material-ui/core/List';
 import Card from '@material-ui/core/Card';

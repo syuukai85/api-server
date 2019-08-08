@@ -30,9 +30,13 @@ function* searchEvent(action: SearchEventAction) {
 function* searchRecentlyAddedEvent() {
   try {
     const events = yield call(searchEvents, { perPage: 5 });
-    yield put(actions.searchSuccessRecentlyAddedEvent(events));
+    yield put(
+      actions.searchRecentlyAddedEvent.searchSuccessRecentlyAddedEvent(events)
+    );
   } catch (error) {
-    yield put(actions.searchErrorRecentlyAddedEvent(error));
+    yield put(
+      actions.searchRecentlyAddedEvent.searchErrorRecentlyAddedEvent(error)
+    );
   }
 }
 

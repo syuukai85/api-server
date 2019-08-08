@@ -6,7 +6,7 @@ const searchEvent = (dispatch: Redux.Dispatch, eventId: string) => {
 };
 
 const searchRecentlyAddedEvent = (dispatch: Redux.Dispatch) => {
-  dispatch(actions.searchRecentlyAddedEvent());
+  dispatch(actions.searchRecentlyAddedEvent.searchRecentlyAddedEvent());
 };
 
 const searchRecentlyFinishedEvent = (dispatch: Redux.Dispatch) => {

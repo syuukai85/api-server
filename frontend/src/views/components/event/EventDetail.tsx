@@ -8,6 +8,7 @@ import AssignButton from '../detail/AssignButton';
 import DetailHeader from '../detail/DetailHeader';
 import RecruitRequirements from './RecruitRequirements';
 import Description from '../detail/Description';
+import NetworkErrorTemplate from '../error/NetworkErrorTemplate';
 
 interface Props {
   id: string;
@@ -23,6 +24,8 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   };
   useEffect(effectFn, []);
   if (props.isLoading) return <Loading />;
+  const isExistsError = props.error !== void 0;
+  if (isExistsError) return <NetworkErrorTemplate />;
   return (
     <>
       <DetailHeader

@@ -10,7 +10,7 @@ const searchRecentlyAddedEvent = (dispatch: Redux.Dispatch) => {
 };
 
 const searchRecentlyFinishedEvent = (dispatch: Redux.Dispatch) => {
-  dispatch(actions.searchRecentlyFinishedEvent());
+  dispatch(actions.searchRecentlyFinishedEvent.searchRecentlyFinishedEvent());
 };
 
 export default {

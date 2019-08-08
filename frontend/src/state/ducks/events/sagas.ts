@@ -48,9 +48,17 @@ function* searchRecentlyFinishedEvent() {
       query: `holdEndDate>${moment(new Date()).format('YYYY-MM-DD-hh-mm-ss')}`,
       perPage: 5
     });
-    yield put(actions.searchSuccessRecentlyFinishedEvent(events));
+    yield put(
+      actions.searchRecentlyFinishedEvent.searchSuccessRecentlyFinishedEvent(
+        events
+      )
+    );
   } catch (error) {
-    yield put(actions.searchErrorRecentlyFinishedEvent(error));
+    yield put(
+      actions.searchRecentlyFinishedEvent.searchErrorRecentlyFinishedEvent(
+        error
+      )
+    );
   }
 }
 

@@ -1,52 +1,7 @@
-import { ActionTypes } from './types';
+import { ActionTypes } from '../types';
 import { Event } from 'typescript-fetch-api';
-
-export interface SearchRequestEventAction {
-  type: typeof ActionTypes.REQUEST_EVENT;
-  eventId: string;
-  isLoading: boolean;
-}
-
-const searchEvent = (eventId: string): SearchRequestEventAction => {
-  return {
-    type: ActionTypes.REQUEST_EVENT,
-    isLoading: true,
-    eventId
-  };
-};
-
-interface SearchSuccessEventAction {
-  type: typeof ActionTypes.SUCCESS_EVENT;
-  isLoading: boolean;
-  event: Event;
-}
-
-const searchSuccessEvent = (event: Event): SearchSuccessEventAction => {
-  return {
-    type: ActionTypes.SUCCESS_EVENT,
-    isLoading: false,
-    event
-  };
-};
-
-interface SearchErrorEventAction {
-  type: typeof ActionTypes.ERROR_EVENT;
-  isLoading: boolean;
-  error: Error;
-}
-
-const searchErrorEvent = (error: Error): SearchErrorEventAction => {
-  return {
-    type: ActionTypes.ERROR_EVENT,
-    isLoading: false,
-    error
-  };
-};
-
-export type SearchEventAction =
-  | SearchRequestEventAction
-  | SearchSuccessEventAction
-  | SearchErrorEventAction;
+import { default as searchEvent, SearchEventAction } from './searchEvent';
+export type SearchEventAction = SearchEventAction;
 
 interface SearchRequestRecentlyAddedEventAction {
   type: typeof ActionTypes.REQUEST_NEWLY_EVENT;
@@ -148,8 +103,6 @@ export type RecentlyFinishedEventAction =
 
 export default {
   searchEvent,
-  searchSuccessEvent,
-  searchErrorEvent,
   searchRecentlyAddedEvent,
   searchSuccessRecentlyAddedEvent,
   searchErrorRecentlyAddedEvent,

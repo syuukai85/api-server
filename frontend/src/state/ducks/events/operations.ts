@@ -2,7 +2,7 @@ import Redux from 'redux';
 import actions from './actions';
 
 const searchEvent = (dispatch: Redux.Dispatch, eventId: string) => {
-  dispatch(actions.searchEvent(eventId));
+  dispatch(actions.searchEvent.searchEvent(eventId));
 };
 
 const searchRecentlyAddedEvent = (dispatch: Redux.Dispatch) => {

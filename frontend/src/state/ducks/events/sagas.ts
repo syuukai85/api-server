@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import actions, { SearchRequestEventAction } from './actions';
+import { default as actions, SearchEventAction } from './actions';
 import { EventApi, SearchEventsRequest } from 'typescript-fetch-api';
 import { ActionTypes } from './types';
 import moment from 'moment';
@@ -15,15 +15,15 @@ const searchEvents = (req: SearchEventsRequest) => {
     });
 };
 
-function* searchEvent(action: SearchRequestEventAction) {
+function* searchEvent(action: SearchEventAction) {
   try {
     // TODO: 検索条件のformatをどうする？
     const events = yield call(searchEvents, {
       query: `eventId:${action.eventId}`
     });
-    yield put(actions.searchSuccessEvent(events[0]));
+    yield put(actions.searchEvent.searchSuccessEvent(events[0]));
   } catch (error) {
-    yield put(actions.searchErrorEvent(error));
+    yield put(actions.searchEvent.searchErrorEvent(error));
   }
 }
 

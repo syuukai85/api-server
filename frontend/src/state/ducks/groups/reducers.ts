@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { Group } from 'typescript-fetch-api';
-import { GroupAction } from './actions';
+import { SearchRecentlyAddedGroupAction } from './actions';
 import { ActionTypes } from './types';
 
 interface RecentlyAddedGroupState {
@@ -10,7 +10,7 @@ interface RecentlyAddedGroupState {
 
 const recentlyAddedGroup = (
   state: RecentlyAddedGroupState = { groups: [], isLoading: true },
-  action: GroupAction
+  action: SearchRecentlyAddedGroupAction
 ): RecentlyAddedGroupState => {
   switch (action.type) {
     case ActionTypes.REQUEST_NEWLY_GROUP: {

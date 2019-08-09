@@ -16,9 +16,13 @@ function* searchRecentlyAddedGroup() {
   };
   try {
     const groups = yield call(searchGroups, { perPage: 5 });
-    yield put(actions.searchSuccessRecentlyAddedGroup(groups));
+    yield put(
+      actions.searchRecentlyAddedGroup.searchSuccessRecentlyAddedGroup(groups)
+    );
   } catch (error) {
-    yield put(actions.searchErrorRecentlyAddedGroup(error));
+    yield put(
+      actions.searchRecentlyAddedGroup.searchErrorRecentlyAddedGroup(error)
+    );
   }
 }
 

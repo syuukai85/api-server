@@ -1,16 +1,16 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import WelcomeBoard from '../../components/welcome/WelcomeBoard';
-import RecentlyAddedEventListContainer from '../../containers/event/RecentlyAddedEventListContainer';
-import RecentlyFinishedEventListContainer from '../../containers/event/RecentlyFinishedEventListContainer';
-import RecentlyAddedGroupListContainer from '../../containers/group/RecentlyAddedGroupListContainer';
-import BottomAppBar from '../appBar/BottomAppBar';
+import WelcomeBoard from '../components/welcome/WelcomeBoard';
+import RecentlyAddedEventListContainer from '../containers/event/RecentlyAddedEventListContainer';
+import RecentlyFinishedEventListContainer from '../containers/event/RecentlyFinishedEventListContainer';
+import RecentlyAddedGroupListContainer from '../containers/group/RecentlyAddedGroupListContainer';
+import BottomAppBar from '../components/appBar/BottomAppBar';
 
 /**
  * Home画面
  */
-const HomePage: React.FC = () => {
+const HomeScene: React.FC = () => {
   return (
     <>
       <Container>
@@ -36,4 +36,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default HomeScene;

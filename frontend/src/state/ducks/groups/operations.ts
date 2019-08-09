@@ -1,7 +1,7 @@
 import Redux from 'redux';
 import actions from './actions';
 
-const searchRecentlyAddedGroup = async (dispatch: Redux.Dispatch) => {
+const searchRecentlyAddedGroup = (dispatch: Redux.Dispatch) => {
   dispatch(actions.searchRecentlyAddedGroup.searchRecentlyAddedGroup());
 };
 

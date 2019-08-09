@@ -17,10 +17,10 @@ const searchGroups = (req: SearchGroupsRequest) => {
 function* searchGroup(action: SearchGroupAction) {
   try {
     // TODO: 検索条件のformatをどうする？
-    const group = yield call(searchGroups, {
+    const groups = yield call(searchGroups, {
       query: `groupId:${action.groupId}`
     });
-    yield put(actions.searchGroup.searchSuccessGroup(group));
+    yield put(actions.searchGroup.searchSuccessGroup(groups[0]));
   } catch (error) {
     yield put(actions.searchGroup.searchErrorGroup(error));
   }

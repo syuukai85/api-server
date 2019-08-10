@@ -4,4 +4,6 @@ package model
 type AppRole struct {
 	Base
 	BaseRole
+	EntryEvents []EntryEvent
+	Members     []Member
 }

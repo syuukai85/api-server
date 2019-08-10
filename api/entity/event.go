@@ -4,9 +4,10 @@ import (
 	"time"
 )
 
+// EventID イベントID
 type EventID string
 
-// Event 簡略化のためjsonタグを記載
+// Event イベント
 type Event struct {
 	ID               EventID    `json:"id"`
 	ColorCode        string     `json:"colorCode"`

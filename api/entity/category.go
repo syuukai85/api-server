@@ -1,7 +1,10 @@
 package entity
 
+// CategoryID カテゴリID
+type CategoryID string
+
 // Category 例）Go, React, もくもく
 type Category struct {
-	ID            string    `json:"id"`
-	Name            string    `json:"name"`
+	ID   CategoryID `json:"id"`
+	Name string     `json:"name"`
 }

@@ -1,7 +1,9 @@
 package entity
 
+// GroupID グループID
 type GroupID string
 
+// Group グループ
 type Group struct {
 	ID          GroupID `json:"id"`
 	Name        string  `json:"name"`

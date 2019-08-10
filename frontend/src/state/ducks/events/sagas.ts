@@ -1,20 +1,33 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import actions from './actions';
+import actions, { SearchRequestEventAction } from './actions';
 import { EventApi, SearchEventsRequest } from 'typescript-fetch-api';
 import { ActionTypes } from './types';
 import moment from 'moment';
 
 let api = new EventApi();
 
+const searchEvents = (req: SearchEventsRequest) => {
+  return api
+    .searchEvents(req)
+    .then(events => events)
+    .catch(error => {
+      throw new Error(error.message);
+    });
+};
+
+function* searchEvent(action: SearchRequestEventAction) {
+  try {
+    // TODO: 検索条件のformatをどうする？
+    const events = yield call(searchEvents, {
+      query: `eventId:${action.eventId}`
+    });
+    yield put(actions.searchSuccessEvent(events[0]));
+  } catch (error) {
+    yield put(actions.searchErrorEvent(error));
+  }
+}
+
 function* searchRecentlyAddedEvent() {
-  const searchEvents = (req: SearchEventsRequest) => {
-    return api
-      .searchEvents(req)
-      .then(events => events)
-      .catch(error => {
-        throw new Error(error.message);
-      });
-  };
   try {
     const events = yield call(searchEvents, { perPage: 5 });
     yield put(actions.searchSuccessRecentlyAddedEvent(events));
@@ -24,14 +37,6 @@ function* searchRecentlyAddedEvent() {
 }
 
 function* searchRecentlyFinishedEvent() {
-  const searchEvents = (req: SearchEventsRequest) => {
-    return api
-      .searchEvents(req)
-      .then(events => events)
-      .catch(error => {
-        throw new Error(error.message);
-      });
-  };
   try {
     const events = yield call(searchEvents, {
       // TODO: 検索条件のformatをどうする？
@@ -46,6 +51,7 @@ function* searchRecentlyFinishedEvent() {
 }
 
 const sagas = [
+  takeEvery(ActionTypes.REQUEST_EVENT, searchEvent),
   takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchRecentlyAddedEvent),
   takeEvery(ActionTypes.REQUEST_FINISHED_EVENT, searchRecentlyFinishedEvent)
 ];

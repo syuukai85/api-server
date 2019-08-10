@@ -1,12 +1,20 @@
 import Redux from 'redux';
 import actions from './actions';
 
-const searchRecentlyAddedEvent = async (dispatch: Redux.Dispatch) => {
+const searchEvent = (dispatch: Redux.Dispatch, eventId: string) => {
+  dispatch(actions.searchEvent(eventId));
+};
+
+const searchRecentlyAddedEvent = (dispatch: Redux.Dispatch) => {
   dispatch(actions.searchRecentlyAddedEvent());
 };
 
-const searchRecentlyFinishedEvent = async (dispatch: Redux.Dispatch) => {
+const searchRecentlyFinishedEvent = (dispatch: Redux.Dispatch) => {
   dispatch(actions.searchRecentlyFinishedEvent());
 };
 
-export default { searchRecentlyAddedEvent, searchRecentlyFinishedEvent };
+export default {
+  searchEvent,
+  searchRecentlyAddedEvent,
+  searchRecentlyFinishedEvent
+};

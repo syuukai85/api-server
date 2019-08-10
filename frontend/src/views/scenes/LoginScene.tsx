@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import GoogleLoginButtonContainer from '../../containers/auth/GoogleLoginButtonContainer';
+import GoogleLoginButtonContainer from '../containers/auth/GoogleLoginButtonContainer';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginPage: React.FC = () => {
+const LoginScene: React.FC = () => {
   const styles = useStyles({});
   return (
     <Container fixed>
@@ -22,4 +22,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default LoginScene;

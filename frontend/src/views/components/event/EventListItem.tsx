@@ -4,13 +4,15 @@ import { Event } from 'typescript-fetch-api';
 import BasicEventListItem from './BasicEventListItem';
 import EnrollmentEventListItem from './EnrollmentEventListItem';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   listItem: {
     '&:hover': {
       backgroundColor: '#e1f5fe'
     }
-  }
+  },
+  listLink: { textDecoration: 'none', color: '#212121' }
 });
 
 interface Props {
@@ -27,12 +29,14 @@ interface Props {
 const EventListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
-    <ListItem className={classes.listItem}>
-      {props.type === 'basic' && <BasicEventListItem event={props.event} />}
-      {props.type === 'enrollment' && (
-        <EnrollmentEventListItem event={props.event} />
-      )}
-    </ListItem>
+    <Link to={`/events/${props.event.id}`} className={classes.listLink}>
+      <ListItem className={classes.listItem}>
+        {props.type === 'basic' && <BasicEventListItem event={props.event} />}
+        {props.type === 'enrollment' && (
+          <EnrollmentEventListItem event={props.event} />
+        )}
+      </ListItem>
+    </Link>
   );
 };
 

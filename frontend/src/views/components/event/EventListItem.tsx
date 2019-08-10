@@ -29,7 +29,9 @@ const EventListItem: React.FC<Props> = (props: Props) => {
   return (
     <ListItem className={classes.listItem}>
       {props.type === 'basic' && <BasicEventListItem event={props.event} />}
-      {props.type === 'enrollment' && <EnrollmentEventListItem />}
+      {props.type === 'enrollment' && (
+        <EnrollmentEventListItem event={props.event} />
+      )}
     </ListItem>
   );
 };

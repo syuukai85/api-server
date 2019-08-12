@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Group } from 'typescript-fetch-api';
 import NetworkErrorTemplate from '../error/NetworkErrorTemplate';
 import Loading from '../loading/Loading';
+import DetailHeader from '../detail/DetailHeader';
 
 interface Props {
   id: string;
@@ -21,7 +22,11 @@ const GroupDetail: React.FC<Props> = (props: Props) => {
   if (isExistsError) return <NetworkErrorTemplate />;
   return (
     <>
-      <div>group detail</div>
+      <DetailHeader
+        title={props.group.name === void 0 ? '' : props.group.name}
+        colorCode={props.group.colorCode}
+        imageUrl={props.group.imagePath}
+      />
     </>
   );
 };

@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { Group } from 'typescript-fetch-api';
 import NetworkErrorTemplate from '../error/NetworkErrorTemplate';
 import Loading from '../loading/Loading';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import AssignButton from '../detail/AssignButton';
 import DetailHeader from '../detail/DetailHeader';
 
 interface Props {
@@ -27,6 +31,13 @@ const GroupDetail: React.FC<Props> = (props: Props) => {
         colorCode={props.group.colorCode}
         imageUrl={props.group.imagePath}
       />
+      <Container>
+        <Grid item xs={12}>
+          <Box textAlign="center">
+            <AssignButton />
+          </Box>
+        </Grid>
+      </Container>
     </>
   );
 };

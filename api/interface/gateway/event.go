@@ -49,6 +49,16 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
 
 	gatewayUser := NewUser()
 
+	entries, err := gatewayUser.FindGeneralByEventID(stringEventID)
+	if err != nil {
+		return nil, err
+	}
+
+	organizer, err := gatewayUser.FindOrganizerByEventID(stringEventID)
+	if err != nil {
+		return nil, err
+	}
+
 	entityEvent := &entity.Event{
 		ID:               entity.EventID(stringEventID),
 		ColorCode:        event.ColorCode,
@@ -63,8 +73,8 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
 		RecruitEndDate:   event.RecruitEndDate,
 		Group:            groupToEntity(group),
 		Venue:            venueToEntity(venue),
-		Entries:          gatewayUser.FindGeneralByEventID(stringEventID),
-		Organizer:        gatewayUser.FindOrganizerByEventID(stringEventID),
+		Entries:          entries,
+		Organizer:        organizer,
 		Categories:       categoriesToEntities(categories),
 	}
 

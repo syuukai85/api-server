@@ -1,10 +1,14 @@
 package waf
 
 import (
+	"github.com/connthass/connthass/api/infrastructure/waf/middleware"
 	"github.com/connthass/connthass/api/interface/controller"
+	"github.com/connthass/connthass/api/interface/gateway"
+	"github.com/connthass/connthass/api/usecase/interactor"
 	"github.com/gin-gonic/gin"
 )
 
+// Server Ginをラップ
 type Server struct {
 	engine *gin.Engine
 }
@@ -18,6 +22,9 @@ func newServer() (*Server, error) {
 func (s *Server) setRouter() {
 
 	v1 := s.engine.Group("/v1")
+	v1.Use(middleware.APIKeyAuth(&interactor.APIKeyAuth{
+		gateway.NewUser(),
+	}))
 	events := v1.Group("/events")
 	{
 		eventController := controller.NewEventController()
@@ -31,6 +38,7 @@ func (s *Server) setRouter() {
 	}
 }
 
+// Run サーバを実行する
 func Run() {
 	s, err := newServer()
 	if err != nil {

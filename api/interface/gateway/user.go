@@ -6,6 +6,7 @@ import (
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/database"
 	"github.com/connthass/connthass/api/infrastructure/database/model"
+	"github.com/connthass/connthass/api/usecase/port"
 	"github.com/jinzhu/gorm"
 )
 
@@ -21,24 +22,28 @@ func NewUser() *User {
 	}
 }
 
+func userToEntity(user model.User) entity.User {
+	entityUser := entity.User{
+		ID:   entity.UserID(fmt.Sprint(user.ID)),
+		UID:  entity.UserUID(fmt.Sprint(user.UID)),
+		Name: user.Name,
+	}
+	return entityUser
+}
+
 func usersToEntities(users []model.User) []entity.User {
 
 	var entityUsers []entity.User
 
 	for _, user := range users {
-		entityUser := entity.User{
-			ID:   entity.UserID(fmt.Sprint(user.ID)),
-			UID:  entity.UserUID(fmt.Sprint(user.UID)),
-			Name: user.Name,
-		}
-		entityUsers = append(entityUsers, entityUser)
+		entityUsers = append(entityUsers, userToEntity(user))
 	}
 
 	return entityUsers
 }
 
 // FindOrganizerByEventID イベント運営者を取得する
-func (u *User) FindOrganizerByEventID(eventID string) []entity.User {
+func (u *User) FindOrganizerByEventID(eventID string) ([]entity.User, port.Error) {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",
@@ -46,11 +51,11 @@ func (u *User) FindOrganizerByEventID(eventID string) []entity.User {
 		entity.OrganizerEntryID,
 	).Find(&users)
 
-	return usersToEntities(users)
+	return usersToEntities(users), nil
 }
 
 // FindGeneralByEventID イベント一般参加者を取得する
-func (u *User) FindGeneralByEventID(eventID string) []entity.User {
+func (u *User) FindGeneralByEventID(eventID string) ([]entity.User, port.Error) {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",
@@ -58,5 +63,17 @@ func (u *User) FindGeneralByEventID(eventID string) []entity.User {
 		entity.GeneralEntryID,
 	).Find(&users)
 
-	return usersToEntities(users)
+	return usersToEntities(users), nil
+}
+
+// FindByEntitryUser エンティティのからユーザを取得
+func (u *User) FindByEntitryUser(entiryUser *entity.User) (entity.User, port.Error) {
+	var firstUser model.User
+	user := model.User{
+		UID:    fmt.Sprint(entiryUser.UID),
+		APIKey: fmt.Sprint(entiryUser.APIKey),
+	}
+	u.db.Where(&user).First(&firstUser)
+
+	return userToEntity(firstUser), nil
 }

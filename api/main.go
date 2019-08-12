@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/connthass/connthass/api/infrastructure/database"
+	"github.com/connthass/connthass/api/infrastructure/waf"
 	"github.com/joho/godotenv"
 )
 
@@ -18,5 +19,5 @@ func init() {
 
 func main() {
 	// TODO: Controllerの作成等がまだなためコメントアウト
-	// waf.Run()
+	waf.Run()
 }

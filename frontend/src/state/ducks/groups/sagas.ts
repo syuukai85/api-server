@@ -25,7 +25,7 @@ const searchGroups = (req: SearchGroupsRequest) => {
 const searchGroupEventsById = (req: SearchGroupEventsByIdRequest) => {
   return api
     .searchGroupEventsById(req)
-    .then(groups => groups)
+    .then(events => events)
     .catch(error => {
       throw new Error(error);
     });
@@ -48,9 +48,9 @@ function* searchGroupEvents(action: SearchGroupEventsAction) {
     const events = yield call(searchGroupEventsById, {
       groupId: parseInt(action.groupId, 10)
     });
-    yield put(actions.searchGroup.searchSuccessGroup(events));
+    yield put(actions.searchGroupEvents.searchSuccessGroupEvents(events));
   } catch (error) {
-    yield put(actions.searchGroup.searchErrorGroup(error));
+    yield put(actions.searchGroupEvents.searchErrorGroupEvents(error));
   }
 }
 

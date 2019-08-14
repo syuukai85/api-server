@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 import { Group } from 'typescript-fetch-api';
-import { SearchGroupAction, SearchRecentlyAddedGroupAction } from './actions';
+import {
+  SearchGroupAction,
+  SearchGroupEventsAction,
+  SearchRecentlyAddedGroupAction
+} from './actions';
 import { ActionTypes } from './types';
 
 interface GroupState {
@@ -25,6 +29,39 @@ const group = (
       });
     }
     case ActionTypes.ERROR_GROUP: {
+      return Object.assign({}, state, {
+        isLoading: action.isLoading,
+        error: action.error
+      });
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+interface GroupEventsState {
+  events: Array<Event>;
+  isLoading: boolean;
+}
+
+const groupEvents = (
+  state: GroupEventsState = { events: [], isLoading: true },
+  action: SearchGroupEventsAction
+): GroupEventsState => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_GROUP_EVENTS: {
+      return Object.assign({}, state, {
+        isLoading: action.isLoading
+      });
+    }
+    case ActionTypes.SUCCESS_GROUP_EVENTS: {
+      return Object.assign({}, state, {
+        events: action.events,
+        isLoading: action.isLoading
+      });
+    }
+    case ActionTypes.ERROR_GROUP_EVENTS: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
         error: action.error
@@ -69,5 +106,9 @@ const recentlyAddedGroup = (
   }
 };
 
-const groupsReducer = combineReducers({ group, recentlyAddedGroup });
+const groupsReducer = combineReducers({
+  group,
+  groupEvents,
+  recentlyAddedGroup
+});
 export default groupsReducer;

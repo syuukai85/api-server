@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Group } from 'typescript-fetch-api';
+import { Group, Event } from 'typescript-fetch-api';
 import * as groupSelector from '../../../state/ducks/groups/selectors';
 import oparations from '../../../state/ducks/groups/operations';
 import Redux from 'redux';
@@ -17,6 +17,11 @@ interface State {
       isLoading: boolean;
       error: Error;
     };
+    groupEvents: {
+      events: Array<Event>;
+      isLoading: boolean;
+      error: Error;
+    };
   };
 }
 
@@ -24,14 +29,19 @@ const mapStateToProps = (state: State) => {
   return {
     id: groupSelector.getGroupIdFromRouter(state),
     group: state.groupsState.group.group,
-    isLoading: state.groupsState.group.isLoading,
-    error: state.groupsState.group.error
+    events: state.groupsState.groupEvents.events,
+    isLoading:
+      state.groupsState.group.isLoading &&
+      state.groupsState.groupEvents.isLoading,
+    error: state.groupsState.group.error || state.groupsState.groupEvents.error
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    searchGroup: (groupId: string) => oparations.searchGroup(dispatch, groupId)
+    searchGroup: (groupId: string) => oparations.searchGroup(dispatch, groupId),
+    searchGroupEvents: (groupId: string) =>
+      oparations.searchGroupEvents(dispatch, groupId)
   };
 };
 

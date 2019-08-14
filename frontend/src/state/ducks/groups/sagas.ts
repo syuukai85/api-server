@@ -1,6 +1,14 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { default as actions, SearchGroupAction } from './actions';
-import { GroupApi, SearchGroupsRequest } from 'typescript-fetch-api';
+import {
+  default as actions,
+  SearchGroupAction,
+  SearchGroupEventsAction
+} from './actions';
+import {
+  GroupApi,
+  SearchGroupsRequest,
+  SearchGroupEventsByIdRequest
+} from 'typescript-fetch-api';
 import { ActionTypes } from './types';
 
 let api = new GroupApi();
@@ -9,6 +17,15 @@ const searchGroups = (req: SearchGroupsRequest) => {
   return api
     .searchGroups(req)
     .then(groups => groups)
+    .catch(error => {
+      throw new Error(error);
+    });
+};
+
+const searchGroupEventsById = (req: SearchGroupEventsByIdRequest) => {
+  return api
+    .searchGroupEventsById(req)
+    .then(events => events)
     .catch(error => {
       throw new Error(error);
     });
@@ -23,6 +40,17 @@ function* searchGroup(action: SearchGroupAction) {
     yield put(actions.searchGroup.searchSuccessGroup(groups[0]));
   } catch (error) {
     yield put(actions.searchGroup.searchErrorGroup(error));
+  }
+}
+
+function* searchGroupEvents(action: SearchGroupEventsAction) {
+  try {
+    const events = yield call(searchGroupEventsById, {
+      groupId: parseInt(action.groupId, 10)
+    });
+    yield put(actions.searchGroupEvents.searchSuccessGroupEvents(events));
+  } catch (error) {
+    yield put(actions.searchGroupEvents.searchErrorGroupEvents(error));
   }
 }
 
@@ -41,6 +69,7 @@ function* searchRecentlyAddedGroup() {
 
 const sagas = [
   takeEvery(ActionTypes.REQUEST_GROUP, searchGroup),
+  takeEvery(ActionTypes.REQUEST_GROUP_EVENTS, searchGroupEvents),
   takeEvery(ActionTypes.REQUEST_NEWLY_GROUP, searchRecentlyAddedGroup)
 ];
 export default sagas;

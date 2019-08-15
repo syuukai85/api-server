@@ -11,8 +11,8 @@ type UserAPIKey string
 
 // User ユーザ
 type User struct {
-	ID   UserID  `json:"id"`
-	UID  UserUID `json:"uid"`
-	APIKey UserAPIKey `json:"apiKey`
-	Name string  `json:"name"`
+	ID     UserID     `json:"id"`
+	UID    UserUID    `json:"uid"`
+	APIKey UserAPIKey `json:"apiKey"`
+	Name   string     `json:"name"`
 }

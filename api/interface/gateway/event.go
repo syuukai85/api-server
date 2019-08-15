@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/database"
-	"github.com/connthass/connthass/api/infrastructure/database/model"
+	"github.com/connthass/connthass/api/infrastructure/orm"
+	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/connthass/connthass/api/usecase/port"
 	"github.com/jinzhu/gorm"
 )
@@ -18,7 +18,7 @@ type Event struct {
 // NewEvent コンストラクタ
 func NewEvent() *Event {
 	return &Event{
-		db: database.GetDB(),
+		db: orm.GetDB(),
 	}
 }
 

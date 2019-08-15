@@ -3,7 +3,7 @@ package gateway
 import (
 	"fmt"
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/database/model"
+	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
 
 func groupToEntity(group model.Group) entity.Group {

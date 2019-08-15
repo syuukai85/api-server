@@ -6,8 +6,4 @@ type User struct {
 	Name          string `gorm:"size:50;not null"`
 	UID           uint   `gorm:"not null;unique_index"`
 	SysRoleID     uint   `gorm:"not null"`
-	Bookmarks     []Bookmark
-	CheckedEvents []CheckedEvent
-	Likes         []Like
-	Members       []Member
 }

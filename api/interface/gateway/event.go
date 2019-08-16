@@ -53,7 +53,6 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	firstEvent.Related(&venue)
 	firstEvent.Related(&categories, "Categories")
 
-	fmt.Println(categoriesToEntities(categories))
 	gatewayUser := NewUser()
 	entityEvent := &entity.Event{
 		ID:               entity.EventID(stringEventID),

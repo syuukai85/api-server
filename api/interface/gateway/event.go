@@ -6,7 +6,6 @@ import (
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
-	"github.com/connthass/connthass/api/usecase/port"
 	"github.com/jinzhu/gorm"
 )
 
@@ -23,7 +22,7 @@ func NewEvent() *Event {
 }
 
 // SearchEvents 検索条件からイベントを検索する
-func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page entity.Page, perPage entity.PerPage) ([]entity.Event, port.Error) {
+func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page entity.Page, perPage entity.PerPage) ([]entity.Event, entity.Error) {
 	// fmt.Println(query)
 	// events := []model.Event{}
 	// e.db.Offset(page).Limit(perPage).Select(fields).Find(&events)
@@ -34,7 +33,7 @@ func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page enti
 }
 
 // FindByID IDからイベントを検索する
-func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
+func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, entity.Error) {
 	var event model.Event
 	var group model.Group
 	var venue model.Venue

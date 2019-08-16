@@ -22,7 +22,7 @@ func NewEvent(
 }
 
 // Input Port の実装
-func (e *Event) SearchEvents(params *server.SearchEventsRequestParams) (*server.SearchEventsResponse, port.Error) {
+func (e *Event) SearchEvents(params *server.SearchEventsRequestParams) (*server.SearchEventsResponse, entity.Error) {
 	res, err := e.EventRepository.SearchEvents(params.Fields, params.Query, params.Page, params.PerPage)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (e *Event) SearchEvents(params *server.SearchEventsRequestParams) (*server.
 	return e.OutputPort.SearchEvents(res)
 }
 
-func (e *Event) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, port.Error) {
+func (e *Event) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, entity.Error) {
 	res, err := e.EventRepository.FindByID(params.EventID)
 	if err != nil {
 		return nil, err

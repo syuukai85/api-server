@@ -21,12 +21,11 @@ func NewUser() *User {
 	}
 }
 
-func usersToEntities(users []model.User) []entity.User {
-
-	var entityUsers []entity.User
+func usersToEntities(users []model.User) []*entity.User {
+	entityUsers := make([]*entity.User, 0)
 
 	for _, user := range users {
-		entityUser := entity.User{
+		entityUser := &entity.User{
 			ID:   entity.UserID(fmt.Sprint(user.ID)),
 			UID:  entity.UserUID(fmt.Sprint(user.UID)),
 			Name: user.Name,
@@ -38,7 +37,7 @@ func usersToEntities(users []model.User) []entity.User {
 }
 
 // FindOrganizerByEventID イベント運営者を取得する
-func (u *User) FindOrganizerByEventID(eventID string) []entity.User {
+func (u *User) FindOrganizerByEventID(eventID string) []*entity.User {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",
@@ -50,7 +49,7 @@ func (u *User) FindOrganizerByEventID(eventID string) []entity.User {
 }
 
 // FindGeneralByEventID イベント一般参加者を取得する
-func (u *User) FindGeneralByEventID(eventID string) []entity.User {
+func (u *User) FindGeneralByEventID(eventID string) []*entity.User {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",

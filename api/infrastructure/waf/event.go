@@ -33,7 +33,7 @@ func (s *Server) searchEvents(controller *controller.EventController) func(c *gi
 		})
 		if err != nil {
 			log.Println(err)
-			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			c.JSON(err.Code, err.Errors)
 			return
 		}
 
@@ -55,7 +55,7 @@ func (s *Server) getEventByID(controller *controller.EventController) func(c *gi
 		})
 		if err != nil {
 			log.Println(err)
-			c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
+			c.JSON(err.Code, err)
 			return
 		}
 

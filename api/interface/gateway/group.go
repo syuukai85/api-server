@@ -2,12 +2,16 @@ package gateway
 
 import (
 	"fmt"
+
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
 
-func groupToEntity(group model.Group) entity.Group {
-	entityGroup := entity.Group{
+func groupToEntity(group model.Group) *entity.Group {
+	if group.ID == 0 {
+		return nil
+	}
+	entityGroup := &entity.Group{
 		ID:          entity.GroupID(fmt.Sprint(group.ID)),
 		Name:        group.Name,
 		Description: group.Description,

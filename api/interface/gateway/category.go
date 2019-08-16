@@ -7,12 +7,11 @@ import (
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
 
-func categoriesToEntities(categories []model.Category) []entity.Category {
-
-	var entityCategories []entity.Category
+func categoriesToEntities(categories []model.Category) []*entity.Category {
+	entityCategories := make([]*entity.Category, 0)
 
 	for _, category := range categories {
-		entityCategoriy := entity.Category{
+		entityCategoriy := &entity.Category{
 			ID:   entity.CategoryID(fmt.Sprint(category.ID)),
 			Name: category.Name,
 		}

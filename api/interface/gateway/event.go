@@ -2,6 +2,7 @@ package gateway
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
@@ -42,10 +43,17 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	stringEventID := fmt.Sprint(eventID)
 	firstEvent := e.db.First(&event, stringEventID)
 
+	if firstEvent.RecordNotFound() {
+		return nil, &entity.Error{
+			Code:   http.StatusNotFound,
+			Errors: []string{"イベントが見つかりませんでした"}}
+	}
+
 	firstEvent.Related(&group)
 	firstEvent.Related(&venue)
 	firstEvent.Related(&categories, "Categories")
 
+	fmt.Println(categoriesToEntities(categories))
 	gatewayUser := NewUser()
 	entityEvent := &entity.Event{
 		ID:               entity.EventID(stringEventID),

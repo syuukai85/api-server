@@ -21,12 +21,12 @@ func NewEventController() *EventController {
 	}
 }
 
-func (ec *EventController) SearchEvents(params *server.SearchEventsRequestParams) (*server.SearchEventsResponse, entity.Error) {
+func (ec *EventController) SearchEvents(params *server.SearchEventsRequestParams) (*server.SearchEventsResponse, *entity.Error) {
 	// Input Port の使用
 	return ec.InputPort.SearchEvents(params)
 }
 
-func (ec *EventController) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, entity.Error) {
+func (ec *EventController) GetEventByID(params *server.GetEventByIDRequestParams) (*server.GetEventByIDResponse, *entity.Error) {
 	// Input Port の使用
 	return ec.InputPort.GetEventByID(params)
 }

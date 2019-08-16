@@ -4,8 +4,7 @@ import "strings"
 
 // Error errorインターフェースを実装した構造体
 type Error struct {
-	Code   int
-	Errors []string
+	Errors []string `json:"errors"`
 }
 
 func (e *Error) Error() string {

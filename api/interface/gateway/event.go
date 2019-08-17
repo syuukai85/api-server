@@ -68,8 +68,8 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 		RecruitEndDate:   event.RecruitEndDate,
 		Group:            groupToEntity(group),
 		Venue:            venueToEntity(venue),
-		Entries:          gatewayUser.FindGeneralByEventID(stringEventID),
-		Organizer:        gatewayUser.FindOrganizerByEventID(stringEventID),
+		Entries:          gatewayUser.findGeneralByEventID(stringEventID),
+		Organizer:        gatewayUser.findOrganizerByEventID(stringEventID),
 		Categories:       categoriesToEntities(categories),
 	}
 

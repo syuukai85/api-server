@@ -6,7 +6,7 @@ import (
 
 // APIKeyAuth Interactorで実装
 type APIKeyAuth interface {
-	Authenticate(*APIKeyAuthRequestParams) bool
+	Authenticate(*APIKeyAuthRequestParams) (bool, *entity.Error)
 }
 
 // APIKeyAuthRequestParams Interactorの引数に利用

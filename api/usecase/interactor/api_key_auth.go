@@ -1,9 +1,15 @@
 package interactor
 
 import (
+	"net/http"
+
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/usecase/port/repository"
 	"github.com/connthass/connthass/api/usecase/port/server"
+)
+
+const (
+	failedAuthError = "認証に失敗しました"
 )
 
 // APIKeyAuth 認証処理の実装
@@ -19,11 +25,13 @@ func NewAPIKeyAuth(userRepository repository.UserRepository) *APIKeyAuth {
 }
 
 // Authenticate 認証処理
-func (aka *APIKeyAuth) Authenticate(params *server.APIKeyAuthRequestParams) bool {
-	user, err := aka.UserRepository.FindByEntitryUser(&entity.User{APIKey: params.APIKey})
-	if user.APIKey == "" || err != nil {
-		return false
+func (aka *APIKeyAuth) Authenticate(params *server.APIKeyAuthRequestParams) (bool, *entity.Error) {
+	if _, err := aka.UserRepository.FindByEntityUser(&entity.User{APIKey: params.APIKey}); err != nil || params.APIKey == "" {
+		return false, &entity.Error{
+			Code:   http.StatusUnauthorized,
+			Errors: []string{failedAuthError},
+		}
 	}
 
-	return true
+	return true, nil
 }

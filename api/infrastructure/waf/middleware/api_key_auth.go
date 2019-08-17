@@ -7,19 +7,17 @@ import (
 )
 
 const (
-	xAPIKey          = "X-API-KEY"
-	unauthStatusCode = 401
-	unauthMessage    = "Unauthorized"
+	xAPIKey = "X-API-KEY"
 )
 
 // APIKeyAuth 全エンドポイントで認証をする
 func APIKeyAuth(apiKeyAuth server.APIKeyAuth) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		apiKey := c.GetHeader(xAPIKey)
-		isAuth := apiKeyAuth.Authenticate(&server.APIKeyAuthRequestParams{APIKey: entity.UserAPIKey(apiKey)})
+		isAuth, err := apiKeyAuth.Authenticate(&server.APIKeyAuthRequestParams{APIKey: entity.UserAPIKey(apiKey)})
 
 		if !isAuth {
-			c.JSON(unauthStatusCode, gin.H{"message": unauthMessage})
+			c.JSON(err.Code, err)
 			c.Abort()
 		}
 	}

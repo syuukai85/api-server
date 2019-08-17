@@ -6,7 +6,6 @@ import (
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
-	"github.com/connthass/connthass/api/usecase/port"
 	"github.com/jinzhu/gorm"
 )
 
@@ -22,8 +21,8 @@ func NewUser() *User {
 	}
 }
 
-func userToEntity(user model.User) entity.User {
-	entityUser := entity.User{
+func userToEntity(user model.User) *entity.User {
+	entityUser := &entity.User{
 		ID:   entity.UserID(fmt.Sprint(user.ID)),
 		UID:  entity.UserUID(fmt.Sprint(user.UID)),
 		Name: user.Name,
@@ -66,14 +65,16 @@ func (u *User) findGeneralByEventID(eventID string) []*entity.User {
 	return usersToEntities(users)
 }
 
-// FindByEntitryUser エンティティのからユーザを取得
-func (u *User) FindByEntitryUser(entiryUser *entity.User) (entity.User, port.Error) {
-	var firstUser model.User
-	user := model.User{
-		UID:    fmt.Sprint(entiryUser.UID),
-		APIKey: fmt.Sprint(entiryUser.APIKey),
+// FindByEntityUser エンティティのからユーザを取得
+func (u *User) FindByEntityUser(entityUser *entity.User) (*entity.User, *entity.Error) {
+	var user model.User
+	firstUser := u.db.Where(&model.User{
+		UID:    fmt.Sprint(entityUser.UID),
+		APIKey: fmt.Sprint(entityUser.APIKey),
+	}).First(&user)
+	if firstUser.RecordNotFound() {
+		return nil, &entity.Error{}
 	}
-	u.db.Where(&user).First(&firstUser)
 
-	return userToEntity(firstUser), nil
+	return userToEntity(user), nil
 }

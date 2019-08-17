@@ -10,6 +10,10 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+const (
+	eventNotFoundError = "イベントが見つかりませんでした"
+)
+
 // Event DBモデルとやり取りをする
 type Event struct {
 	db *gorm.DB
@@ -46,7 +50,7 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	if firstEvent.RecordNotFound() {
 		return nil, &entity.Error{
 			Code:   http.StatusNotFound,
-			Errors: []string{"イベントが見つかりませんでした"}}
+			Errors: []string{eventNotFoundError}}
 	}
 
 	firstEvent.Related(&group)

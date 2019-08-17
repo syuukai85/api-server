@@ -18,7 +18,7 @@ func (s *Server) searchEvents(controller *controller.EventController) func(c *gi
 
 		var req request.SearchEvents
 		if err := c.ShouldBindUri(&req); err != nil {
-			c.JSON(400, gin.H{"msg": err})
+			c.JSON(internalServerError.Code, internalServerError)
 			return
 		}
 
@@ -46,7 +46,7 @@ func (s *Server) getEventByID(controller *controller.EventController) func(c *gi
 
 		var req request.GetEventByID
 		if err := c.ShouldBindUri(&req); err != nil {
-			c.JSON(400, gin.H{"msg": err})
+			c.JSON(internalServerError.Code, internalServerError)
 			return
 		}
 

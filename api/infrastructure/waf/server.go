@@ -1,11 +1,21 @@
 package waf
 
 import (
+	"net/http"
+
+	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/waf/middleware"
 	"github.com/connthass/connthass/api/interface/controller"
 	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/connthass/connthass/api/usecase/interactor"
 	"github.com/gin-gonic/gin"
+)
+
+var (
+	internalServerError = entity.Error{
+		Code:   http.StatusInternalServerError,
+		Errors: []string{"システムエラーが発生しました"},
+	}
 )
 
 // Server Ginをラップ
@@ -22,9 +32,9 @@ func newServer() (*Server, error) {
 func (s *Server) setRouter() {
 
 	v1 := s.engine.Group("/v1")
-	v1.Use(middleware.APIKeyAuth(&interactor.APIKeyAuth{
+	v1.Use(middleware.APIKeyAuth(interactor.NewAPIKeyAuth(
 		gateway.NewUser(),
-	}))
+	)))
 	events := v1.Group("/events")
 	{
 		eventController := controller.NewEventController()

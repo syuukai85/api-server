@@ -1,7 +1,7 @@
-package database
+package orm
 
 import (
-	"github.com/connthass/connthass/api/infrastructure/database/model"
+	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
 
 func autoMigrate() {

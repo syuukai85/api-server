@@ -4,6 +4,4 @@ package model
 type Category struct {
 	Base
 	Name            string `gorm:"size:50;not null;unique_index"`
-	EventCategories []EventCategory
-	Likes           []Like
 }

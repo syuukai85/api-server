@@ -2,7 +2,6 @@ package server
 
 import (
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/usecase/port"
 )
 
 /*
@@ -12,8 +11,8 @@ import (
 
 // EventInputPort Interactorで実装
 type EventInputPort interface {
-	SearchEvents(*SearchEventsRequestParams) (*SearchEventsResponse, port.Error)
-	GetEventByID(*GetEventByIDRequestParams) (*GetEventByIDResponse, port.Error)
+	SearchEvents(*SearchEventsRequestParams) (*SearchEventsResponse, *entity.Error)
+	GetEventByID(*GetEventByIDRequestParams) (*GetEventByIDResponse, *entity.Error)
 }
 
 // SearchEventsRequestParams Interactorの引数に利用
@@ -31,8 +30,8 @@ type GetEventByIDRequestParams struct {
 
 // EventOutputPort Presenter で実装、Interactor で使用される
 type EventOutputPort interface {
-	SearchEvents([]entity.Event) (*SearchEventsResponse, port.Error)
-	GetEventByID(*entity.Event) (*GetEventByIDResponse, port.Error)
+	SearchEvents([]entity.Event) (*SearchEventsResponse, *entity.Error)
+	GetEventByID(*entity.Event) (*GetEventByIDResponse, *entity.Error)
 }
 
 // SearchEventsResponse Presenterの戻り値で利用

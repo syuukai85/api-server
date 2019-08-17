@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/database"
-	"github.com/connthass/connthass/api/infrastructure/database/model"
+	"github.com/connthass/connthass/api/infrastructure/orm"
+	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/connthass/connthass/api/usecase/port"
 	"github.com/jinzhu/gorm"
 )
@@ -18,7 +18,7 @@ type User struct {
 // NewUser コンストラクタ
 func NewUser() *User {
 	return &User{
-		db: database.GetDB(),
+		db: orm.GetDB(),
 	}
 }
 
@@ -31,9 +31,9 @@ func userToEntity(user model.User) entity.User {
 	return entityUser
 }
 
-func usersToEntities(users []model.User) []entity.User {
+func usersToEntities(users []model.User) []*entity.User {
 
-	var entityUsers []entity.User
+	entityUsers := make([]*entity.User, 0)
 
 	for _, user := range users {
 		entityUsers = append(entityUsers, userToEntity(user))
@@ -43,7 +43,7 @@ func usersToEntities(users []model.User) []entity.User {
 }
 
 // FindOrganizerByEventID イベント運営者を取得する
-func (u *User) FindOrganizerByEventID(eventID string) ([]entity.User, port.Error) {
+func (u *User) FindOrganizerByEventID(eventID string) []*entity.User {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",
@@ -51,11 +51,11 @@ func (u *User) FindOrganizerByEventID(eventID string) ([]entity.User, port.Error
 		entity.OrganizerEntryID,
 	).Find(&users)
 
-	return usersToEntities(users), nil
+	return usersToEntities(users)
 }
 
 // FindGeneralByEventID イベント一般参加者を取得する
-func (u *User) FindGeneralByEventID(eventID string) ([]entity.User, port.Error) {
+func (u *User) FindGeneralByEventID(eventID string) []*entity.User {
 	var users []model.User
 	u.db.Joins(
 		"JOIN entry_events ON entry_events.user_id = users.id AND entry_events.event_id = ? AND entry_events.app_role_id = ?",
@@ -63,7 +63,7 @@ func (u *User) FindGeneralByEventID(eventID string) ([]entity.User, port.Error) 
 		entity.GeneralEntryID,
 	).Find(&users)
 
-	return usersToEntities(users), nil
+	return usersToEntities(users)
 }
 
 // FindByEntitryUser エンティティのからユーザを取得

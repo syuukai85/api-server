@@ -2,11 +2,11 @@ package gateway
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/database"
-	"github.com/connthass/connthass/api/infrastructure/database/model"
-	"github.com/connthass/connthass/api/usecase/port"
+	"github.com/connthass/connthass/api/infrastructure/orm"
+	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 )
 
@@ -18,12 +18,12 @@ type Event struct {
 // NewEvent コンストラクタ
 func NewEvent() *Event {
 	return &Event{
-		db: database.GetDB(),
+		db: orm.GetDB(),
 	}
 }
 
 // SearchEvents 検索条件からイベントを検索する
-func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page entity.Page, perPage entity.PerPage) ([]entity.Event, port.Error) {
+func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page entity.Page, perPage entity.PerPage) ([]entity.Event, *entity.Error) {
 	// fmt.Println(query)
 	// events := []model.Event{}
 	// e.db.Offset(page).Limit(perPage).Select(fields).Find(&events)
@@ -34,7 +34,7 @@ func (e *Event) SearchEvents(fields entity.Fields, query entity.Query, page enti
 }
 
 // FindByID IDからイベントを検索する
-func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
+func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) {
 	var event model.Event
 	var group model.Group
 	var venue model.Venue
@@ -43,22 +43,17 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
 	stringEventID := fmt.Sprint(eventID)
 	firstEvent := e.db.First(&event, stringEventID)
 
+	if firstEvent.RecordNotFound() {
+		return nil, &entity.Error{
+			Code:   http.StatusNotFound,
+			Errors: []string{"イベントが見つかりませんでした"}}
+	}
+
 	firstEvent.Related(&group)
 	firstEvent.Related(&venue)
 	firstEvent.Related(&categories, "Categories")
 
 	gatewayUser := NewUser()
-
-	entries, err := gatewayUser.FindGeneralByEventID(stringEventID)
-	if err != nil {
-		return nil, err
-	}
-
-	organizer, err := gatewayUser.FindOrganizerByEventID(stringEventID)
-	if err != nil {
-		return nil, err
-	}
-
 	entityEvent := &entity.Event{
 		ID:               entity.EventID(stringEventID),
 		ColorCode:        event.ColorCode,
@@ -73,8 +68,8 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, port.Error) {
 		RecruitEndDate:   event.RecruitEndDate,
 		Group:            groupToEntity(group),
 		Venue:            venueToEntity(venue),
-		Entries:          entries,
-		Organizer:        organizer,
+		Entries:          gatewayUser.FindGeneralByEventID(stringEventID),
+		Organizer:        gatewayUser.FindOrganizerByEventID(stringEventID),
 		Categories:       categoriesToEntities(categories),
 	}
 

@@ -6,6 +6,8 @@ import {
 } from './actions';
 import {
   GroupApi,
+  Group,
+  Event,
   SearchGroupsRequest,
   SearchGroupEventsByIdRequest
 } from 'typescript-fetch-api';
@@ -13,7 +15,7 @@ import { ActionTypes } from './types';
 
 let api = new GroupApi();
 
-const searchGroups = (req: SearchGroupsRequest) => {
+const searchGroups = (req: SearchGroupsRequest): Promise<Group[]> => {
   return api
     .searchGroups(req)
     .then(groups => groups)
@@ -22,7 +24,9 @@ const searchGroups = (req: SearchGroupsRequest) => {
     });
 };
 
-const searchGroupEventsById = (req: SearchGroupEventsByIdRequest) => {
+const searchGroupEventsById = (
+  req: SearchGroupEventsByIdRequest
+): Promise<Event[]> => {
   return api
     .searchGroupEventsById(req)
     .then(events => events)

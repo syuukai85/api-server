@@ -1,19 +1,21 @@
 import { createSelector } from 'reselect';
 import { matchPath } from 'react-router';
 
-interface State {
-  router: {
-    location: {
-      pathname: string;
-    };
+interface Router {
+  location: {
+    pathname: string;
   };
+}
+
+interface State {
+  router: Router;
 }
 
 interface Param {
   id: string;
 }
 
-const routerSelector = (state: State) => state.router;
+const routerSelector = (state: State): Router => state.router;
 
 const getGroupIdFromRouter = createSelector(
   routerSelector,

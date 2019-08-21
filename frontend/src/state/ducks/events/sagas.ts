@@ -1,14 +1,31 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { default as actions, SearchEventAction } from './actions';
-import { EventApi, SearchEventsRequest } from 'typescript-fetch-api';
+import {
+  default as actions,
+  SearchEventAction,
+  AddEventAction
+} from './actions';
+import {
+  EventApi,
+  SearchEventsRequest,
+  AddEventRequest
+} from 'typescript-fetch-api';
 import { ActionTypes } from './types';
 import moment from 'moment';
 
 let api = new EventApi();
 
-const searchEvents = (req: SearchEventsRequest) => {
+const searchEventsRequest = (req: SearchEventsRequest) => {
   return api
     .searchEvents(req)
+    .then(events => events)
+    .catch(error => {
+      throw new Error(error.message);
+    });
+};
+
+const addEventRequest = (req: AddEventRequest) => {
+  return api
+    .addEvent(req)
     .then(events => events)
     .catch(error => {
       throw new Error(error.message);
@@ -18,7 +35,7 @@ const searchEvents = (req: SearchEventsRequest) => {
 function* searchEvent(action: SearchEventAction) {
   try {
     // TODO: 検索条件のformatをどうする？
-    const events = yield call(searchEvents, {
+    const events = yield call(searchEventsRequest, {
       query: `eventId:${action.eventId}`
     });
     yield put(actions.searchEvent.searchSuccessEvent(events[0]));
@@ -27,9 +44,18 @@ function* searchEvent(action: SearchEventAction) {
   }
 }
 
+function* addEvent(action: AddEventAction) {
+  try {
+    yield call(addEventRequest, { Event: action.event });
+    yield put(actions.addEvent.addSuccessEvent());
+  } catch (error) {
+    yield put(actions.addEvent.addErrorEvent(error));
+  }
+}
+
 function* searchRecentlyAddedEvent() {
   try {
-    const events = yield call(searchEvents, { perPage: 5 });
+    const events = yield call(searchEventsRequest, { perPage: 5 });
     yield put(
       actions.searchRecentlyAddedEvent.searchSuccessRecentlyAddedEvent(events)
     );
@@ -42,7 +68,7 @@ function* searchRecentlyAddedEvent() {
 
 function* searchRecentlyFinishedEvent() {
   try {
-    const events = yield call(searchEvents, {
+    const events = yield call(searchEventsRequest, {
       // TODO: 検索条件のformatをどうする？
       // 開催が終了していて、現在ログインしているユーザーが参加したイベントを表示
       query: `holdEndDate>${moment(new Date()).format('YYYY-MM-DD-hh-mm-ss')}`,
@@ -64,6 +90,7 @@ function* searchRecentlyFinishedEvent() {
 
 const sagas = [
   takeEvery(ActionTypes.REQUEST_EVENT, searchEvent),
+  takeEvery(ActionTypes.REQUEST_ADD_EVENT, addEvent),
   takeEvery(ActionTypes.REQUEST_NEWLY_EVENT, searchRecentlyAddedEvent),
   takeEvery(ActionTypes.REQUEST_FINISHED_EVENT, searchRecentlyFinishedEvent)
 ];

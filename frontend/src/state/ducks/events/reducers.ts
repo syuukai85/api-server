@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { Event } from 'typescript-fetch-api';
 import {
   SearchEventAction,
+  AddEventAction,
   RecentlyAddedEventAction,
   RecentlyFinishedEventAction
 } from './actions';
@@ -26,6 +27,39 @@ const event = (
       return Object.assign({}, state, {
         isLoading: action.isLoading,
         event: action.event
+      });
+    }
+    case ActionTypes.ERROR_EVENT: {
+      return Object.assign({}, state, {
+        isLoading: action.isLoading,
+        error: action.error
+      });
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+interface AddEventState {
+  event: Event;
+  isLoading: boolean;
+}
+
+const addEvent = (
+  state: AddEventState = { event: { title: '' }, isLoading: true },
+  action: AddEventAction
+): EventState => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_EVENT: {
+      return Object.assign({}, state, {
+        event: action.event,
+        isLoading: action.isLoading
+      });
+    }
+    case ActionTypes.SUCCESS_EVENT: {
+      return Object.assign({}, state, {
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.ERROR_EVENT: {
@@ -108,6 +142,7 @@ const recentlyFinishedEvent = (
 
 const eventsReducer = combineReducers({
   event,
+  addEvent,
   recentlyAddedEvent,
   recentlyFinishedEvent
 });

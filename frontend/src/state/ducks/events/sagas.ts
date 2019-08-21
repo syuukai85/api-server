@@ -46,6 +46,7 @@ function* searchEvent(action: SearchEventAction) {
 
 function* addEvent(action: AddEventAction) {
   try {
+    // TODO: Eventのkeyが先頭大文字になってるがために記述が冗長。swagger側の修正必須
     yield call(addEventRequest, { Event: action.event });
     yield put(actions.addEvent.addSuccessEvent());
   } catch (error) {

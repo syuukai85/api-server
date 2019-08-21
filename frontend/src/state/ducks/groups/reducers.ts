@@ -12,6 +12,14 @@ interface GroupState {
   isLoading: boolean;
 }
 
+/**
+ * グループのstateをreduceする
+ *
+ * @param {GroupState} state state情報
+ * @param {SearchGroupAction} action action情報
+ *
+ * @returns {GroupState} reduce後のstate情報
+ */
 const group = (
   state: GroupState = { group: {}, isLoading: true },
   action: SearchGroupAction
@@ -45,6 +53,14 @@ interface GroupEventsState {
   isLoading: boolean;
 }
 
+/**
+ * グループ内のイベントのstateをreduceする
+ *
+ * @param {GroupEventsState} state state情報
+ * @param {SearchGroupEventsAction} action action情報
+ *
+ * @returns {GroupEventsState} reduce後のstate情報
+ */
 const groupEvents = (
   state: GroupEventsState = { events: [], isLoading: true },
   action: SearchGroupEventsAction
@@ -78,6 +94,14 @@ interface RecentlyAddedGroupState {
   isLoading: boolean;
 }
 
+/**
+ * 最近追加されたグループのstateをreduceする
+ *
+ * @param {RecentlyAddedGroupState} state state情報
+ * @param {SearchRecentlyAddedGroupAction} action action情報
+ *
+ * @returns {RecentlyAddedGroupState} reduce後のstate情報
+ */
 const recentlyAddedGroup = (
   state: RecentlyAddedGroupState = { groups: [], isLoading: true },
   action: SearchRecentlyAddedGroupAction

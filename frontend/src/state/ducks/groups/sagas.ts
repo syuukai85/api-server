@@ -6,6 +6,8 @@ import {
 } from './actions';
 import {
   GroupApi,
+  Group,
+  Event,
   SearchGroupsRequest,
   SearchGroupEventsByIdRequest
 } from 'typescript-fetch-api';
@@ -13,7 +15,14 @@ import { ActionTypes } from './types';
 
 let api = new GroupApi();
 
-const searchGroups = (req: SearchGroupsRequest) => {
+/**
+ * グループ検索を実行
+ *
+ * @param {SearchGroupsRequest} req グループ検索時のリクエスト
+ *
+ * @returns {Promise<Group[]>} 実行時のPromiseオブジェクト
+ */
+const searchGroups = (req: SearchGroupsRequest): Promise<Group[]> => {
   return api
     .searchGroups(req)
     .then(groups => groups)
@@ -22,7 +31,16 @@ const searchGroups = (req: SearchGroupsRequest) => {
     });
 };
 
-const searchGroupEventsById = (req: SearchGroupEventsByIdRequest) => {
+/**
+ * グループidからイベント検索を実行
+ *
+ * @param  {SearchGroupEventsByIdRequest} req イベント検索時のリクエスト
+ *
+ * @returns {Promise<Event[]>} 実行時のPromiseオブジェクト
+ */
+const searchGroupEventsById = (
+  req: SearchGroupEventsByIdRequest
+): Promise<Event[]> => {
   return api
     .searchGroupEventsById(req)
     .then(events => events)
@@ -31,6 +49,11 @@ const searchGroupEventsById = (req: SearchGroupEventsByIdRequest) => {
     });
 };
 
+/**
+ * グループ検索時の処理をまとめたsagaの処理
+ *
+ * @param {SearchGroupAction} action グループ検索時のaction
+ */
 function* searchGroup(action: SearchGroupAction) {
   try {
     // TODO: 検索条件のformatをどうする？
@@ -43,6 +66,11 @@ function* searchGroup(action: SearchGroupAction) {
   }
 }
 
+/**
+ * グループ内イベント検索時の処理をまとめたsagaの処理
+ *
+ * @param {SearchGroupAction} action グループ内イベント検索時のaction
+ */
 function* searchGroupEvents(action: SearchGroupEventsAction) {
   try {
     const events = yield call(searchGroupEventsById, {
@@ -54,6 +82,9 @@ function* searchGroupEvents(action: SearchGroupEventsAction) {
   }
 }
 
+/**
+ * 最近追加されたグループ検索時の処理をまとめたsagaの処理
+ */
 function* searchRecentlyAddedGroup() {
   try {
     const groups = yield call(searchGroups, { perPage: 5 });

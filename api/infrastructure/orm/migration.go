@@ -2,9 +2,10 @@ package orm
 
 import (
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
+	"github.com/jinzhu/gorm"
 )
 
-func autoMigrate() {
+func autoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		model.User{},
 		model.Like{},

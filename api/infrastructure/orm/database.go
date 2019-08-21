@@ -22,7 +22,7 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	autoMigrate()
+	autoMigrate(db)
 }
 
 func getConnectionString() string {

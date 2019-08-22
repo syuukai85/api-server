@@ -6,6 +6,7 @@ import {
 } from './actions';
 import {
   EventApi,
+  Event,
   SearchEventsRequest,
   AddEventRequest
 } from 'typescript-fetch-api';
@@ -14,7 +15,14 @@ import moment from 'moment';
 
 let api = new EventApi();
 
-const searchEventsRequest = (req: SearchEventsRequest) => {
+/**
+ * イベント検索を実行
+ *
+ * @param {SearchEventsRequest} req イベント検索時のリクエスト
+ *
+ * @returns {Promise<Event[]>} 実行時のPromiseオブジェクト
+ */
+const searchEventsRequest = (req: SearchEventsRequest): Promise<Event[]> => {
   return api
     .searchEvents(req)
     .then(events => events)
@@ -23,7 +31,12 @@ const searchEventsRequest = (req: SearchEventsRequest) => {
     });
 };
 
-const addEventRequest = (req: AddEventRequest) => {
+/**
+ * イベント追加を実行
+ *
+ * @param {SearchEventsRequest} req イベント追加時のリクエスト
+ */
+const addEventRequest = (req: AddEventRequest): Promise<Event> => {
   return api
     .addEvent(req)
     .then(events => events)
@@ -32,6 +45,11 @@ const addEventRequest = (req: AddEventRequest) => {
     });
 };
 
+/**
+ * イベント検索時の処理をまとめたsagaの処理
+ *
+ * @param {SearchEventAction} action イベント検索時のaction
+ */
 function* searchEvent(action: SearchEventAction) {
   try {
     // TODO: 検索条件のformatをどうする？
@@ -44,6 +62,11 @@ function* searchEvent(action: SearchEventAction) {
   }
 }
 
+/**
+ * イベント追加時の処理をまとめたsagaの処理
+ *
+ * @param {AddEventAction} action イベント追加時のaction
+ */
 function* addEvent(action: AddEventAction) {
   try {
     // TODO: Eventのkeyが先頭大文字になってるがために記述が冗長。swagger側の修正必須
@@ -54,6 +77,9 @@ function* addEvent(action: AddEventAction) {
   }
 }
 
+/**
+ * 最近追加されたグループ検索時の処理をまとめたsagaの処理
+ */
 function* searchRecentlyAddedEvent() {
   try {
     const events = yield call(searchEventsRequest, { perPage: 5 });
@@ -67,6 +93,9 @@ function* searchRecentlyAddedEvent() {
   }
 }
 
+/**
+ * 最近終了したグループ検索時の処理をまとめたsagaの処理
+ */
 function* searchRecentlyFinishedEvent() {
   try {
     const events = yield call(searchEventsRequest, {

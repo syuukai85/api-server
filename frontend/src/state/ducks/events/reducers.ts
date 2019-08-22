@@ -13,6 +13,14 @@ interface EventState {
   isLoading: boolean;
 }
 
+/**
+ * イベントのstateをreduceする
+ *
+ * @param {EventState} state state情報
+ * @param {SearchEventAction} action action情報
+ *
+ * @returns {EventState} reduce後のstate情報
+ */
 const event = (
   state: EventState = { event: { title: '' }, isLoading: true },
   action: SearchEventAction
@@ -46,6 +54,14 @@ interface AddEventState {
   isLoading: boolean;
 }
 
+/**
+ * イベントの追加のstateをreduceする
+ *
+ * @param {AddEventState} state state情報
+ * @param {AddEventAction} action action情報
+ *
+ * @returns {EventState} reduce後のstate情報
+ */
 const addEvent = (
   state: AddEventState = { event: { title: '' }, isLoading: true },
   action: AddEventAction
@@ -79,6 +95,14 @@ interface RecentlyAddedEventState {
   isLoading: boolean;
 }
 
+/**
+ * 最近追加されたイベントのstateをreduceする
+ *
+ * @param {RecentlyAddedEventState} state state情報
+ * @param {RecentlyAddedEventAction} action action情報
+ *
+ * @returns {RecentlyAddedEventState} reduce後のstate情報
+ */
 const recentlyAddedEvent = (
   state: RecentlyAddedEventState = { events: [], isLoading: true },
   action: RecentlyAddedEventAction
@@ -112,6 +136,14 @@ interface RecentlyFinishedEventState {
   isLoading: boolean;
 }
 
+/**
+ * 最近終了したイベントのstateをreduceする
+ *
+ * @param {RecentlyFinishedEventState} state state情報
+ * @param {RecentlyFinishedEventAction} action action情報
+ *
+ * @returns {RecentlyFinishedEventState} reduce後のstate情報
+ */
 const recentlyFinishedEvent = (
   state: RecentlyFinishedEventState = { events: [], isLoading: true },
   action: RecentlyFinishedEventAction

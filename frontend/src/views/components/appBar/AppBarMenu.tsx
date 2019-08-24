@@ -4,6 +4,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import EventIcon from '@material-ui/icons/Event';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+
+const useStyles = makeStyles({
+  listItem: {
+    '&:hover': {
+      backgroundColor: '#e1f5fe'
+    }
+  },
+  listLink: { textDecoration: 'none', color: '#212121' }
+});
 
 interface Props {
   open: boolean;
@@ -12,6 +23,7 @@ interface Props {
 }
 
 const AppBarMenu: React.FC<Props> = (props: Props) => {
+  const classes = useStyles({});
   const { open, anchorEl, handleClose } = props;
   return (
     <Menu
@@ -21,12 +33,14 @@ const AppBarMenu: React.FC<Props> = (props: Props) => {
       open={open}
       onClose={handleClose}
     >
-      <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-          <EventIcon />
-        </ListItemIcon>
-        <ListItemText primary="イベントを作成" />
-      </MenuItem>
+      <Link to={'/event/add'} className={classes.listLink}>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <EventIcon />
+          </ListItemIcon>
+          <ListItemText primary="イベントを作成" />
+        </MenuItem>
+      </Link>
     </Menu>
   );
 };

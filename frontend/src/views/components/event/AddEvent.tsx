@@ -4,12 +4,24 @@ import { FormValues } from '../../forms/addEvent';
 import { FormikProps } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ReactMde from 'react-mde';
+import * as Showdown from 'showdown';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 interface OtherProps {
   isLoading: boolean;
   error: Error;
   addEvent: (event: Event) => void;
 }
+
+const converter = new Showdown.Converter({
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true
+});
+
+type SelectedTab = 'write' | 'preview';
 
 const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   props: OtherProps & FormikProps<FormValues>
@@ -19,7 +31,6 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
     errors,
     touched,
     handleChange,
-    handleBlur,
     handleSubmit,
     isSubmitting,
     addEvent
@@ -27,7 +38,7 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   const effectFn = () => {
     addEvent({ title: 'sample' });
   };
-  console.log(errors);
+  const [selectedTab, setSelectedTab] = React.useState<SelectedTab>('write');
   useEffect(effectFn, []);
   return (
     <form onSubmit={handleSubmit}>
@@ -44,6 +55,17 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         value={values.imageUrl}
         onChange={handleChange('imageUrl')}
         margin="normal"
+      />
+      <ReactMde
+        value={values.description}
+        selectedTab={selectedTab}
+        onChange={handleChange('description')}
+        onTabChange={tab => {
+          setSelectedTab(tab);
+        }}
+        generateMarkdownPreview={markdown =>
+          Promise.resolve(converter.makeHtml(markdown))
+        }
       />
       <Button
         variant="contained"

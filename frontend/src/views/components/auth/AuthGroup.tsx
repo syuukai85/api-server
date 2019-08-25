@@ -15,7 +15,7 @@ const AuthGroup: React.FC<Props> = (props: Props) => {
   };
   useEffect(effectFn, []);
   if (props.isLoading) {
-    return <div>loading....</div>;
+    return <></>;
   }
   return props.uid !== null ? props.children : <Redirect to={'/login'} />;
 };

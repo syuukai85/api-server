@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Event } from 'typescript-fetch-api';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import moment from 'moment';
 
 const useStyles = makeStyles({
   image: {

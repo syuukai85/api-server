@@ -32,7 +32,8 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   };
 };
 
-const addEventFormEnhancer = withFormik<AddEventFormInitValues, FormValues>({
+// NOTE: formikのmapPropsToValuesのcontainer, formik propsとの型付けがまだいまいち理解できていない。anyで仮置き。直したい。
+const addEventFormEnhancer = withFormik<any, FormValues>({
   mapPropsToValues: addEventForm.mapPropsToValues,
   validationSchema: addEventForm.validateSchema,
   handleSubmit: (

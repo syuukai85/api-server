@@ -35,6 +35,12 @@ export type FormValues = {
   venue: Venue;
 };
 
+export type OtherProps = {
+  isLoading: boolean;
+  error: Error;
+  addEvent: (event: Event) => void;
+};
+
 const mapPropsToValues = (props: AddEventFormInitValues) => ({
   capacity: props.capacity || 0,
   categories: props.categories || [],

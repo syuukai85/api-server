@@ -11,7 +11,7 @@ interface OtherProps {
   addEvent: (event: Event) => void;
 }
 
-const AddEvent: React.FC<FormikProps<FormValues>> = (
+const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   props: OtherProps & FormikProps<FormValues>
 ) => {
   const {

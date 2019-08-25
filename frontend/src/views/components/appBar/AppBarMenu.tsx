@@ -8,11 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  listItem: {
-    '&:hover': {
-      backgroundColor: '#e1f5fe'
-    }
-  },
   listLink: { textDecoration: 'none', color: '#212121' }
 });
 

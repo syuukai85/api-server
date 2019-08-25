@@ -28,7 +28,7 @@ const AppBarMenu: React.FC<Props> = (props: Props) => {
       open={open}
       onClose={handleClose}
     >
-      <Link to={'/event/add'} className={classes.listLink}>
+      <Link to="/event/add" className={classes.listLink}>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <EventIcon />

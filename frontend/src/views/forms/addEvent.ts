@@ -1,38 +1,40 @@
-import { Category, Group, User, Venue } from 'typescript-fetch-api';
 import * as Yup from 'yup';
+
+// react-selectで選択されたformの値を保持する型
+type SelectValue = { value: number; label: string };
 
 export type AddEventFormInitValues = {
   capacity: number;
-  categories: Category[];
+  categories: SelectValue[];
   colorCode: string;
   description: string;
-  group: Group;
+  group: SelectValue;
   holdEndDate: Date;
   holdStartDate: Date;
   imageUrl: string;
-  organizer: User[];
+  organizers: SelectValue[];
   qrCodeUrl: string;
   recruitEndDate: Date;
   recruitStartDate: Date;
   title: string;
-  venue: Venue;
+  venue: SelectValue;
 };
 
 export type FormValues = {
   capacity: number;
-  categories: Category[];
+  categories: SelectValue[];
   colorCode: string;
   description: string;
-  group: Group;
+  group: SelectValue;
   holdEndDate: Date;
   holdStartDate: Date;
   imageUrl: string;
-  organizer: User[];
+  organizers: SelectValue[];
   qrCodeUrl: string;
   recruitEndDate: Date;
   recruitStartDate: Date;
   title: string;
-  venue: Venue;
+  venue: SelectValue;
 };
 
 const mapPropsToValues = (props: AddEventFormInitValues) => ({
@@ -44,7 +46,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   holdEndDate: props.holdEndDate || null,
   holdStartDate: props.holdStartDate || null,
   imageUrl: props.imageUrl || '',
-  organizer: props.organizer || [],
+  organizers: props.organizers || [],
   qrCodeUrl: props.qrCodeUrl || '',
   recruitEndDate: props.recruitEndDate || null,
   recruitStartDate: props.recruitStartDate || null,
@@ -61,7 +63,7 @@ const validateSchema = Yup.object().shape({
   holdEndDate: Yup.date().required(),
   holdStartDate: Yup.date().required(),
   imageUrl: Yup.string().url(),
-  organizer: Yup.object().required(),
+  organizers: Yup.object().required(),
   qrCodeUrl: Yup.string().url(),
   recruitEndDate: Yup.date().required(),
   recruitStartDate: Yup.date().required(),

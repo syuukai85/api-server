@@ -121,13 +121,6 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         onChange={handleChange('title')}
         margin="normal"
       />
-      <TextField
-        id="standard-name"
-        label="画像URL"
-        value={values.imageUrl}
-        onChange={handleChange('imageUrl')}
-        margin="normal"
-      />
       <ReactMde
         value={values.description}
         selectedTab={selectedTab}
@@ -151,6 +144,17 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
           />
         </div>
       )}
+      <Button variant="contained" component="label">
+        Upload File
+        <input
+          id="selected-image"
+          type="file"
+          onChange={(e: any) => {
+            setFieldValue('imageFile', e.target.files[0]);
+          }}
+          style={{ display: 'none' }}
+        />
+      </Button>
       <Select
         value={values.group}
         onChange={handleChange('group')}

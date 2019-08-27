@@ -11,7 +11,7 @@ export type AddEventFormInitValues = {
   group: SelectValue;
   holdEndDate: Date;
   holdStartDate: Date;
-  imageUrl: string;
+  imageFile: File;
   organizers: SelectValue[];
   qrCodeUrl: string;
   recruitEndDate: Date;
@@ -28,7 +28,7 @@ export type FormValues = {
   group: SelectValue;
   holdEndDate: Date;
   holdStartDate: Date;
-  imageUrl: string;
+  imageFile: File;
   organizers: SelectValue[];
   qrCodeUrl: string;
   recruitEndDate: Date;
@@ -45,7 +45,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   group: props.group || null,
   holdEndDate: props.holdEndDate || null,
   holdStartDate: props.holdStartDate || null,
-  imageUrl: props.imageUrl || '',
+  imageFile: props.imageFile || null,
   organizers: props.organizers || [],
   qrCodeUrl: props.qrCodeUrl || '',
   recruitEndDate: props.recruitEndDate || null,
@@ -62,7 +62,7 @@ const validateSchema = Yup.object().shape({
   group: Yup.object().required(),
   holdEndDate: Yup.date().required(),
   holdStartDate: Yup.date().required(),
-  imageUrl: Yup.string().url(),
+  imageFile: Yup.string().url(),
   organizers: Yup.object().required(),
   qrCodeUrl: Yup.string().url(),
   recruitEndDate: Yup.date().required(),

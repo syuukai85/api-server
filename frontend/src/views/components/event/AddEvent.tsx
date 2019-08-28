@@ -14,41 +14,11 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker
 } from '@material-ui/pickers';
-import { makeStyles } from '@material-ui/core/styles';
 import Description from '../form/Description';
 import SelectColor from '../form/SelectColor';
+import UploadFileButton from '../form/UploadFileButton';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
-
-const useStyles = makeStyles({
-  swatch: {
-    padding: '5px',
-    background: '#fff',
-    borderRadius: '1px',
-    boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-    display: 'inline-block',
-    cursor: 'pointer'
-  },
-  color: {
-    width: '36px',
-    height: '14px',
-    borderRadius: '2px'
-  },
-  colorCode: (props: any) => ({
-    background: props.colorCode
-  }),
-  popover: {
-    position: 'absolute',
-    zIndex: 2
-  },
-  cover: {
-    position: 'fixed',
-    top: '0px',
-    right: '0px',
-    bottom: '0px',
-    left: '0px'
-  }
-});
 
 // グループを一括で取得する処理はまた別pullreqで対応予定
 const groups = [
@@ -89,16 +59,8 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
     addEvent,
     setFieldValue
   } = props;
-  const classes = useStyles({ colorCode: values.colorCode });
   const effectFn = () => {
     addEvent({ title: 'sample' });
-  };
-  const [displayColorPicker, setDisplayColorPicker] = React.useState(false);
-  const handleClick = () => {
-    setDisplayColorPicker(true);
-  };
-  const handleClose = () => {
-    setDisplayColorPicker(false);
   };
   useEffect(effectFn, []);
   return (
@@ -118,17 +80,11 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         colorCode={values.colorCode}
         onChange={e => setFieldValue('colorCode', e.hex)}
       />
-      <Button variant="contained" component="label">
-        Upload File
-        <input
-          id="selected-image"
-          type="file"
-          onChange={(e: any) => {
-            setFieldValue('imageFile', e.target.files[0]);
-          }}
-          style={{ display: 'none' }}
-        />
-      </Button>
+      <UploadFileButton
+        onChange={(e: any) => {
+          setFieldValue('imageFile', e.target.files[0]);
+        }}
+      />
       <Select
         value={values.group}
         onChange={handleChange('group')}

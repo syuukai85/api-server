@@ -4,8 +4,6 @@ import { FormValues } from '../../forms/addEvent';
 import { FormikProps } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ReactMde from 'react-mde';
-import * as Showdown from 'showdown';
 import Select from 'react-select';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -18,6 +16,7 @@ import {
 } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import { SketchPicker } from 'react-color';
+import AddEventDescription from '../form/Description';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
@@ -77,15 +76,6 @@ interface OtherProps {
   addEvent: (event: Event) => void;
 }
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true
-});
-
-type SelectedTab = 'write' | 'preview';
-
 const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   props: OtherProps & FormikProps<FormValues>
 ) => {
@@ -110,7 +100,6 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   const handleClose = () => {
     setDisplayColorPicker(false);
   };
-  const [selectedTab, setSelectedTab] = React.useState<SelectedTab>('write');
   useEffect(effectFn, []);
   return (
     <form onSubmit={handleSubmit}>
@@ -121,16 +110,9 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         onChange={handleChange('title')}
         margin="normal"
       />
-      <ReactMde
+      <AddEventDescription
         value={values.description}
-        selectedTab={selectedTab}
         onChange={handleChange('description')}
-        onTabChange={tab => {
-          setSelectedTab(tab);
-        }}
-        generateMarkdownPreview={markdown =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
       />
       <div className={classes.swatch} onClick={handleClick}>
         <div className={`${classes.color} ${classes.colorCode}`} />

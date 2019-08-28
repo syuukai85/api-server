@@ -12,8 +12,6 @@ import SelectColor from '../form/SelectColor';
 import UploadFileButton from '../form/UploadFileButton';
 import RangeDatePicker from '../form/RangeDatePicker';
 
-import 'react-mde/lib/styles/css/react-mde-all.css';
-
 // グループを一括で取得する処理はまた別pullreqで対応予定
 const groups = [
   { value: 1, label: 'group1' },
@@ -28,6 +26,7 @@ const categories = [
   { value: 3, label: 'category3' }
 ];
 
+// 開催者を一括で取得する処理はまた別pullreqで対応予定
 const organizers = [
   { value: 1, label: 'organizer1' },
   { value: 2, label: 'organizer2' },

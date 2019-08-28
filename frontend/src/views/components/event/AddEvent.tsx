@@ -7,16 +7,10 @@ import Button from '@material-ui/core/Button';
 import Select from 'react-select';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
 import Description from '../form/Description';
 import SelectColor from '../form/SelectColor';
 import UploadFileButton from '../form/UploadFileButton';
+import RangeDatePicker from '../form/RangeDatePicker';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
@@ -49,16 +43,7 @@ interface OtherProps {
 const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   props: OtherProps & FormikProps<FormValues>
 ) => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-    addEvent,
-    setFieldValue
-  } = props;
+  const { values, handleChange, handleSubmit, addEvent, setFieldValue } = props;
   const effectFn = () => {
     addEvent({ title: 'sample' });
   };
@@ -114,76 +99,23 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         onChange={handleChange('organizers')}
         options={organizers}
       />
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          margin="normal"
-          id="recruitStartDate"
-          label="募集開始日"
-          format="yyyy/MM/dd"
-          value={values.recruitStartDate}
-          onChange={handleChange('recruitStartDate')}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="recruitStartTime"
-          label="募集開始時間"
-          value={values.recruitStartDate}
-          onChange={handleChange('recruitStartDate')}
-        />
-        <KeyboardDatePicker
-          margin="normal"
-          id="recruitEndDate"
-          label="募集終了日"
-          format="yyyy/MM/dd"
-          value={values.recruitEndDate}
-          onChange={handleChange('recruitEndDate')}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="recruitEndTime"
-          label="募集終了時間"
-          value={values.recruitEndDate}
-          onChange={handleChange('recruitEndDate')}
-        />
-      </MuiPickersUtilsProvider>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          margin="normal"
-          id="holdStartDate"
-          label="開催開始日"
-          format="yyyy/MM/dd"
-          value={values.holdStartDate}
-          onChange={handleChange('holdStartDate')}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="holdStartTime"
-          label="開催開始時間"
-          value={values.holdStartDate}
-          onChange={handleChange('holdStartDate')}
-        />
-        <KeyboardDatePicker
-          margin="normal"
-          id="holdEndDate"
-          label="開催終了日"
-          format="yyyy/MM/dd"
-          value={values.holdEndDate}
-          onChange={handleChange('holdEndDate')}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="holdEndTime"
-          label="開催終了時間"
-          value={values.holdEndDate}
-          onChange={handleChange('holdEndDate')}
-        />
-      </MuiPickersUtilsProvider>
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        disabled={isSubmitting || !!(errors.title && touched.title)}
-      >
+      <RangeDatePicker
+        idPrefix="recruit"
+        labelPrefix="募集"
+        startDate={values.recruitStartDate}
+        endDate={values.recruitEndDate}
+        startDateOnChange={handleChange('recruitStartDate')}
+        endDateOnChange={handleChange('recruitEndDate')}
+      />
+      <RangeDatePicker
+        idPrefix="hold"
+        labelPrefix="開催"
+        startDate={values.holdStartDate}
+        endDate={values.holdEndDate}
+        startDateOnChange={handleChange('holdStartDate')}
+        endDateOnChange={handleChange('holdEndDate')}
+      />
+      <Button variant="contained" color="primary" type="submit">
         イベント作成
       </Button>
     </form>

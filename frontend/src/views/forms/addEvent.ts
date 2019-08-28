@@ -55,20 +55,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
 });
 
 const validateSchema = Yup.object().shape({
-  capacity: Yup.number().required(),
-  categories: Yup.array(),
-  colorCode: Yup.string(),
-  description: Yup.string().required(),
-  group: Yup.object().required(),
-  holdEndDate: Yup.date().required(),
-  holdStartDate: Yup.date().required(),
-  imageFile: Yup.string().url(),
-  organizers: Yup.object().required(),
-  qrCodeUrl: Yup.string().url(),
-  recruitEndDate: Yup.date().required(),
-  recruitStartDate: Yup.date().required(),
-  title: Yup.string().required(),
-  venue: Yup.object().required()
+  capacity: Yup.number().required()
 });
 
 export default {

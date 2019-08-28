@@ -11,6 +11,7 @@ import Description from '../form/Description';
 import SelectColor from '../form/SelectColor';
 import UploadFileButton from '../form/UploadFileButton';
 import RangeDatePicker from '../form/RangeDatePicker';
+import PreviewHeaderImage from '../form/PreviewHeaderImage';
 
 // グループを一括で取得する処理はまた別pullreqで対応予定
 const groups = [
@@ -68,6 +69,10 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         onChange={(e: any) => {
           setFieldValue('imageFile', e.target.files[0]);
         }}
+      />
+      <PreviewHeaderImage
+        colorCode={values.colorCode}
+        imageFile={values.imageFile}
       />
       <Select
         value={values.group}

@@ -15,8 +15,8 @@ import {
   KeyboardDatePicker
 } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
-import { SketchPicker } from 'react-color';
-import AddEventDescription from '../form/Description';
+import Description from '../form/Description';
+import SelectColor from '../form/SelectColor';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
@@ -110,22 +110,14 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
         onChange={handleChange('title')}
         margin="normal"
       />
-      <AddEventDescription
+      <Description
         value={values.description}
         onChange={handleChange('description')}
       />
-      <div className={classes.swatch} onClick={handleClick}>
-        <div className={`${classes.color} ${classes.colorCode}`} />
-      </div>
-      {displayColorPicker && (
-        <div className={classes.popover}>
-          <div className={classes.cover} onClick={handleClose} />
-          <SketchPicker
-            color={values.colorCode}
-            onChangeComplete={e => setFieldValue('colorCode', e.hex)}
-          />
-        </div>
-      )}
+      <SelectColor
+        colorCode={values.colorCode}
+        onChange={e => setFieldValue('colorCode', e.hex)}
+      />
       <Button variant="contained" component="label">
         Upload File
         <input

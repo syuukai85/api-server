@@ -4,7 +4,7 @@ import * as Showdown from 'showdown';
 
 interface Props {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value?: string) => void;
 }
 
 type SelectedTab = 'write' | 'preview';

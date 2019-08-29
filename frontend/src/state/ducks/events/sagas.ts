@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import actions, { SearchRequestEventAction } from './actions';
+import { default as actions, SearchEventAction } from './actions';
 import { EventApi, SearchEventsRequest } from 'typescript-fetch-api';
 import { ActionTypes } from './types';
 import moment from 'moment';
@@ -15,24 +15,28 @@ const searchEvents = (req: SearchEventsRequest) => {
     });
 };
 
-function* searchEvent(action: SearchRequestEventAction) {
+function* searchEvent(action: SearchEventAction) {
   try {
     // TODO: 検索条件のformatをどうする？
     const events = yield call(searchEvents, {
       query: `eventId:${action.eventId}`
     });
-    yield put(actions.searchSuccessEvent(events[0]));
+    yield put(actions.searchEvent.searchSuccessEvent(events[0]));
   } catch (error) {
-    yield put(actions.searchErrorEvent(error));
+    yield put(actions.searchEvent.searchErrorEvent(error));
   }
 }
 
 function* searchRecentlyAddedEvent() {
   try {
     const events = yield call(searchEvents, { perPage: 5 });
-    yield put(actions.searchSuccessRecentlyAddedEvent(events));
+    yield put(
+      actions.searchRecentlyAddedEvent.searchSuccessRecentlyAddedEvent(events)
+    );
   } catch (error) {
-    yield put(actions.searchErrorRecentlyAddedEvent(error));
+    yield put(
+      actions.searchRecentlyAddedEvent.searchErrorRecentlyAddedEvent(error)
+    );
   }
 }
 
@@ -44,9 +48,17 @@ function* searchRecentlyFinishedEvent() {
       query: `holdEndDate>${moment(new Date()).format('YYYY-MM-DD-hh-mm-ss')}`,
       perPage: 5
     });
-    yield put(actions.searchSuccessRecentlyFinishedEvent(events));
+    yield put(
+      actions.searchRecentlyFinishedEvent.searchSuccessRecentlyFinishedEvent(
+        events
+      )
+    );
   } catch (error) {
-    yield put(actions.searchErrorRecentlyFinishedEvent(error));
+    yield put(
+      actions.searchRecentlyFinishedEvent.searchErrorRecentlyFinishedEvent(
+        error
+      )
+    );
   }
 }
 

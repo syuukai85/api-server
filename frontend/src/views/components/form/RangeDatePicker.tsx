@@ -7,6 +7,14 @@ import {
 } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  datePicker: {
+    margin: theme.spacing(1)
+  }
+}));
 
 interface Props {
   idPrefix: string;
@@ -26,38 +34,47 @@ const RangeDatePicker: React.FC<Props> = (props: Props) => {
     startDateOnChange,
     endDateOnChange
   } = props;
+  const classes = useStyles({});
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <KeyboardDatePicker
-        margin="normal"
-        id={`${idPrefix}StartDate`}
-        label={`${labelPrefix}開始日`}
-        format="yyyy/MM/dd"
-        value={startDate}
-        onChange={startDateOnChange}
-      />
-      <KeyboardTimePicker
-        margin="normal"
-        id={`${idPrefix}StartTime`}
-        label={`${labelPrefix}開始時間`}
-        value={startDate}
-        onChange={startDateOnChange}
-      />
-      <KeyboardDatePicker
-        margin="normal"
-        id={`${idPrefix}EndDate`}
-        label={`${labelPrefix}終了日`}
-        format="yyyy/MM/dd"
-        value={endDate}
-        onChange={endDateOnChange}
-      />
-      <KeyboardTimePicker
-        margin="normal"
-        id={`${idPrefix}EndTime`}
-        label={`${labelPrefix}終了時間`}
-        value={endDate}
-        onChange={endDateOnChange}
-      />
+      <FormControl>
+        <KeyboardDatePicker
+          id={`${idPrefix}StartDate`}
+          label={`${labelPrefix}開始日`}
+          format="yyyy/MM/dd"
+          value={startDate}
+          onChange={startDateOnChange}
+          className={classes.datePicker}
+        />
+      </FormControl>
+      <FormControl>
+        <KeyboardTimePicker
+          id={`${idPrefix}StartTime`}
+          label={`${labelPrefix}開始時間`}
+          value={startDate}
+          onChange={startDateOnChange}
+          className={classes.datePicker}
+        />
+      </FormControl>
+      <FormControl>
+        <KeyboardDatePicker
+          id={`${idPrefix}EndDate`}
+          label={`${labelPrefix}終了日`}
+          format="yyyy/MM/dd"
+          value={endDate}
+          onChange={endDateOnChange}
+          className={classes.datePicker}
+        />
+      </FormControl>
+      <FormControl>
+        <KeyboardTimePicker
+          id={`${idPrefix}EndTime`}
+          label={`${labelPrefix}終了時間`}
+          value={endDate}
+          onChange={endDateOnChange}
+          className={classes.datePicker}
+        />
+      </FormControl>
     </MuiPickersUtilsProvider>
   );
 };

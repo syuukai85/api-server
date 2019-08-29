@@ -1,4 +1,6 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -6,7 +8,12 @@ const useStyles = makeStyles({
     background: props.colorCode
   }),
   imageContainer: {
-    width: '1000px',
+    height: '500px'
+  },
+  imageWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '500px'
   }
 });
@@ -19,11 +26,17 @@ interface Props {
 const PreviewHeaderImage: React.FC<Props> = (props: Props) => {
   const classes = useStyles({ colorCode: props.colorCode });
   return (
-    <div className={`${classes.imageContainer} ${classes.colorCode}`}>
+    <Grid
+      className={`${classes.imageContainer} ${classes.colorCode}`}
+      item
+      xs={12}
+    >
       {props.imageFile !== null && (
-        <img src={URL.createObjectURL(props.imageFile)} />
+        <Box className={classes.imageWrapper}>
+          <img src={URL.createObjectURL(props.imageFile)} />
+        </Box>
       )}
-    </div>
+    </Grid>
   );
 };
 

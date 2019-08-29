@@ -14,8 +14,12 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    objectFit: 'cover',
     height: '500px'
+  },
+  image: {
+    width: '50%',
+    height: '300px',
+    objectFit: 'contain'
   }
 });
 
@@ -34,7 +38,10 @@ const PreviewHeaderImage: React.FC<Props> = (props: Props) => {
     >
       {props.imageFile !== null && (
         <Box className={classes.imageWrapper}>
-          <img src={URL.createObjectURL(props.imageFile)} />
+          <img
+            className={classes.image}
+            src={URL.createObjectURL(props.imageFile)}
+          />
         </Box>
       )}
     </Grid>

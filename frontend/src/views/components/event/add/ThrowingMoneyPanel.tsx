@@ -16,7 +16,11 @@ const useStyles = makeStyles({
     marginTop: '20px',
     marginBottom: '20px'
   },
-  image: { width: '100%', objectFit: 'cover' }
+  image: {
+    width: '100%',
+    height: '300px',
+    objectFit: 'contain'
+  }
 });
 
 const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (

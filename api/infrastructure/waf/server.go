@@ -32,16 +32,17 @@ func newServer() (*Server, error) {
 func (s *Server) setRouter() {
 
 	v1 := s.engine.Group("/v1")
-	v1.Use(middleware.APIKeyAuth(interactor.NewAPIKeyAuth(
+	apiKeyAuth := v1.Group("/")
+	apiKeyAuth.Use(middleware.APIKeyAuth(interactor.NewAPIKeyAuth(
 		gateway.NewUser(),
 	)))
-	events := v1.Group("/events")
+	events := apiKeyAuth.Group("/events")
 	{
 		eventController := controller.NewEventController()
 		events.GET("/", s.searchEvents(eventController))
 	}
 
-	event := v1.Group("/event")
+	event := apiKeyAuth.Group("/event")
 	{
 		eventController := controller.NewEventController()
 		event.GET("/:eventId", s.getEventByID(eventController))

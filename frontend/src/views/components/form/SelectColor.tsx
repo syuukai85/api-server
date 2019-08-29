@@ -47,7 +47,7 @@ const SelectColor: React.FC<Props> = (props: Props) => {
     setDisplayColorPicker(false);
   };
   return (
-    <>
+    <div>
       <div className={classes.swatch} onClick={handleClick}>
         <div className={`${classes.color} ${classes.colorCode}`} />
       </div>
@@ -57,7 +57,7 @@ const SelectColor: React.FC<Props> = (props: Props) => {
           <SketchPicker color={props.colorCode} onChange={props.onChange} />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

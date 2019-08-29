@@ -40,7 +40,7 @@ export type FormValues = {
 const mapPropsToValues = (props: AddEventFormInitValues) => ({
   capacity: props.capacity || 0,
   categories: props.categories || [],
-  colorCode: props.colorCode || '',
+  colorCode: props.colorCode || '#F9F9F9',
   description: props.description || '',
   group: props.group || null,
   holdEndDate: props.holdEndDate || null,

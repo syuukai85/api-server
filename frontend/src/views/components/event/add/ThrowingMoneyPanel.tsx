@@ -7,12 +7,23 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  container: {
+    marginTop: '20px',
+    marginBottom: '20px'
+  },
+  image: { width: '100%', objectFit: 'cover' }
+});
 
 const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
   props: FormikProps<FormValues>
 ) => {
   const { setFieldValue } = props;
+  const classes = useStyles({});
   return (
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary
@@ -27,10 +38,20 @@ const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
           <Grid item xs={12}>
             <UploadFileButton
               onChange={(e: any) => {
-                setFieldValue('qrImageFile', e.target.files[0]);
+                setFieldValue('qrCodeFile', e.target.files[0]);
               }}
             />
           </Grid>
+          {props.values.qrCodeFile !== null && (
+            <Grid item xs={12}>
+              <Box>
+                <img
+                  className={classes.image}
+                  src={URL.createObjectURL(props.values.qrCodeFile)}
+                />
+              </Box>
+            </Grid>
+          )}
         </Grid>
       </ExpansionPanelDetails>
     </ExpansionPanel>

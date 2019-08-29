@@ -31,7 +31,7 @@ const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (
       <HoldAndRecruitInfomationsPanel {...props} />
       <AdditionalInfomationPanel {...props} />
       <Grid item xs={12}>
-        <Button variant="contained" color="primary" type="submit">
+        <Button fullWidth variant="contained" color="primary" type="submit">
           イベント作成
         </Button>
       </Grid>

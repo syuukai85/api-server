@@ -13,7 +13,7 @@ export type AddEventFormInitValues = {
   holdStartDate: Date;
   imageFile: File;
   organizers: SelectValue[];
-  qrCodeUrl: string;
+  qrCodeFile: File;
   recruitEndDate: Date;
   recruitStartDate: Date;
   title: string;
@@ -30,7 +30,7 @@ export type FormValues = {
   holdStartDate: Date;
   imageFile: File;
   organizers: SelectValue[];
-  qrCodeUrl: string;
+  qrCodeFile: File;
   recruitEndDate: Date;
   recruitStartDate: Date;
   title: string;
@@ -47,7 +47,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   holdStartDate: props.holdStartDate || null,
   imageFile: props.imageFile || null,
   organizers: props.organizers || [],
-  qrCodeUrl: props.qrCodeUrl || '',
+  qrCodeFile: props.qrCodeFile || null,
   recruitEndDate: props.recruitEndDate || null,
   recruitStartDate: props.recruitStartDate || null,
   title: props.title || '',

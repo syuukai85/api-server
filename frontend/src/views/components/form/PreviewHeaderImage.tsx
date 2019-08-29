@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    objectFit: 'cover',
     height: '500px'
   }
 });

@@ -35,6 +35,7 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
       <ExpansionPanelDetails>
         <Grid container spacing={1}>
           <Grid item xs={12}>
+            <Typography variant="overline">主催者</Typography>
             <Select
               closeMenuOnSelect={false}
               isMulti
@@ -44,6 +45,7 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
             />
           </Grid>
           <Grid item xs={12}>
+            <Typography variant="overline">募集人数</Typography>
             <Input
               id="adornment-capacity"
               value={values.capacity}

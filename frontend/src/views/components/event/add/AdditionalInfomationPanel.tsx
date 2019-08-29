@@ -39,6 +39,7 @@ const AdditionalInfomationPanel: React.FC<FormikProps<FormValues>> = (
       <ExpansionPanelDetails>
         <Grid container spacing={1}>
           <Grid item xs={12}>
+            <Typography variant="overline">グループ</Typography>
             <Select
               value={values.group}
               onChange={handleChange('group')}
@@ -46,6 +47,7 @@ const AdditionalInfomationPanel: React.FC<FormikProps<FormValues>> = (
             />
           </Grid>
           <Grid item xs={12}>
+            <Typography variant="overline">カテゴリー</Typography>
             <Select
               closeMenuOnSelect={false}
               isMulti

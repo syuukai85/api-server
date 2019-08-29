@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Event } from 'typescript-fetch-api';
-import AddEvent from '../../components/event/AddEvent';
+import AddEventForm from '../../components/event/add/AddEventForm';
 import oparations from '../../../state/ducks/events/operations';
 import {
   default as addEventForm,
@@ -72,7 +72,7 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
       venue
     );
   }
-})(AddEvent);
+})(AddEventForm);
 
 export default connect(
   mapStateToProps,

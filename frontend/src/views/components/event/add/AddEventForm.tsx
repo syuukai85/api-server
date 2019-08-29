@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Event } from 'typescript-fetch-api';
-import { FormValues } from '../../forms/addEvent';
+import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -9,11 +9,11 @@ import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Description from '../form/Description';
-import SelectColor from '../form/SelectColor';
-import UploadFileButton from '../form/UploadFileButton';
-import RangeDatePicker from '../form/RangeDatePicker';
-import PreviewHeaderImage from '../form/PreviewHeaderImage';
+import Description from '../../form/Description';
+import SelectColor from '../../form/SelectColor';
+import UploadFileButton from '../../form/UploadFileButton';
+import RangeDatePicker from '../../form/RangeDatePicker';
+import PreviewHeaderImage from '../../form/PreviewHeaderImage';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -48,7 +48,7 @@ interface OtherProps {
 }
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
-const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
+const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (
   props: OtherProps & FormikProps<FormValues>
 ) => {
   const { values, handleChange, handleSubmit, addEvent, setFieldValue } = props;
@@ -223,4 +223,4 @@ const AddEvent: React.FC<OtherProps & FormikProps<FormValues>> = (
   );
 };
 
-export default AddEvent;
+export default AddEventForm;

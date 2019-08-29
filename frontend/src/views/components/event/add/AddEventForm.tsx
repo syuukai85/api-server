@@ -7,7 +7,6 @@ import Select from 'react-select';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import UploadFileButton from '../../form/UploadFileButton';
 import RangeDatePicker from '../../form/RangeDatePicker';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -15,6 +14,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import BasicInfomationPanel from './BasicInfomationsPanel';
+import ThrowingMoneyPanel from './ThrowingMoneyPanel';
 
 // グループを一括で取得する処理はまた別pullreqで対応予定
 const groups = [
@@ -55,26 +55,7 @@ const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (
   return (
     <form onSubmit={handleSubmit}>
       <BasicInfomationPanel {...props} />
-      <ExpansionPanel defaultExpanded>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>投げ銭QRコード画像</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <UploadFileButton
-                onChange={(e: any) => {
-                  setFieldValue('qrImageFile', e.target.files[0]);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+      <ThrowingMoneyPanel {...props} />
       <ExpansionPanel defaultExpanded>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}

@@ -13,6 +13,6 @@ type UserAPIKey string
 type User struct {
 	ID     UserID     `json:"id"`
 	UID    UserUID    `json:"uid"`
-	APIKey UserAPIKey `json:"apiKey"`
+	APIKey UserAPIKey `json:"-"`
 	Name   string     `json:"name"`
 }

@@ -73,9 +73,7 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
               />
               <Box className={classes.uploadFileButtonContainer}>
                 <UploadFileButton
-                  onChange={(e: any) => {
-                    setFieldValue('imageFile', e.target.files[0]);
-                  }}
+                  onChange={e => setFieldValue('imageFile', e.target.files[0])}
                 />
               </Box>
             </Box>

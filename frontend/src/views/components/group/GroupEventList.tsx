@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import EventListItem from './EventListItem';
-import ErrorMessageAlert from '../error/ErrorMessageAlert';
+import React from 'react';
+import EventListItem from '../event/EventListItem';
 import { Event } from 'typescript-fetch-api';
 import List from '@material-ui/core/List';
 import Card from '@material-ui/core/Card';
@@ -17,34 +16,18 @@ const useStyles = makeStyles({
 
 interface Props {
   title: string;
-  type: 'basic' | 'enrollment';
-  searchEvent: () => void;
   events: Array<Event>;
-  isLoading: boolean;
-  error?: Error;
 }
 
-/**
- * イベントリスト
- */
-const EventList: React.FC<Props> = (props: Props) => {
+const GroupEventList: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
-  const effectFn = () => {
-    props.searchEvent();
-  };
-
-  useEffect(effectFn, []);
-
-  const renderItems = (events: Array<Event>, error?: Error) => {
-    const isExistsError = error !== void 0;
-    if (isExistsError)
-      return <ErrorMessageAlert messageText="データ取得失敗しました" />;
+  const renderItems = (events: Array<Event>) => {
     return events.map((event: Event, i: number) => {
       if (props.events.length - 1 === i)
-        return <EventListItem key={i} event={event} type={props.type} />;
+        return <EventListItem key={i} event={event} type="basic" />;
       return (
         <>
-          <EventListItem key={i} event={event} type={props.type} />
+          <EventListItem key={i} event={event} type="basic" />
           <Divider />
         </>
       );
@@ -57,11 +40,11 @@ const EventList: React.FC<Props> = (props: Props) => {
         <CardHeader title={props.title} />
         <CardContent>
           <Divider className={classes.contentDivider} />
-          {renderItems(props.events, props.error)}
+          {renderItems(props.events)}
         </CardContent>
       </Card>
     </List>
   );
 };
 
-export default EventList;
+export default GroupEventList;

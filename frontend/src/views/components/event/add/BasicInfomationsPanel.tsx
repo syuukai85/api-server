@@ -79,6 +79,8 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
                 />
               </Box>
             </Box>
+            <ErrorMessage name="colorCode" />
+            <ErrorMessage name="imageFile" />
           </Grid>
           <Grid item xs={12}>
             <PreviewHeaderImage

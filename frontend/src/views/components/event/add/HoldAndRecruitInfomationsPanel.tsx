@@ -7,6 +7,7 @@ import RangeDatePicker from '../../form/RangeDatePicker';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ErrorMessage from '../../form/ErrorMessage';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Input from '@material-ui/core/Input';
@@ -22,7 +23,7 @@ const organizers = [
 const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
   props: FormikProps<FormValues>
 ) => {
-  const { values, handleChange } = props;
+  const { values, handleChange, handleBlur } = props;
   return (
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary
@@ -43,20 +44,19 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
               onChange={handleChange('organizers')}
               options={organizers}
             />
+            <ErrorMessage name="organizers" />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline">募集人数</Typography>
             <Input
-              id="adornment-capacity"
+              name="capacity"
               value={values.capacity}
               onChange={handleChange('capacity')}
+              onBlur={handleBlur('capacity')}
               endAdornment={<InputAdornment position="end">人</InputAdornment>}
-              aria-describedby="capacity-helper-text"
-              inputProps={{
-                'aria-label': 'capacity'
-              }}
               fullWidth
             />
+            <ErrorMessage name="capacity" />
           </Grid>
           <Grid item xs={12}>
             <RangeDatePicker

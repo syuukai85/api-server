@@ -6,6 +6,7 @@ import UploadFileButton from '../../form/UploadFileButton';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ErrorMessage from '../../form/ErrorMessage';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -45,6 +46,7 @@ const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
                 setFieldValue('qrCodeFile', e.target.files[0]);
               }}
             />
+            <ErrorMessage name="qrCodeFile" />
           </Grid>
           {props.values.qrCodeFile !== null && (
             <Grid item xs={12}>

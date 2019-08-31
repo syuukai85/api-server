@@ -60,23 +60,29 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
           </Grid>
           <Grid item xs={12}>
             <RangeDatePicker
-              idPrefix="recruit"
               labelPrefix="募集"
+              startName="recruitStartDate"
+              endName="recruitEndDate"
               startDate={values.recruitStartDate}
               endDate={values.recruitEndDate}
               startDateOnChange={handleChange('recruitStartDate')}
               endDateOnChange={handleChange('recruitEndDate')}
             />
+            <ErrorMessage name="recruitStartDate" />
+            <ErrorMessage name="recruitEndDate" />
           </Grid>
           <Grid item xs={12}>
             <RangeDatePicker
-              idPrefix="hold"
               labelPrefix="開催"
+              startName="holdStartDate"
+              endName="holdEndDate"
               startDate={values.holdStartDate}
               endDate={values.holdEndDate}
               startDateOnChange={handleChange('holdStartDate')}
               endDateOnChange={handleChange('holdEndDate')}
             />
+            <ErrorMessage name="holdStartDate" />
+            <ErrorMessage name="holdEndDate" />
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

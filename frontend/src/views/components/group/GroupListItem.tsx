@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#e1f5fe'
     }
-  }
+  },
+  listLink: { textDecoration: 'none', color: '#212121' }
 }));
 
 interface Props {
@@ -33,26 +35,28 @@ interface Props {
 const GroupListItem: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
-    <ListItem className={classes.listItem} alignItems="flex-start">
-      <ListItemAvatar>
-        <Avatar src={props.group.imagePath} />
-      </ListItemAvatar>
-      <ListItemText
-        primary={props.group.name}
-        secondary={
-          <React.Fragment>
-            <Typography
-              component="span"
-              variant="body2"
-              className={classes.inline}
-              color="textPrimary"
-            >
-              {props.group.description}
-            </Typography>
-          </React.Fragment>
-        }
-      />
-    </ListItem>
+    <Link to={`/groups/${props.group.id}`} className={classes.listLink}>
+      <ListItem className={classes.listItem} alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar src={props.group.imagePath} />
+        </ListItemAvatar>
+        <ListItemText
+          primary={props.group.name}
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {props.group.description}
+              </Typography>
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+    </Link>
   );
 };
 

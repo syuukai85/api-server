@@ -8,6 +8,7 @@ import Description from '../../form/Description';
 import SelectColor from '../../form/SelectColor';
 import UploadFileButton from '../../form/UploadFileButton';
 import PreviewHeaderImage from '../../form/PreviewHeaderImage';
+import ErrorMessage from '../../form/ErrorMessage';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -29,7 +30,7 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
   props: FormikProps<FormValues>
 ) => {
   const classes = useStyles({});
-  const { values, handleChange, setFieldValue } = props;
+  const { values, handleChange, handleBlur, setFieldValue } = props;
   return (
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary
@@ -43,20 +44,25 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <TextField
-              id="standard-name"
               label="イベント名"
+              name="title"
               value={values.title}
               onChange={handleChange('title')}
+              onBlur={handleBlur('title')}
               margin="normal"
               fullWidth
             />
+            <ErrorMessage name="title" />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline">説明</Typography>
             <Description
               value={values.description}
+              name="description"
+              onBlur={handleBlur('description')}
               onChange={handleChange('description')}
             />
+            <ErrorMessage name="description" />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline">ヘッダー画像設定</Typography>

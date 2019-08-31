@@ -1,7 +1,10 @@
 package entity
 
-// Venue イベントの開催場所
+// VenueID 会場ID
+type VenueID string
+
+// Venue イベント会場
 type Venue struct {
-	Base
-	Name string `gorm:"size:255;not null;unique_index"`
+	ID   VenueID `json:"id"`
+	Name string  `json:"name"`
 }

@@ -1,11 +1,14 @@
 package entity
 
-// Group is イベントとユーザの集まり
+// GroupID グループID
+type GroupID string
+
+// Group グループ
 type Group struct {
-	Base
-	BaseColor
-	Name        string `gorm:"size:50;not null"`
-	Description string
-	Domain      string `gorm:"size:64;not null"`
-	ImageURL    string `gorm:"size:255"`
+	ID          GroupID `json:"id"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	Domain      string  `json:"domain"`
+	ColorCode   string  `json:"colorCode"`
+	ImageURL    string  `json:"imageUrl"`
 }

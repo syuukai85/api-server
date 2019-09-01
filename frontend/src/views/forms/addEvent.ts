@@ -87,7 +87,11 @@ const validateMessages = {
     )}`,
   fileSizeLarge: (fileSize: number) =>
     `ファイルサイズは${fileSize / 1024 / 1024}MBまでです`,
-  required: (param: string) => `${param}は必須項目です`
+  required: (param: string) => `${param}は必須項目です`,
+  overStartDate: (param: string) =>
+    `${param}は開始時間よりも後の時間を入力する必要があります`,
+  overNowDate: (param: string) =>
+    `${param}は今の時間よりも後の時間を入力する必要があります`
 };
 
 const validateSchema = Yup.object().shape({
@@ -112,10 +116,15 @@ const validateSchema = Yup.object().shape({
     ),
   holdEndDate: Yup.date()
     .nullable()
+    .min(
+      Yup.ref('recruitStartDate'),
+      validateMessages.overStartDate('開催終了日時')
+    )
     .required(validateMessages.required('開催終了日時')),
   holdStartDate: Yup.date()
     .nullable()
-    .required(validateMessages.required('開催開始日時')),
+    .required(validateMessages.required('開催開始日時'))
+    .min(new Date(), validateMessages.overNowDate('開催開始日時')),
   imageFile: Yup.mixed()
     .required(validateMessages.required('ヘッダー画像'))
     .test(
@@ -151,10 +160,15 @@ const validateSchema = Yup.object().shape({
     ),
   recruitEndDate: Yup.date()
     .nullable()
-    .required(validateMessages.required('募集終了日時')),
+    .required(validateMessages.required('募集終了日時'))
+    .min(
+      Yup.ref('recruitStartDate'),
+      validateMessages.overStartDate('募集終了日時')
+    ),
   recruitStartDate: Yup.date()
     .nullable()
-    .required(validateMessages.required('募集開始日時')),
+    .required(validateMessages.required('募集開始日時'))
+    .min(new Date(), validateMessages.overNowDate('募集開始日時')),
   title: Yup.string()
     .required(validateMessages.required('イベント名'))
     .min(

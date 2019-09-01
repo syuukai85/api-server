@@ -99,6 +99,7 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
               onChange={handleChange('venue')}
               options={venues}
             />
+            <ErrorMessage name="venue" />
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

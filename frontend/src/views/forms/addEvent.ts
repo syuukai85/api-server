@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 // react-selectで選択されたformの値を保持する型
+// TODO: 選択されたlabelがいらない。削除して対象のカラムに対してnumberのみを保持するようにする
 type SelectValue = { value: number; label: string };
 
 export type AddEventFormInitValues = {
@@ -179,7 +180,9 @@ const validateSchema = Yup.object().shape({
       validateConstants.title.maxLength,
       validateMessages.maxString(validateConstants.title.maxLength)
     ),
-  venue: Yup.object().required()
+  venue: Yup.object()
+    .nullable()
+    .required(validateMessages.required('開催場所'))
 });
 
 export default {

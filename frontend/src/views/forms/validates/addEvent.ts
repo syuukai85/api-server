@@ -12,4 +12,7 @@ export const venue = () =>
 /**
  * 主催者のバリデーションスキーマ
  */
-export const organizers = () => Yup.array().required(messages.validate.required('主催者'));
+export const organizers = () =>
+  Yup.array()
+    .nullable()
+    .required(messages.validate.required('主催者'));

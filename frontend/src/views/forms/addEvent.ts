@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { validate } from '@babel/types';
 
 // react-selectで選択されたformの値を保持する型
 type SelectValue = { value: number; label: string };
@@ -57,7 +56,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
 
 const validateConstants = {
   file: {
-    size: 160 * 1024,
+    size: 1 * 1024 * 1024,
     formats: ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
   },
   capacity: {
@@ -73,48 +72,99 @@ const validateConstants = {
   }
 };
 
+/**
+ * NOTE: 現在は日本語のみの対応なので、メッセージ表示を純粋関数で表現している
+ * i18n対応の場合は別途対応が必須。
+ */
+const validateMessages = {
+  minNumber: (num: number) => `${num}以下の数字を入力してください`,
+  maxNumber: (num: number) => `${num}以上の数字を入力してください`,
+  minString: (str: number) => `${str}文字以内の文字列を入力してください`,
+  maxString: (str: number) => `${str}文字以内の文字列を入力してください`,
+  unsupportedFormat: (formats: Array<string>) =>
+    `対応のファイル形式ではありません。対応フォーマット: ${formats.reduce(
+      (prev, format) => prev + ',' + format
+    )}`,
+  fileSizeLarge: (fileSize: number) =>
+    `ファイルサイズは${fileSize / 1024 / 1024}MBまでです`,
+  required: (param: string) => `${param}は必須項目です`
+};
+
 const validateSchema = Yup.object().shape({
   capacity: Yup.number()
-    .required()
-    .min(validateConstants.capacity.min)
-    .max(validateConstants.capacity.max),
-  colorCode: Yup.string().required(),
+    .required(validateMessages.required('募集人数'))
+    .min(
+      validateConstants.capacity.min,
+      validateMessages.minNumber(validateConstants.capacity.min)
+    )
+    .max(
+      validateConstants.capacity.max,
+      validateMessages.maxNumber(validateConstants.capacity.max)
+    ),
+  colorCode: Yup.string().required(
+    validateMessages.required('ヘッダー画像のカラー設定')
+  ),
   description: Yup.string()
-    .required()
-    .min(validateConstants.description.minLength),
-  holdEndDate: Yup.date().required(),
-  holdStartDate: Yup.date().required(),
+    .required(validateMessages.required('説明'))
+    .min(
+      validateConstants.description.minLength,
+      validateMessages.minString(validateConstants.description.minLength)
+    ),
+  holdEndDate: Yup.date()
+    .nullable()
+    .required(validateMessages.required('開催終了日時')),
+  holdStartDate: Yup.date()
+    .nullable()
+    .required(validateMessages.required('開催開始日時')),
   imageFile: Yup.mixed()
-    .required()
+    .required(validateMessages.required('ヘッダー画像'))
     .test(
       'fileSize',
-      'File too large',
+      validateMessages.fileSizeLarge(validateConstants.file.size),
       value => value && value.size <= validateConstants.file.size
     )
     .test(
       'fileFormat',
-      'Unsupported Format',
+      validateMessages.unsupportedFormat(
+        validateConstants.file.formats.map(format =>
+          format.replace('image/', '')
+        )
+      ),
       value => value && validateConstants.file.formats.includes(value.type)
     ),
-  organizers: Yup.object().required(),
+  organizers: Yup.array().required(validateMessages.required('主催者')),
   qrCodeFile: Yup.mixed()
-    .required()
+    .required(validateMessages.required('投げ銭QRコード画像'))
     .test(
       'fileSize',
-      'File too large',
+      validateMessages.fileSizeLarge(validateConstants.file.size),
       value => value && value.size <= validateConstants.file.size
     )
     .test(
       'fileFormat',
-      'Unsupported Format',
+      validateMessages.unsupportedFormat(
+        validateConstants.file.formats.map(format =>
+          format.replace('image/', '')
+        )
+      ),
       value => value && validateConstants.file.formats.includes(value.type)
     ),
-  recruitEndDate: Yup.date().required(),
-  recruitStartDate: Yup.date().required(),
+  recruitEndDate: Yup.date()
+    .nullable()
+    .required(validateMessages.required('募集終了日時')),
+  recruitStartDate: Yup.date()
+    .nullable()
+    .required(validateMessages.required('募集開始日時')),
   title: Yup.string()
-    .required()
-    .min(validateConstants.title.minLength)
-    .max(validateConstants.title.maxLength),
+    .required(validateMessages.required('イベント名'))
+    .min(
+      validateConstants.title.minLength,
+      validateMessages.minString(validateConstants.title.minLength)
+    )
+    .max(
+      validateConstants.title.maxLength,
+      validateMessages.maxString(validateConstants.title.maxLength)
+    ),
   venue: Yup.object().required()
 });
 

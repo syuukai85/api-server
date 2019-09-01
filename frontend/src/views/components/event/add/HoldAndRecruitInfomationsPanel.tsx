@@ -20,6 +20,13 @@ const organizers = [
   { value: 3, label: 'organizer3' }
 ];
 
+// 開催場所を一括で取得する処理はまた別pullreqで対応予定
+const venues = [
+  { value: 1, label: 'venue1' },
+  { value: 2, label: 'venue2' },
+  { value: 3, label: 'venue3' }
+];
+
 const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
   props: FormikProps<FormValues>
 ) => {
@@ -83,6 +90,15 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
             />
             <ErrorMessage name="holdStartDate" />
             <ErrorMessage name="holdEndDate" />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="overline">開催場所</Typography>
+            <Select
+              closeMenuOnSelect={false}
+              value={values.venue}
+              onChange={handleChange('venue')}
+              options={venues}
+            />
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

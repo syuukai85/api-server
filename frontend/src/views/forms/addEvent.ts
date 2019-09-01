@@ -59,7 +59,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
 
 const validateSchema = Yup.object().shape({
   capacity: validates.numberRange('募集人数', constants.validate.capacity.min, constants.validate.capacity.max),
-  colorCode: validates.colorCode(),
+  colorCode: validates.colorCode('ヘッダー画像のカラー設定'),
   description: validates.stringMinLength('説明', constants.validate.description.minLength),
   holdEndDate: validates.endDate('開催終了日時', 'holdStartDate'),
   holdStartDate: validates.startDate('開催開始日時'),

@@ -7,6 +7,11 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	gormbulk "github.com/t-tiger/gorm-bulk-insert"
+)
+
+const (
+	defaultChunkSize = 3000
 )
 
 var (
@@ -67,5 +72,13 @@ func TransactAndReturnData(db *gorm.DB, txFunc func(*gorm.DB) (interface{}, erro
 	}()
 
 	data, err = txFunc(tx)
+	if err != nil {
+		tx.Rollback()
+	}
 	return
+}
+
+// Bulkinsert 標準でbulkinsertが使えないためライブラリを利用
+func Bulkinsert(db *gorm.DB, models []interface{}) error {
+	return gormbulk.BulkInsert(db, models, defaultChunkSize)
 }

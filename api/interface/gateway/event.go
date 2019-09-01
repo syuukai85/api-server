@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
@@ -26,6 +27,15 @@ func NewEvent() *Event {
 	return &Event{
 		db: orm.GetDB(),
 	}
+}
+
+func entityEventIDToUint(entityEventID entity.EventID) uint64 {
+	envetID, _ := strconv.ParseUint(fmt.Sprint(entityEventID), 10, 64)
+	return envetID
+}
+
+func eventIDToEntityEventID(eventID uint64) entity.EventID {
+	return entity.EventID(strconv.FormatUint(eventID, 10))
 }
 
 // SearchEvents 検索条件からイベントを検索する
@@ -96,28 +106,32 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 		RecruitEndDate:   entityEvent.RecruitEndDate,
 	}
 	event.ColorCode = entityEvent.ColorCode
+	groupID := entityGroupIDToUint(entityEvent.Group.ID)
+	venueID := entityVenueIDToUint(entityEvent.Venue.ID)
 
 	data, err := orm.TransactAndReturnData(e.db, func(tx *gorm.DB) (interface{}, error) {
-		group := model.Group{}
-		groupID, _ := entityGroupIDToUint(entityEvent.Group.ID)
-		if tx.First(&group, groupID).RecordNotFound() {
-			event.GroupID = entity.UnknownGroup
-		} else {
-			event.GroupID = groupID
+		if len(entityEvent.Group.ID) != 0 && tx.First(&model.Group{}, groupID).RecordNotFound() {
+			return nil, errors.New(addEventFailure)
 		}
 
-		venue := model.Venue{}
-		venueID, _ := entityVenueIDToUint(entityEvent.Venue.ID)
-		if tx.First(&venue, venueID).RecordNotFound() {
-			event.VenueID = entity.UnknownVenue
-		} else {
-			event.GroupID = venueID
+		if len(entityEvent.Venue.ID) != 0 && tx.First(&model.Venue{}, venueID).RecordNotFound() {
+			return nil, errors.New(addEventFailure)
 		}
 
+		event.GroupID = groupID
+		event.VenueID = venueID
 		tx.Create(&event)
 		if tx.NewRecord(event) {
 			return nil, errors.New(addEventFailure)
 		}
+		entityEventID := eventIDToEntityEventID(event.ID)
+		_, generalEntryErr := entryEventTransact(entityEvent.Entries, entityEventID, entity.GeneralEntryID)(tx)
+		_, organizerEntryErr := entryEventTransact(entityEvent.Organizer, entityEventID, entity.OrganizerEntryID)(tx)
+		_, eventCategoryErr := createCategoriesTransact(entityEvent.Categories, entityEventID)(tx)
+		if generalEntryErr != nil || organizerEntryErr != nil || eventCategoryErr != nil {
+			return nil, errors.New(addEventFailure)
+		}
+
 		return entityEvent, nil
 
 	})

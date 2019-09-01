@@ -26,18 +26,9 @@ func NewUser(tx *gorm.DB) *User {
 	return user
 }
 
-func usersToModels(users []*entity.User) []model.User {
-	modelUsers := make([]model.User, 0)
-	for _, user := range users {
-		userID, _ := strconv.ParseUint(fmt.Sprint(user.ID), 10, 64)
-		modelUser := model.User{
-			Name: user.Name,
-		}
-		modelUser.ID = userID
-		modelUsers = append(modelUsers, modelUser)
-	}
-
-	return modelUsers
+func entityUserIDToUint(entityUserID entity.UserID) uint64 {
+	userID, _ := strconv.ParseUint(fmt.Sprint(entityUserID), 10, 64)
+	return userID
 }
 
 func userToEntity(user model.User) *entity.User {

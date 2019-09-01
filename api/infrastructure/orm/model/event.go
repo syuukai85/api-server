@@ -16,7 +16,7 @@ type Event struct {
 	RecruitStartDate time.Time
 	RecruitEndDate   time.Time
 	GroupID          uint64
-	VenueID          uint64     `gorm:"not null"`
+	VenueID          uint64
 	Group            Group      `gorm:"foreignkey:GroupID;association_foreignkey:Refer"`
 	Venue            Venue      `gorm:"foreignkey:VenueID;association_foreignkey:Refer"`
 	Bookmarks        []User     `gorm:"many2many:bookmarks"`

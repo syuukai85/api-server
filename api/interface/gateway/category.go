@@ -20,3 +20,16 @@ func categoriesToEntities(categories []model.Category) []*entity.Category {
 
 	return entityCategories
 }
+
+func categoriesToModels(categories []*entity.Category) []model.Category {
+	modelCategories := make([]model.Category, 0)
+
+	for _, category := range categories {
+		modelCategory := model.Category{
+			Name: category.Name,
+		}
+		modelCategories = append(modelCategories, modelCategory)
+	}
+
+	return modelCategories
+}

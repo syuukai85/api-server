@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -11,7 +12,8 @@ import (
 )
 
 const (
-	eventNotFoundError = "イベントが見つかりませんでした"
+	eventNotFound   = "イベントが見つかりませんでした"
+	addEventFailure = "イベントの作成に失敗しました"
 )
 
 // Event DBモデルとやり取りをする
@@ -50,14 +52,14 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	if firstEvent.RecordNotFound() {
 		return nil, &entity.Error{
 			Code:   http.StatusNotFound,
-			Errors: []string{eventNotFoundError}}
+			Errors: []string{eventNotFound}}
 	}
 
 	firstEvent.Related(&group)
 	firstEvent.Related(&venue)
 	firstEvent.Related(&categories, "Categories")
 
-	gatewayUser := NewUser()
+	gatewayUser := NewUser(e.db)
 	entityEvent := &entity.Event{
 		ID:               entity.EventID(stringEventID),
 		ColorCode:        event.ColorCode,
@@ -78,4 +80,54 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	}
 
 	return entityEvent, nil
+}
+
+// AddEvent イベント追加
+func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Error) {
+	event := model.Event{
+		Title:            entityEvent.Title,
+		Description:      entityEvent.Description,
+		Capacity:         entityEvent.Capacity,
+		ImageURL:         entityEvent.ImageURL,
+		QRCodeURL:        entityEvent.QRCodeURL,
+		HoldStartDate:    entityEvent.HoldStartDate,
+		HoldEndDate:      entityEvent.HoldEndDate,
+		RecruitStartDate: entityEvent.RecruitStartDate,
+		RecruitEndDate:   entityEvent.RecruitEndDate,
+	}
+	event.ColorCode = entityEvent.ColorCode
+
+	data, err := orm.TransactAndReturnData(e.db, func(tx *gorm.DB) (interface{}, error) {
+		group := model.Group{}
+		groupID, _ := entityGroupIDToUint(entityEvent.Group.ID)
+		if tx.First(&group, groupID).RecordNotFound() {
+			event.GroupID = entity.UnknownGroup
+		} else {
+			event.GroupID = groupID
+		}
+
+		venue := model.Venue{}
+		venueID, _ := entityVenueIDToUint(entityEvent.Venue.ID)
+		if tx.First(&venue, venueID).RecordNotFound() {
+			event.VenueID = entity.UnknownVenue
+		} else {
+			event.GroupID = venueID
+		}
+
+		tx.Create(&event)
+		if tx.NewRecord(event) {
+			return nil, errors.New(addEventFailure)
+		}
+		return entityEvent, nil
+
+	})
+
+	if err != nil {
+		return nil, &entity.Error{
+			Code:   http.StatusNotFound,
+			Errors: []string{err.Error()},
+		}
+	}
+
+	return data.(*entity.Event), nil
 }

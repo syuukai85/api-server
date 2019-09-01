@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	failedAuthError = "認証に失敗しました"
+	keyAuthFailure = "認証に失敗しました"
 )
 
 // APIKeyAuth 認証処理の実装
@@ -29,7 +29,7 @@ func (aka *APIKeyAuth) Authenticate(params *server.APIKeyAuthRequestParams) (boo
 	if _, err := aka.UserRepository.FindByEntityUser(&entity.User{APIKey: params.APIKey}); err != nil || params.APIKey == "" {
 		return false, &entity.Error{
 			Code:   http.StatusUnauthorized,
-			Errors: []string{failedAuthError},
+			Errors: []string{keyAuthFailure},
 		}
 	}
 

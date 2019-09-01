@@ -9,6 +9,7 @@ func autoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		model.User{},
 		model.Like{},
+		model.Bookmark{},
 		model.EventCategory{},
 		model.EntryEvent{},
 		model.Category{},
@@ -18,7 +19,6 @@ func autoMigrate(db *gorm.DB) {
 		model.Group{},
 		model.Member{},
 		model.CheckedEvent{},
-		model.Bookmark{},
 		model.Venue{},
 	)
 

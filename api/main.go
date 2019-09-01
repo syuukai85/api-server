@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/connthass/connthass/api/infrastructure/orm"
+	"github.com/connthass/connthass/api/infrastructure/validator"
 	"github.com/connthass/connthass/api/infrastructure/waf"
 	"github.com/joho/godotenv"
 )
@@ -15,6 +16,7 @@ func init() {
 	}
 
 	orm.Init()
+	validator.Init()
 }
 
 func main() {

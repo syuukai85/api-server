@@ -30,3 +30,8 @@ func (ec *EventController) GetEventByID(params *server.GetEventByIDRequestParams
 	// Input Port の使用
 	return ec.InputPort.GetEventByID(params)
 }
+
+func (ec *EventController) AddEvent(params *server.AddEventRequestParams) (*server.AddEventResponse, *entity.Error) {
+	// Input Port の使用
+	return ec.InputPort.AddEvent(params)
+}

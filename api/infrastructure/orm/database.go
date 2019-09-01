@@ -47,3 +47,25 @@ func getConnectionString() string {
 func GetDB() *gorm.DB {
 	return db
 }
+
+// TransactAndReturnData トランザクション実行し情報を受取る
+func TransactAndReturnData(db *gorm.DB, txFunc func(*gorm.DB) (interface{}, error)) (data interface{}, err error) {
+	tx := db.Begin()
+
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		} else if err != nil {
+			tx.Rollback()
+		} else {
+			err = tx.Commit().Error
+		}
+	}()
+
+	data, err = txFunc(tx)
+	return
+}

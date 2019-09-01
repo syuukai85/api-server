@@ -1,8 +1,6 @@
 package entity
 
-import (
-	"time"
-)
+import "time"
 
 // EventID イベントID
 type EventID string
@@ -13,7 +11,7 @@ type Event struct {
 	ColorCode        string      `json:"colorCode"`
 	Title            string      `json:"title"`
 	Description      string      `json:"description"`
-	Capacity         uint        `json:"capacity"`
+	Capacity         uint64      `json:"capacity"`
 	ImageURL         string      `json:"imageUrl"`
 	QRCodeURL        string      `json:"qrCodeUrl"`
 	HoldStartDate    time.Time   `json:"holdStartDate"`

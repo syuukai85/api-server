@@ -12,13 +12,13 @@ export type AddEventFormInitValues = {
   colorCode: string;
   description: string;
   group: SelectValue;
-  holdEndDate: Date;
   holdStartDate: Date;
+  holdEndDate: Date;
   imageFile: File;
   organizers: SelectValue[];
   qrCodeFile: File;
-  recruitEndDate: Date;
   recruitStartDate: Date;
+  recruitEndDate: Date;
   title: string;
   venue: SelectValue;
 };
@@ -29,13 +29,13 @@ export type FormValues = {
   colorCode: string;
   description: string;
   group: SelectValue;
-  holdEndDate: Date;
   holdStartDate: Date;
+  holdEndDate: Date;
   imageFile: File;
   organizers: SelectValue[];
   qrCodeFile: File;
-  recruitEndDate: Date;
   recruitStartDate: Date;
+  recruitEndDate: Date;
   title: string;
   venue: SelectValue;
 };
@@ -46,13 +46,13 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   colorCode: props.colorCode || '#F9F9F9',
   description: props.description || '',
   group: props.group || null,
-  holdEndDate: props.holdEndDate || null,
   holdStartDate: props.holdStartDate || null,
+  holdEndDate: props.holdEndDate || null,
   imageFile: props.imageFile || null,
   organizers: props.organizers || [],
   qrCodeFile: props.qrCodeFile || null,
-  recruitEndDate: props.recruitEndDate || null,
   recruitStartDate: props.recruitStartDate || null,
+  recruitEndDate: props.recruitEndDate || null,
   title: props.title || '',
   venue: props.venue || null
 });
@@ -61,13 +61,13 @@ const validateSchema = Yup.object().shape({
   capacity: validates.numberRange('募集人数', constants.validate.capacity.min, constants.validate.capacity.max),
   colorCode: validates.colorCode('ヘッダー画像のカラー設定'),
   description: validates.stringMinLength('説明', constants.validate.description.minLength),
-  holdEndDate: validates.endDate('開催終了日時', 'holdStartDate'),
   holdStartDate: validates.startDate('開催開始日時'),
+  holdEndDate: validates.endDate('開催終了日時', 'holdStartDate'),
   imageFile: validates.file('ヘッダー画像'),
   organizers: validates.organizers(),
   qrCodeFile: validates.file('投げ銭QRコード画像'),
-  recruitEndDate: validates.endDate('募集終了日時', 'recruitStartDate'),
   recruitStartDate: validates.startDate('募集開始日時'),
+  recruitEndDate: validates.endDate('募集終了日時', 'recruitStartDate'),
   title: validates.stringLengthRange(
     'イベント名',
     constants.validate.title.minLength,

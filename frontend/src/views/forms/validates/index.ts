@@ -13,6 +13,7 @@ export * from './addEvent';
  */
 export const numberRange = (prefix: string, min: number, max: number) =>
   Yup.number()
+    .typeError(messages.validate.number(prefix))
     .required(messages.validate.required(prefix))
     .min(min, messages.validate.minNumber(min))
     .max(max, messages.validate.maxNumber(max));
@@ -28,6 +29,7 @@ export const numberRange = (prefix: string, min: number, max: number) =>
 export const startDate = (prefix: string) =>
   Yup.date()
     .nullable()
+    .typeError(messages.validate.date(prefix))
     .min(new Date(), messages.validate.overStartDate(prefix))
     .required(messages.validate.required(prefix));
 
@@ -43,6 +45,7 @@ export const startDate = (prefix: string) =>
 export const endDate = (prefix: string, startDateRef: string) =>
   Yup.date()
     .nullable()
+    .typeError(messages.validate.date(prefix))
     .min(Yup.ref(startDateRef), messages.validate.overStartDate(prefix))
     .required(messages.validate.required(prefix));
 
@@ -56,6 +59,7 @@ export const endDate = (prefix: string, startDateRef: string) =>
 export const stringLengthRange = (prefix: string, min: number, max: number) => {
   return Yup.string()
     .required(messages.validate.required(prefix))
+    .typeError(messages.validate.string(prefix))
     .min(min, messages.validate.minString(min))
     .max(max, messages.validate.maxString(max));
 };
@@ -68,6 +72,7 @@ export const stringLengthRange = (prefix: string, min: number, max: number) => {
  */
 export const stringMinLength = (prefix: string, min: number) =>
   Yup.string()
+    .typeError(messages.validate.string(prefix))
     .required(messages.validate.required(prefix))
     .min(min, messages.validate.minString(min));
 
@@ -95,4 +100,7 @@ export const file = (prefix: string) =>
 /**
  * カラーコードのバリデーションスキーマ
  */
-export const colorCode = (prefix: string) => Yup.string().required(messages.validate.required(prefix));
+export const colorCode = (prefix: string) =>
+  Yup.string()
+    .typeError(messages.validate.string(prefix))
+    .required(messages.validate.required(prefix));

@@ -7,14 +7,14 @@ import Report from '@material-ui/icons/Report';
 const useStyles = makeStyles({
   alert: {
     borderRadius: '5px',
-    padding: '10px'
+    padding: '10px',
   },
   iconContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '5px'
-  }
+    marginRight: '5px',
+  },
 });
 
 interface Props {
@@ -24,11 +24,7 @@ interface Props {
 const ErrorMessageAlert: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   return (
-    <Box
-      className={classes.alert}
-      bgcolor="error.main"
-      color="error.contrastText"
-    >
+    <Box className={classes.alert} bgcolor="error.main" color="error.contrastText">
       <Grid container direction="row" alignItems="center">
         <Grid className={classes.iconContainer} item>
           <Report />

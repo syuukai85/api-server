@@ -39,7 +39,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   organizers: props.organizers || [],
   venue: props.venue || null,
   categories: props.categories || [],
-  group: props.group || null
+  group: props.group || null,
 });
 
 const validateSchema = Yup.object().shape({
@@ -58,10 +58,10 @@ const validateSchema = Yup.object().shape({
   holdStartDate: validates.startDate('開催開始日時'),
   holdEndDate: validates.endDate('開催終了日時', 'holdStartDate'),
   organizers: validates.organizers(),
-  venue: validates.venue()
+  venue: validates.venue(),
 });
 
 export default {
   mapPropsToValues,
-  validateSchema
+  validateSchema,
 };

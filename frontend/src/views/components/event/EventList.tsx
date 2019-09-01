@@ -11,8 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   contentDivider: {
-    marginBottom: '15px'
-  }
+    marginBottom: '15px',
+  },
 });
 
 interface Props {
@@ -37,11 +37,9 @@ const EventList: React.FC<Props> = (props: Props) => {
 
   const renderItems = (events: Array<Event>, error?: Error) => {
     const isExistsError = error !== void 0;
-    if (isExistsError)
-      return <ErrorMessageAlert messageText="データ取得失敗しました" />;
+    if (isExistsError) return <ErrorMessageAlert messageText="データ取得失敗しました" />;
     return events.map((event: Event, i: number) => {
-      if (props.events.length - 1 === i)
-        return <EventListItem key={i} event={event} type={props.type} />;
+      if (props.events.length - 1 === i) return <EventListItem key={i} event={event} type={props.type} />;
       return (
         <>
           <EventListItem key={i} event={event} type={props.type} />

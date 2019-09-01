@@ -11,8 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   contentDivider: {
-    marginBottom: '15px'
-  }
+    marginBottom: '15px',
+  },
 });
 
 interface Props {
@@ -35,8 +35,7 @@ const GroupList: React.FC<Props> = (props: Props) => {
 
   const renderItems = (groups: Array<Group>, error?: Error) => {
     const isExistsError = error !== void 0;
-    if (isExistsError)
-      return <ErrorMessageAlert messageText="データ取得失敗しました" />;
+    if (isExistsError) return <ErrorMessageAlert messageText="データ取得失敗しました" />;
     return groups.map((group: Group, i: number) => {
       if (props.groups.length - 1 === i) {
         return <GroupListItem key={i} group={group} />;

@@ -16,16 +16,16 @@ const useStyles = makeStyles(theme => ({
     height: '80vh',
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: props.backgroundColor
+    backgroundColor: props.backgroundColor,
   }),
   headerImage: {
     marginBottom: '50px',
-    width: '50%'
+    width: '50%',
   },
   headerContainer: {
     flexDirection: 'column',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));
 
 interface Props {

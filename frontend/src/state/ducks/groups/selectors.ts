@@ -33,12 +33,9 @@ const getGroupIdFromRouter = createSelector(
     const match = matchPath<Param>(state.location.pathname, {
       path: '/groups/:id',
       exact: true,
-      strict: true
+      strict: true,
     });
-    const id =
-      match === null || match.params === null || match.params.id === null
-        ? ''
-        : match.params.id;
+    const id = match === null || match.params === null || match.params.id === null ? '' : match.params.id;
     return id;
   }
 );

@@ -2,11 +2,7 @@ import { connect } from 'react-redux';
 import { Event } from 'typescript-fetch-api';
 import AddEventForm from '../../components/event/add/AddEventForm';
 import oparations from '../../../state/ducks/events/operations';
-import {
-  default as addEventForm,
-  AddEventFormInitValues,
-  FormValues
-} from '../../forms/addEvent';
+import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
 
@@ -22,13 +18,13 @@ interface State {
 const mapStateToProps = (state: State) => {
   return {
     isLoading: state.eventsState.addEvent.isLoading,
-    error: state.eventsState.addEvent.error
+    error: state.eventsState.addEvent.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    addEvent: (event: Event) => oparations.addEvent(dispatch, event)
+    addEvent: (event: Event) => oparations.addEvent(dispatch, event),
   };
 };
 
@@ -51,7 +47,7 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
       recruitEndDate,
       recruitStartDate,
       title,
-      venue
+      venue,
     }: FormValues,
     { props, setSubmitting, setErrors }
   ) => {
@@ -71,7 +67,7 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
       title,
       venue
     );
-  }
+  },
 })(AddEventForm);
 
 export default connect(

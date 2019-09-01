@@ -7,15 +7,15 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   imageWidthHalf: {
-    width: '50%'
+    width: '50%',
   },
   imageWidthFull: {
-    width: '100%'
+    width: '100%',
   },
   imageContainer: {
     marginTop: '15px',
-    marginBottom: '15px'
-  }
+    marginBottom: '15px',
+  },
 });
 
 const eventDetailImg = require('../../../images/eventDetail.png');
@@ -35,26 +35,14 @@ const WelcomeBoard: React.FC = () => {
           connthassではイベントやグループを作成して好きな技術を余すことなく楽しむことができます
         </Typography>
         <div className={classes.imageContainer}>
-          <img
-            className={classes.imageWidthHalf}
-            src={eventDetailImg}
-            alt="eventDetail"
-          />
-          <img
-            className={classes.imageWidthHalf}
-            src={groupDetailImg}
-            alt="groupDetail"
-          />
+          <img className={classes.imageWidthHalf} src={eventDetailImg} alt="eventDetail" />
+          <img className={classes.imageWidthHalf} src={groupDetailImg} alt="groupDetail" />
         </div>
         <Typography color="textSecondary" component="p">
           イベント終了後は投げ銭感覚で登壇者にお布施を
         </Typography>
         <div className={classes.imageContainer}>
-          <img
-            className={classes.imageWidthFull}
-            src={throwingMoneyImg}
-            alt="throwingMoney"
-          />
+          <img className={classes.imageWidthFull} src={throwingMoneyImg} alt="throwingMoney" />
         </div>
       </CardContent>
     </Card>

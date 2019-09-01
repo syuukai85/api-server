@@ -4,7 +4,7 @@ import { Event } from 'typescript-fetch-api';
 const searchRecentlyAddedEvent = () => {
   return {
     type: ActionTypes.REQUEST_NEWLY_EVENT,
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -12,7 +12,7 @@ const searchSuccessRecentlyAddedEvent = (events: Array<Event>) => {
   return {
     type: ActionTypes.SUCCESS_NEWLY_EVENT,
     isLoading: false,
-    events
+    events,
   };
 };
 
@@ -20,18 +20,16 @@ const searchErrorRecentlyAddedEvent = (error: Error) => {
   return {
     type: ActionTypes.ERROR_NEWLY_EVENT,
     isLoading: false,
-    error
+    error,
   };
 };
 
-export type RecentlyAddedEventAction = ReturnType<
-  typeof searchErrorRecentlyAddedEvent
-> &
+export type RecentlyAddedEventAction = ReturnType<typeof searchErrorRecentlyAddedEvent> &
   ReturnType<typeof searchRecentlyAddedEvent> &
   ReturnType<typeof searchSuccessRecentlyAddedEvent>;
 
 export default {
   searchRecentlyAddedEvent,
   searchSuccessRecentlyAddedEvent,
-  searchErrorRecentlyAddedEvent
+  searchErrorRecentlyAddedEvent,
 };

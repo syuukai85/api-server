@@ -10,41 +10,27 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // グループを一括で取得する処理はまた別pullreqで対応予定
-const groups = [
-  { value: 1, label: 'group1' },
-  { value: 2, label: 'group2' },
-  { value: 3, label: 'group3' }
-];
+const groups = [{ value: 1, label: 'group1' }, { value: 2, label: 'group2' }, { value: 3, label: 'group3' }];
 
 // カテゴリーを一括で取得する処理はまた別pullreqで対応予定
 const categories = [
   { value: 1, label: 'category1' },
   { value: 2, label: 'category2' },
-  { value: 3, label: 'category3' }
+  { value: 3, label: 'category3' },
 ];
 
-const AdditionalInfomationPanel: React.FC<FormikProps<FormValues>> = (
-  props: FormikProps<FormValues>
-) => {
+const AdditionalInfomationPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
   const { values, handleChange } = props;
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
         <Typography>イベント追加情報</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Typography variant="overline">グループ</Typography>
-            <Select
-              value={values.group}
-              onChange={handleChange('group')}
-              options={groups}
-            />
+            <Select value={values.group} onChange={handleChange('group')} options={groups} />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline">カテゴリー</Typography>

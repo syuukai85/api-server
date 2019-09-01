@@ -8,16 +8,16 @@ const defaultOptions = {
   autoplay: true,
   animationData: loadingJson,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
-  }
+    preserveAspectRatio: 'xMidYMid slice',
+  },
 };
 const useStyles = makeStyles({
   loadingContainer: {
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const Loading: React.FC = () => {

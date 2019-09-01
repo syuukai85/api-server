@@ -6,8 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   container: {
     marginTop: '20px',
-    marginBottom: '20px'
-  }
+    marginBottom: '20px',
+  },
 });
 
 const AddEventScene: React.FC = () => {

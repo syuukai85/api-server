@@ -18,7 +18,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default function configureStore(initialState = {}) {
   const rootReducer = combineReducers({
     router: connectRouter(history),
-    ...reducers
+    ...reducers,
   });
   const store = createStore(
     rootReducer,

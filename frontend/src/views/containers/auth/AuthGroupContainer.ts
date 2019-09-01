@@ -15,13 +15,13 @@ interface State {
 const mapStateToProps = (state: State) => {
   return {
     uid: state.authState.auth.uid,
-    isLoading: state.authState.auth.isLoading
+    isLoading: state.authState.auth.isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    updateLoginState: () => oparations.updateLoginState(dispatch)
+    updateLoginState: () => oparations.updateLoginState(dispatch),
   };
 };
 

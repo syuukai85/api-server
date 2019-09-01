@@ -5,7 +5,7 @@ const searchEvent = (eventId: string) => {
   return {
     type: ActionTypes.REQUEST_EVENT,
     isLoading: true,
-    eventId
+    eventId,
   };
 };
 
@@ -13,7 +13,7 @@ const searchSuccessEvent = (event: Event) => {
   return {
     type: ActionTypes.SUCCESS_EVENT,
     isLoading: false,
-    event
+    event,
   };
 };
 
@@ -21,7 +21,7 @@ const searchErrorEvent = (error: Error) => {
   return {
     type: ActionTypes.ERROR_EVENT,
     isLoading: false,
-    error
+    error,
   };
 };
 
@@ -32,5 +32,5 @@ export type SearchEventAction = ReturnType<typeof searchEvent> &
 export default {
   searchEvent,
   searchSuccessEvent,
-  searchErrorEvent
+  searchErrorEvent,
 };

@@ -5,11 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   errorText: {
     color: 'red',
-    marginTop: 5
+    marginTop: 5,
   },
   errorTextWrap: {
-    borderColor: 'transparent'
-  }
+    borderColor: 'transparent',
+  },
 });
 
 interface Props {

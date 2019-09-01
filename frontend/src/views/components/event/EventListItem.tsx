@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   listItem: {
     '&:hover': {
-      backgroundColor: '#e1f5fe'
-    }
+      backgroundColor: '#e1f5fe',
+    },
   },
-  listLink: { textDecoration: 'none', color: '#212121' }
+  listLink: { textDecoration: 'none', color: '#212121' },
 });
 
 interface Props {
@@ -32,9 +32,7 @@ const EventListItem: React.FC<Props> = (props: Props) => {
     <Link to={`/events/${props.event.id}`} className={classes.listLink}>
       <ListItem className={classes.listItem}>
         {props.type === 'basic' && <BasicEventListItem event={props.event} />}
-        {props.type === 'enrollment' && (
-          <EnrollmentEventListItem event={props.event} />
-        )}
+        {props.type === 'enrollment' && <EnrollmentEventListItem event={props.event} />}
       </ListItem>
     </Link>
   );

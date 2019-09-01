@@ -25,13 +25,13 @@ const mapStateToProps = (state: State) => {
     id: eventSelector.getEventIdFromRouter(state),
     event: state.eventsState.event.event,
     isLoading: state.eventsState.event.isLoading,
-    error: state.eventsState.event.error
+    error: state.eventsState.event.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    searchEvent: (eventId: string) => oparations.searchEvent(dispatch, eventId)
+    searchEvent: (eventId: string) => oparations.searchEvent(dispatch, eventId),
   };
 };
 

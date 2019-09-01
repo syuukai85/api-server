@@ -10,7 +10,7 @@ interface StartLoadingAction {
 const startLoading = (): StartLoadingAction => {
   return {
     type: ActionTypes.START_LOADING,
-    isLoading: true
+    isLoading: true,
   };
 };
 
@@ -22,7 +22,7 @@ interface EndLoadingAction {
 const endLoading = (): EndLoadingAction => {
   return {
     type: ActionTypes.END_LOADING,
-    isLoading: false
+    isLoading: false,
   };
 };
 
@@ -41,8 +41,8 @@ const isLogin = (user: firebase.User): IsLoginAction => {
     payload: {
       displayName: user.displayName,
       email: user.email,
-      uid: user.uid
-    }
+      uid: user.uid,
+    },
   };
 };
 
@@ -52,13 +52,9 @@ interface LogoutAction extends Action {
 
 const logout = (): LogoutAction => {
   return {
-    type: ActionTypes.LOGOUT
+    type: ActionTypes.LOGOUT,
   };
 };
 
 export default { startLoading, endLoading, isLogin, logout };
-export type AuthAction =
-  | IsLoginAction
-  | LogoutAction
-  | StartLoadingAction
-  | EndLoadingAction;
+export type AuthAction = IsLoginAction | LogoutAction | StartLoadingAction | EndLoadingAction;

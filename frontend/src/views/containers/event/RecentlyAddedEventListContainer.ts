@@ -18,13 +18,13 @@ const mapStateToProps = (state: State) => {
   return {
     events: state.eventsState.recentlyAddedEvent.events,
     isLoading: state.eventsState.recentlyAddedEvent.isLoading,
-    error: state.eventsState.recentlyAddedEvent.error
+    error: state.eventsState.recentlyAddedEvent.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    searchEvent: () => oparations.searchRecentlyAddedEvent(dispatch)
+    searchEvent: () => oparations.searchRecentlyAddedEvent(dispatch),
   };
 };
 

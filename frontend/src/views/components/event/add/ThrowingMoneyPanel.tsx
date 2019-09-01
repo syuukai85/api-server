@@ -15,27 +15,21 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   container: {
     marginTop: '20px',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   image: {
     width: '100%',
     height: '300px',
-    objectFit: 'contain'
-  }
+    objectFit: 'contain',
+  },
 });
 
-const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
-  props: FormikProps<FormValues>
-) => {
+const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
   const { setFieldValue } = props;
   const classes = useStyles({});
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
         <Typography>投げ銭QRコード画像</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -51,10 +45,7 @@ const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
           {props.values.qrCodeFile !== null && (
             <Grid item xs={12}>
               <Box>
-                <img
-                  className={classes.image}
-                  src={URL.createObjectURL(props.values.qrCodeFile)}
-                />
+                <img className={classes.image} src={URL.createObjectURL(props.values.qrCodeFile)} />
               </Box>
             </Grid>
           )}

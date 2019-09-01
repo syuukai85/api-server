@@ -18,13 +18,13 @@ const mapStateToProps = (state: State) => {
   return {
     groups: state.groupsState.recentlyAddedGroup.groups,
     isLoading: state.groupsState.recentlyAddedGroup.isLoading,
-    error: state.groupsState.recentlyAddedGroup.error
+    error: state.groupsState.recentlyAddedGroup.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    searchGroup: () => oparations.searchRecentlyAddedGroup(dispatch)
+    searchGroup: () => oparations.searchRecentlyAddedGroup(dispatch),
   };
 };
 

@@ -5,7 +5,7 @@ const searchGroup = (groupId: string) => {
   return {
     type: ActionTypes.REQUEST_GROUP,
     isLoading: true,
-    groupId
+    groupId,
   };
 };
 
@@ -13,7 +13,7 @@ const searchSuccessGroup = (group: Group) => {
   return {
     type: ActionTypes.SUCCESS_GROUP,
     isLoading: false,
-    group
+    group,
   };
 };
 
@@ -21,7 +21,7 @@ const searchErrorGroup = (error: Error) => {
   return {
     type: ActionTypes.ERROR_GROUP,
     isLoading: false,
-    error
+    error,
   };
 };
 
@@ -32,5 +32,5 @@ export type SearchGroupAction = ReturnType<typeof searchGroup> &
 export default {
   searchGroup,
   searchSuccessGroup,
-  searchErrorGroup
+  searchErrorGroup,
 };

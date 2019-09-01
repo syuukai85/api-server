@@ -30,18 +30,15 @@ const mapStateToProps = (state: State) => {
     id: groupSelector.getGroupIdFromRouter(state),
     group: state.groupsState.group.group,
     events: state.groupsState.groupEvents.events,
-    isLoading:
-      state.groupsState.group.isLoading &&
-      state.groupsState.groupEvents.isLoading,
-    error: state.groupsState.group.error || state.groupsState.groupEvents.error
+    isLoading: state.groupsState.group.isLoading && state.groupsState.groupEvents.isLoading,
+    error: state.groupsState.group.error || state.groupsState.groupEvents.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
     searchGroup: (groupId: string) => oparations.searchGroup(dispatch, groupId),
-    searchGroupEvents: (groupId: string) =>
-      oparations.searchGroupEvents(dispatch, groupId)
+    searchGroupEvents: (groupId: string) => oparations.searchGroupEvents(dispatch, groupId),
   };
 };
 

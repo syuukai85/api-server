@@ -9,8 +9,8 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(theme => ({
   descriptionPaper: {
     padding: theme.spacing(3, 2),
-    margin: theme.spacing(3, 2)
-  }
+    margin: theme.spacing(3, 2),
+  },
 }));
 
 interface Props {

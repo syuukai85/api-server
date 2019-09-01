@@ -8,16 +8,16 @@ const defaultOptions = {
   autoplay: true,
   animationData: networkErrorJson,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
-  }
+    preserveAspectRatio: 'xMidYMid slice',
+  },
 };
 const useStyles = makeStyles({
   networkErrorContainer: {
     height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const NetworkErrorTemplate: React.FC = () => {

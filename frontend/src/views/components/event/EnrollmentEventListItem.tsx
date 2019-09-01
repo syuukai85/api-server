@@ -8,8 +8,8 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles({
   image: {
     width: '90%',
-    marginTop: '10px'
-  }
+    marginTop: '10px',
+  },
 });
 
 interface Props {

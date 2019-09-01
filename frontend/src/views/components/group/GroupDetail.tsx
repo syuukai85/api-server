@@ -12,8 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   eventListContainer: {
-    marginTop: '20px'
-  }
+    marginTop: '20px',
+  },
 });
 
 interface Props {

@@ -3,7 +3,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-  MaterialUiPickersDate
+  MaterialUiPickersDate,
 } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,8 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   datePicker: {
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1),
+  },
 }));
 
 interface Props {
@@ -27,15 +27,7 @@ interface Props {
 }
 
 const RangeDatePicker: React.FC<Props> = (props: Props) => {
-  const {
-    labelPrefix,
-    startName,
-    endName,
-    startDate,
-    endDate,
-    startDateOnChange,
-    endDateOnChange
-  } = props;
+  const { labelPrefix, startName, endName, startDate, endDate, startDateOnChange, endDateOnChange } = props;
   const classes = useStyles({});
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

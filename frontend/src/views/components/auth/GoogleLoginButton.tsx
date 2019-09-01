@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   googleButton: {
-    margin: 'auto'
-  }
+    margin: 'auto',
+  },
 });
 
 interface Props {
@@ -14,12 +14,7 @@ interface Props {
 
 const GoogleLoginButton: React.FC<Props> = (props: Props) => {
   const styles = useStyles({});
-  return (
-    <ReactGoogleButton
-      onClick={props.onClick}
-      className={styles.googleButton}
-    />
-  );
+  return <ReactGoogleButton onClick={props.onClick} className={styles.googleButton} />;
 };
 
 export default GoogleLoginButton;

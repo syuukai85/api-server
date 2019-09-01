@@ -9,27 +9,27 @@ const useStyles = makeStyles({
     borderRadius: '1px',
     boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
     display: 'inline-block',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   color: {
     width: '36px',
     height: '14px',
-    borderRadius: '2px'
+    borderRadius: '2px',
   },
   colorCode: (props: any) => ({
-    background: props.colorCode
+    background: props.colorCode,
   }),
   popover: {
     position: 'absolute',
-    zIndex: 2
+    zIndex: 2,
   },
   cover: {
     position: 'fixed',
     top: '0px',
     right: '0px',
     bottom: '0px',
-    left: '0px'
-  }
+    left: '0px',
+  },
 });
 
 interface Props {

@@ -5,12 +5,12 @@ import moment from 'moment';
 
 const useStyles = makeStyles({
   date: {
-    fontSize: '3.5vw'
+    fontSize: '3.5vw',
   },
   time: {
     marginTop: '5px',
-    fontSize: '1vw'
-  }
+    fontSize: '1vw',
+  },
 });
 
 interface Props {
@@ -20,8 +20,7 @@ interface Props {
 
 const HoldDateBox: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
-  const getHoldStartDay = (date?: Date): string =>
-    date !== void 0 ? moment(date).format('MM/DD') : '';
+  const getHoldStartDay = (date?: Date): string => (date !== void 0 ? moment(date).format('MM/DD') : '');
 
   const getHoldBetweenTime = (fromDate?: Date, toDate?: Date): string => {
     if (fromDate === void 0) return '';

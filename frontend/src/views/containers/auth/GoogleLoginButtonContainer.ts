@@ -7,7 +7,7 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
     onClick: () => {
       operations.loginGoogle(dispatch);
-    }
+    },
   };
 };
 

@@ -12,16 +12,16 @@ import TableRow from '@material-ui/core/TableRow';
 const useStyles = makeStyles(theme => ({
   recruitRequirementsContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   table: {
     width: '60%',
-    marginTop: '15px'
+    marginTop: '15px',
   },
   descriptionPaper: {
     padding: theme.spacing(3, 2),
-    margin: theme.spacing(3, 2)
-  }
+    margin: theme.spacing(3, 2),
+  },
 }));
 
 interface Props {
@@ -41,10 +41,7 @@ const RecruitRequirements: React.FC<Props> = (props: Props) => {
               </TableCell>
               <TableCell align="right">
                 <Typography variant="h5">
-                  {props.event.entries !== void 0
-                    ? props.event.entries.length
-                    : 0}
-                  /{props.event.capacity}人
+                  {props.event.entries !== void 0 ? props.event.entries.length : 0}/{props.event.capacity}人
                 </Typography>
               </TableCell>
             </TableRow>

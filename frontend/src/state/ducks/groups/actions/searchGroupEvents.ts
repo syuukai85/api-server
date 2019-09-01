@@ -5,7 +5,7 @@ const searchGroupEvents = (groupId: string) => {
   return {
     type: ActionTypes.REQUEST_GROUP_EVENTS,
     isLoading: true,
-    groupId
+    groupId,
   };
 };
 
@@ -13,7 +13,7 @@ const searchSuccessGroupEvents = (events: Array<Event>) => {
   return {
     type: ActionTypes.SUCCESS_GROUP_EVENTS,
     isLoading: false,
-    events
+    events,
   };
 };
 
@@ -21,7 +21,7 @@ const searchErrorGroupEvents = (error: Error) => {
   return {
     type: ActionTypes.ERROR_GROUP_EVENTS,
     isLoading: false,
-    error
+    error,
   };
 };
 
@@ -32,5 +32,5 @@ export type SearchGroupEventsAction = ReturnType<typeof searchGroupEvents> &
 export default {
   searchGroupEvents,
   searchSuccessGroupEvents,
-  searchErrorGroupEvents
+  searchErrorGroupEvents,
 };

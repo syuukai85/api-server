@@ -28,11 +28,7 @@ const EventDetail: React.FC<Props> = (props: Props) => {
   if (isExistsError) return <NetworkErrorTemplate />;
   return (
     <>
-      <DetailHeader
-        title={props.event.title}
-        colorCode={props.event.colorCode}
-        imageUrl={props.event.imageUrl}
-      />
+      <DetailHeader title={props.event.title} colorCode={props.event.colorCode} imageUrl={props.event.imageUrl} />
       <RecruitRequirements event={props.event} />
       <Description description={props.event.description} />
       <Container>

@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
 import { Group } from 'typescript-fetch-api';
-import {
-  SearchGroupAction,
-  SearchGroupEventsAction,
-  SearchRecentlyAddedGroupAction
-} from './actions';
+import { SearchGroupAction, SearchGroupEventsAction, SearchRecentlyAddedGroupAction } from './actions';
 import { ActionTypes } from './types';
 
 interface GroupState {
@@ -20,26 +16,23 @@ interface GroupState {
  *
  * @returns {GroupState} reduce後のstate情報
  */
-const group = (
-  state: GroupState = { group: {}, isLoading: true },
-  action: SearchGroupAction
-): GroupState => {
+const group = (state: GroupState = { group: {}, isLoading: true }, action: SearchGroupAction): GroupState => {
   switch (action.type) {
     case ActionTypes.REQUEST_GROUP: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.SUCCESS_GROUP: {
       return Object.assign({}, state, {
         group: action.group,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.ERROR_GROUP: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error
+        error: action.error,
       });
     }
     default: {
@@ -68,19 +61,19 @@ const groupEvents = (
   switch (action.type) {
     case ActionTypes.REQUEST_GROUP_EVENTS: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.SUCCESS_GROUP_EVENTS: {
       return Object.assign({}, state, {
         events: action.events,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.ERROR_GROUP_EVENTS: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error
+        error: action.error,
       });
     }
     default: {
@@ -109,19 +102,19 @@ const recentlyAddedGroup = (
   switch (action.type) {
     case ActionTypes.REQUEST_NEWLY_GROUP: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.SUCCESS_NEWLY_GROUP: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        groups: action.groups
+        groups: action.groups,
       });
     }
     case ActionTypes.ERROR_NEWLY_GROUP: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error
+        error: action.error,
       });
     }
     default: {
@@ -133,6 +126,6 @@ const recentlyAddedGroup = (
 const groupsReducer = combineReducers({
   group,
   groupEvents,
-  recentlyAddedGroup
+  recentlyAddedGroup,
 });
 export default groupsReducer;

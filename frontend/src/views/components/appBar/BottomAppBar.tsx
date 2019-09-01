@@ -10,11 +10,11 @@ import AppBarMenu from './AppBarMenu';
 const useStyles = makeStyles({
   appBar: {
     top: 'auto',
-    bottom: 0
+    bottom: 0,
   },
   grow: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 });
 
 /**
@@ -35,19 +35,10 @@ const BottomAppBar: React.FC = () => {
   return (
     <AppBar position="sticky" color="primary" className={classes.appBar}>
       <Toolbar>
-        <IconButton
-          onClick={handleClick}
-          edge="start"
-          color="inherit"
-          aria-label="Open drawer"
-        >
+        <IconButton onClick={handleClick} edge="start" color="inherit" aria-label="Open drawer">
           <MenuIcon />
         </IconButton>
-        <AppBarMenu
-          open={openMenu}
-          anchorEl={anchorEl}
-          handleClose={handleClose}
-        />
+        <AppBarMenu open={openMenu} anchorEl={anchorEl} handleClose={handleClose} />
         <div className={classes.grow} />
         <IconButton color="inherit">
           <SearchIcon />

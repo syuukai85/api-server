@@ -15,5 +15,5 @@ export const validate = {
   fileSizeLarge: (fileSize: number) => `ファイルサイズは${fileSize / 1024 / 1024}MBまでです`,
   required: (param: string) => `${param}は必須項目です`,
   overStartDate: (param: string) => `${param}は開始時間よりも後の時間を入力する必要があります`,
-  overNowDate: (param: string) => `${param}は今の時間よりも後の時間を入力する必要があります`
+  overNowDate: (param: string) => `${param}は今の時間よりも後の時間を入力する必要があります`,
 };

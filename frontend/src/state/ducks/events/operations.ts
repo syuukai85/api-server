@@ -44,5 +44,5 @@ export default {
   searchEvent,
   addEvent,
   searchRecentlyAddedEvent,
-  searchRecentlyFinishedEvent
+  searchRecentlyFinishedEvent,
 };

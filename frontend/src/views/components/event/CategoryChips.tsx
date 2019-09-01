@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   category: {
-    margin: '5px'
-  }
+    margin: '5px',
+  },
 });
 
 interface Props {
@@ -19,11 +19,7 @@ const CategoryChips: React.FC<Props> = (props: Props) => {
   return (
     <div>
       {props.categories.map((category: Category) => (
-        <Chip
-          key={category.id}
-          className={classes.category}
-          label={category.name}
-        />
+        <Chip key={category.id} className={classes.category} label={category.name} />
       ))}
     </div>
   );

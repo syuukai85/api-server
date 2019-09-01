@@ -10,8 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   contentDivider: {
-    marginBottom: '15px'
-  }
+    marginBottom: '15px',
+  },
 });
 
 interface Props {
@@ -23,8 +23,7 @@ const GroupEventList: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   const renderItems = (events: Array<Event>) => {
     return events.map((event: Event, i: number) => {
-      if (props.events.length - 1 === i)
-        return <EventListItem key={i} event={event} type="basic" />;
+      if (props.events.length - 1 === i) return <EventListItem key={i} event={event} type="basic" />;
       return (
         <>
           <EventListItem key={i} event={event} type="basic" />

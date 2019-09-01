@@ -12,17 +12,17 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   inline: {
-    display: 'inline'
+    display: 'inline',
   },
   listItem: {
     '&:hover': {
-      backgroundColor: '#e1f5fe'
-    }
+      backgroundColor: '#e1f5fe',
+    },
   },
-  listLink: { textDecoration: 'none', color: '#212121' }
+  listLink: { textDecoration: 'none', color: '#212121' },
 }));
 
 interface Props {
@@ -44,12 +44,7 @@ const GroupListItem: React.FC<Props> = (props: Props) => {
           primary={props.group.name}
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
+              <Typography component="span" variant="body2" className={classes.inline} color="textPrimary">
                 {props.group.description}
               </Typography>
             </React.Fragment>

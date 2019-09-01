@@ -13,33 +13,33 @@ const initialState = {
   uid: null,
   displayName: null,
   email: null,
-  isLoading: true
+  isLoading: true,
 };
 
 const auth = (state: AppState = initialState, action: AuthAction): AppState => {
   switch (action.type) {
     case ActionTypes.START_LOADING: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.END_LOADING: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
       });
     }
     case ActionTypes.SAVE_LOGIN_USER: {
       return Object.assign({}, state, {
         uid: action.payload.uid,
         displayName: action.payload.displayName,
-        email: action.payload.email
+        email: action.payload.email,
       });
     }
     case ActionTypes.LOGOUT: {
       return Object.assign({}, state, {
         uid: null,
         displayName: null,
-        email: null
+        email: null,
       });
     }
     default: {
@@ -49,7 +49,7 @@ const auth = (state: AppState = initialState, action: AuthAction): AppState => {
 };
 
 const authReducer = combineReducers({
-  auth
+  auth,
 });
 
 export default authReducer;

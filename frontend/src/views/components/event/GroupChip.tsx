@@ -9,12 +9,7 @@ interface Props {
 
 const GroupChip: React.FC<Props> = (props: Props) => {
   if (props.group === void 0) return <></>;
-  return (
-    <Chip
-      avatar={<Avatar src={props.group.imagePath} />}
-      label={props.group.name}
-    />
-  );
+  return <Chip avatar={<Avatar src={props.group.imagePath} />} label={props.group.name} />;
 };
 
 export default GroupChip;

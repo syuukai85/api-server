@@ -5,22 +5,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   colorCode: (props: any) => ({
-    background: props.colorCode
+    background: props.colorCode,
   }),
   imageContainer: {
-    height: '500px'
+    height: '500px',
   },
   imageWrapper: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '500px'
+    height: '500px',
   },
   image: {
     width: '50%',
     height: '300px',
-    objectFit: 'contain'
-  }
+    objectFit: 'contain',
+  },
 });
 
 interface Props {
@@ -31,17 +31,10 @@ interface Props {
 const PreviewHeaderImage: React.FC<Props> = (props: Props) => {
   const classes = useStyles({ colorCode: props.colorCode });
   return (
-    <Grid
-      className={`${classes.imageContainer} ${classes.colorCode}`}
-      item
-      xs={12}
-    >
+    <Grid className={`${classes.imageContainer} ${classes.colorCode}`} item xs={12}>
       {props.imageFile !== null && (
         <Box className={classes.imageWrapper}>
-          <img
-            className={classes.image}
-            src={URL.createObjectURL(props.imageFile)}
-          />
+          <img className={classes.image} src={URL.createObjectURL(props.imageFile)} />
         </Box>
       )}
     </Grid>

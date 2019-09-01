@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
 const addEventFormEnhancer = withFormik<any, FormValues>({
   mapPropsToValues: addEventForm.mapPropsToValues,
   validationSchema: addEventForm.validateSchema,
-  handleSubmit: (
+  handleSubmit: async (
     {
       title,
       description,
@@ -51,7 +51,7 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
     }: FormValues,
     { props, setSubmitting, setErrors }
   ) => {
-    props.addEvent({
+    await props.addEvent({
       title,
       description,
       colorCode,
@@ -67,22 +67,6 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
       categories,
       group,
     });
-    console.log(
-      capacity,
-      categories,
-      colorCode,
-      description,
-      group,
-      holdEndDate,
-      holdStartDate,
-      imageFile,
-      organizers,
-      qrCodeFile,
-      recruitEndDate,
-      recruitStartDate,
-      title,
-      venue
-    );
   },
 })(AddEventForm);
 

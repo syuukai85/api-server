@@ -1,16 +1,18 @@
-import { ActionTypes } from './types';
+import { ActionTypes, VariantIconKeys } from './types';
 
 interface ShowNotificationAction {
   type: typeof ActionTypes.SHOW_NOTIFICATION;
   open: boolean;
+  variant: VariantIconKeys;
   message: string;
 }
 
-const showNotification = (message: string): ShowNotificationAction => {
+const showNotification = (message: string, variant: VariantIconKeys): ShowNotificationAction => {
   return {
     type: ActionTypes.SHOW_NOTIFICATION,
     open: true,
     message: message,
+    variant: variant,
   };
 };
 

@@ -3,6 +3,7 @@ import { Event } from 'typescript-fetch-api';
 import AddEventForm from '../../components/event/add/AddEventForm';
 import eventOparations from '../../../state/ducks/events/operations';
 import notificationOparations from '../../../state/ducks/notification/operation';
+import { VariantIconKeys } from '../../../state/ducks/notification/types';
 import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
@@ -26,7 +27,8 @@ const mapStateToProps = (state: State) => {
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
     addEvent: (event: Event) => eventOparations.addEvent(dispatch, event),
-    showNotification: (message: string) => notificationOparations.showNotification(dispatch, message),
+    showNotification: (message: string, variant: VariantIconKeys) =>
+      notificationOparations.showNotification(dispatch, message, variant),
   };
 };
 
@@ -39,7 +41,8 @@ const addEventFormEnhancer = withFormik<any, FormValues>({
       ...formValues,
     });
     const isExistsError = props.error !== void 0;
-    if (isExistsError) props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください');
+    if (isExistsError)
+      props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください', 'error');
   },
 })(AddEventForm);
 

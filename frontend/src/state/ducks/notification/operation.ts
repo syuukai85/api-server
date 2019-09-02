@@ -1,5 +1,6 @@
 import Redux from 'redux';
 import actions from './actions';
+import { VariantIconKeys } from './types';
 
 /**
  * 通知の表示
@@ -7,8 +8,8 @@ import actions from './actions';
  * @param {Redux.Dispatch} dispatch reduxのdispatch
  * @param {string} message 通知メッセージ
  */
-const showNotification = (dispatch: Redux.Dispatch, message: string) => {
-  dispatch(actions.showNotification(message));
+const showNotification = (dispatch: Redux.Dispatch, message: string, variant: VariantIconKeys) => {
+  dispatch(actions.showNotification(message, variant));
 };
 
 /**

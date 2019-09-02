@@ -13,6 +13,7 @@ interface OtherProps {
   isLoading: boolean;
   error: Error;
   addEvent: (event: Event) => void;
+  showErrorMessage: (message: string) => void;
 }
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？

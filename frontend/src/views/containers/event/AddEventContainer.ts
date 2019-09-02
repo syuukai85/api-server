@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { Event } from 'typescript-fetch-api';
 import AddEventForm from '../../components/event/add/AddEventForm';
-import oparations from '../../../state/ducks/events/operations';
+import eventOparations from '../../../state/ducks/events/operations';
+import notificationOparations from '../../../state/ducks/notification/operation';
 import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
@@ -24,7 +25,8 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    addEvent: (event: Event) => oparations.addEvent(dispatch, event),
+    addEvent: (event: Event) => eventOparations.addEvent(dispatch, event),
+    showNotification: (message: string) => notificationOparations.showNotification(dispatch, message),
   };
 };
 
@@ -32,41 +34,12 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
 const addEventFormEnhancer = withFormik<any, FormValues>({
   mapPropsToValues: addEventForm.mapPropsToValues,
   validationSchema: addEventForm.validateSchema,
-  handleSubmit: async (
-    {
-      title,
-      description,
-      colorCode,
-      imageFile,
-      qrCodeFile,
-      capacity,
-      recruitStartDate,
-      recruitEndDate,
-      holdStartDate,
-      holdEndDate,
-      organizers,
-      venue,
-      categories,
-      group,
-    }: FormValues,
-    { props, setSubmitting, setErrors }
-  ) => {
+  handleSubmit: async ({ ...formValues }: FormValues, { props, setSubmitting, setErrors }) => {
     await props.addEvent({
-      title,
-      description,
-      colorCode,
-      imageFile,
-      qrCodeFile,
-      capacity,
-      recruitStartDate,
-      recruitEndDate,
-      holdStartDate,
-      holdEndDate,
-      organizers,
-      venue,
-      categories,
-      group,
+      ...formValues,
     });
+    const isExistsError = props.error !== void 0;
+    if (isExistsError) props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください');
   },
 })(AddEventForm);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import AddEventContainer from '../../containers/event/AddEventContainer';
+import NotificationContainer from '../../containers/notification/NotificationContainer';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,6 +16,7 @@ const AddEventScene: React.FC = () => {
   return (
     <Container className={classes.container}>
       <AddEventContainer />
+      <NotificationContainer />
     </Container>
   );
 };

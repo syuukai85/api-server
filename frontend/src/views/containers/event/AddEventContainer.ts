@@ -7,6 +7,7 @@ import { VariantIconKeys } from '../../../state/ducks/notification/types';
 import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
+import { withRouter } from 'react-router';
 
 interface State {
   eventsState: {
@@ -33,18 +34,23 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
 };
 
 // NOTE: formikのmapPropsToValuesのcontainer, formik propsとの型付けがまだいまいち理解できていない。anyで仮置き。直したい。
-const addEventFormEnhancer = withFormik<any, FormValues>({
-  mapPropsToValues: addEventForm.mapPropsToValues,
-  validationSchema: addEventForm.validateSchema,
-  handleSubmit: async ({ ...formValues }: FormValues, { props, setSubmitting, setErrors }) => {
-    await props.addEvent({
-      ...formValues,
-    });
-    const isExistsError = props.error !== void 0;
-    if (isExistsError)
-      props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください', 'error');
-  },
-})(AddEventForm);
+const addEventFormEnhancer = withRouter(
+  withFormik<any, FormValues>({
+    mapPropsToValues: addEventForm.mapPropsToValues,
+    validationSchema: addEventForm.validateSchema,
+    handleSubmit: async ({ ...formValues }: FormValues, { props }) => {
+      await props.addEvent({
+        ...formValues,
+      });
+      const isExistsError = props.error !== null;
+      if (isExistsError) {
+        props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください', 'error');
+        return;
+      }
+      props.history.push('/');
+    },
+  })(AddEventForm)
+);
 
 export default connect(
   mapStateToProps,

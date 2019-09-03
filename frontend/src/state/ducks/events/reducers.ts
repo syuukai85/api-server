@@ -66,6 +66,7 @@ const addEvent = (
       return Object.assign({}, state, {
         event: action.event,
         isLoading: action.isLoading,
+        error: null,
       });
     }
     case ActionTypes.SUCCESS_EVENT: {

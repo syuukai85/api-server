@@ -70,9 +70,9 @@ const Notification: React.FC<Props> = (props: Props) => {
         className={classes[variant]}
         aria-describedby="snackbar-message"
         message={
-          <span id="snackbar-message">
+          <span id="snackbar-message" className={classes.message}>
             <Icon className={`${classes.icon} ${classes.iconVariant}`} />
-            {message}
+            <p>{message}</p>
           </span>
         }
         action={[

@@ -10,6 +10,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/leodido/go-urn v1.1.0 // indirect
+	github.com/satori/go.uuid v1.2.0
 	github.com/t-tiger/gorm-bulk-insert v0.0.0-20190401142620-ba33202b110e
 	gopkg.in/go-playground/validator.v9 v9.29.1
 )

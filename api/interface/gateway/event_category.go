@@ -17,7 +17,7 @@ func makeEventCategory(entityCategoryID entity.CategoryID, entityEventID entity.
 	}
 }
 
-func createCategoriesTransact(entityCategories []*entity.Category, entityEventID entity.EventID) func(tx *gorm.DB) (interface{}, error) {
+func createEventCategoriesTransact(entityCategories []*entity.Category, entityEventID entity.EventID) func(tx *gorm.DB) (interface{}, error) {
 	insertValues := make([]interface{}, len(entityCategories))
 
 	for index, entityCategoriy := range entityCategories {

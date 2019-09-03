@@ -127,7 +127,7 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 		entityEventID := eventIDToEntityEventID(event.ID)
 		_, generalEntryErr := entryEventTransact(entityEvent.Entries, entityEventID, entity.GeneralEntryID)(tx)
 		_, organizerEntryErr := entryEventTransact(entityEvent.Organizer, entityEventID, entity.OrganizerEntryID)(tx)
-		_, eventCategoryErr := createCategoriesTransact(entityEvent.Categories, entityEventID)(tx)
+		_, eventCategoryErr := createEventCategoriesTransact(entityEvent.Categories, entityEventID)(tx)
 		if generalEntryErr != nil || organizerEntryErr != nil || eventCategoryErr != nil {
 			return nil, errors.New(addEventFailure)
 		}

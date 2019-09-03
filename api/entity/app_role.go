@@ -1,7 +1,7 @@
 package entity
 
 // AppRoleID アプリ内での役割
-type AppRoleID int
+type AppRoleID uint
 
 const (
 	// GeneralEntryID 一般参加

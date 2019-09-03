@@ -1,7 +1,7 @@
 package entity
 
 // SysRoleID システムでの役割
-type SysRoleID int
+type SysRoleID uint
 
 const (
 	// SystemAdminID システム管理者

@@ -29,6 +29,10 @@ func Seed(db *gorm.DB, names ...string) {
 func getSeeder(name string) Seeder {
 	var seeder Seeder
 	switch name {
+	case "group":
+		seeder = NewGroup()
+	case "venue":
+		seeder = NewVenue()
 	case "app_roles":
 		seeder = NewAppRole()
 	case "sys_roles":

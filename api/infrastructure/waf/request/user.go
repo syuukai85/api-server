@@ -12,7 +12,10 @@ type User struct {
 	Name string `json:"name" validate:"gte=1,lte=50"`
 }
 
-func (u User) ToEntity() *entity.User {
+func (u *User) ToEntity() *entity.User {
+	if u == nil {
+		return nil
+	}
 	return &entity.User{
 		ID:   entity.UserID(fmt.Sprint(u.ID)),
 		Name: u.Name,

@@ -2,6 +2,7 @@ package seed
 
 import (
 	"github.com/connthass/connthass/api/entity"
+	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 )
@@ -14,7 +15,7 @@ func NewAppRole() AppRoles {
 	return AppRoles{
 		{
 			model.Base{
-				ID: uint64(entity.SystemAdminID),
+				ID: gateway.EntityAppRoleIDToUint(entity.GeneralEntryID),
 			},
 			model.BaseRole{
 				Name: "general",
@@ -22,7 +23,7 @@ func NewAppRole() AppRoles {
 		},
 		{
 			model.Base{
-				ID: uint64(entity.GeneralUserID),
+				ID: gateway.EntityAppRoleIDToUint(entity.OrganizerEntryID),
 			},
 			model.BaseRole{
 				Name: "organizer",

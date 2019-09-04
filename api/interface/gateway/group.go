@@ -26,7 +26,7 @@ func NewGroup(tx *gorm.DB) *Group {
 	return group
 }
 
-func entityGroupIDToUint(entityGroupID entity.GroupID) uint64 {
+func EntityGroupIDToUint(entityGroupID entity.GroupID) uint64 {
 	groupID, _ := strconv.ParseUint(fmt.Sprint(entityGroupID), 10, 64)
 	return groupID
 }
@@ -48,7 +48,7 @@ func groupToEntity(group model.Group) *entity.Group {
 }
 
 func groupToModel(group *entity.Group) model.Group {
-	groupID, _ := strconv.ParseUint(fmt.Sprint(group.ID), 10, 64)
+	groupID := EntityGroupIDToUint(group.ID)
 	modelGroup := model.Group{
 		Name:        group.Name,
 		Description: group.Description,

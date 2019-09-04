@@ -13,6 +13,9 @@ type Venue struct {
 }
 
 func (v *Venue) ToEntity() *entity.Venue {
+	if v == nil {
+		return nil
+	}
 	return &entity.Venue{
 		ID:   entity.VenueID(fmt.Sprint(v.ID)),
 		Name: v.Name,

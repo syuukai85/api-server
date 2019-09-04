@@ -2,6 +2,7 @@ package seed
 
 import (
 	"github.com/connthass/connthass/api/entity"
+	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 )
@@ -14,7 +15,7 @@ func NewSysRole() SysRoles {
 	return SysRoles{
 		{
 			model.Base{
-				ID: uint64(entity.SystemAdminID),
+				ID: gateway.EntitySysRoleIDToUint(entity.SystemAdminID),
 			},
 			model.BaseRole{
 				Name: "systemAdmin",
@@ -22,7 +23,7 @@ func NewSysRole() SysRoles {
 		},
 		{
 			model.Base{
-				ID: uint64(entity.GeneralUserID),
+				ID: gateway.EntitySysRoleIDToUint(entity.GeneralUserID),
 			},
 			model.BaseRole{
 				Name: "generalUser",

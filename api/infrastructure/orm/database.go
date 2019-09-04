@@ -5,7 +5,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/connthass/connthass/api/infrastructure/orm/seed"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	gormbulk "github.com/t-tiger/gorm-bulk-insert"
@@ -28,14 +27,6 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	autoMigrate(db)
-	seed.Seed(
-		db,
-		"app_roles",
-		"sys_roles",
-		"admin_users",
-		"general_users",
-	)
 }
 
 func getConnectionString() string {

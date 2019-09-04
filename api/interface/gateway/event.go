@@ -106,20 +106,21 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 		RecruitEndDate:   entityEvent.RecruitEndDate,
 	}
 	event.ColorCode = entityEvent.ColorCode
-	groupID := entityGroupIDToUint(entityEvent.Group.ID)
-	venueID := entityVenueIDToUint(entityEvent.Venue.ID)
 
 	data, err := orm.TransactAndReturnData(e.db, func(tx *gorm.DB) (interface{}, error) {
-		if len(entityEvent.Group.ID) != 0 && tx.First(&model.Group{}, groupID).RecordNotFound() {
-			return nil, errors.New(addEventFailure)
+		var err error
+		var modelID uint64
+
+		if modelID, err = getGroupIDFromEntityEvent(tx, entityEvent); err == nil {
+			event.GroupID = modelID
+		}
+		if modelID, err = getVenueIDFromEntityEvent(tx, entityEvent); err == nil {
+			event.VenueID = modelID
+		}
+		if err != nil {
+			return nil, err
 		}
 
-		if len(entityEvent.Venue.ID) != 0 && tx.First(&model.Venue{}, venueID).RecordNotFound() {
-			return nil, errors.New(addEventFailure)
-		}
-
-		event.GroupID = groupID
-		event.VenueID = venueID
 		tx.Create(&event)
 		if tx.NewRecord(event) {
 			return nil, errors.New(addEventFailure)
@@ -138,10 +139,38 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 
 	if err != nil {
 		return nil, &entity.Error{
-			Code:   http.StatusNotFound,
+			Code:   http.StatusUnprocessableEntity,
 			Errors: []string{err.Error()},
 		}
 	}
 
 	return data.(*entity.Event), nil
+}
+
+func getGroupIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (uint64, error) {
+	if entityEvent.Group != nil {
+		group := groupToModel(entityEvent.Group)
+
+		if db.First(&group).RecordNotFound() {
+			return 0, errors.New(addEventFailure)
+		}
+
+		return group.ID, nil
+	}
+
+	return EntityGroupIDToUint(entity.UnknownGroup), nil
+}
+
+func getVenueIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (uint64, error) {
+	if entityEvent.Venue != nil {
+		venue := venueToModel(entityEvent.Venue)
+
+		if db.First(&venue).RecordNotFound() {
+			return 0, errors.New(addEventFailure)
+		}
+
+		return venue.ID, nil
+	}
+
+	return EntityVenueIDToUint(entity.UnknownVenue), nil
 }

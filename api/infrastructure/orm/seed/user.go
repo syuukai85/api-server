@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/connthass/connthass/api/entity"
+	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 	uuid "github.com/satori/go.uuid"
@@ -16,7 +17,7 @@ type Users []model.User
 func NewUsers(sysRoleID entity.SysRoleID, users ...model.User) Users {
 	for index := range users {
 		users[index].APIKey = fmt.Sprint(uuid.NewV4())
-		users[index].SysRoleID = uint64(sysRoleID)
+		users[index].SysRoleID = gateway.EntitySysRoleIDToUint(sysRoleID)
 	}
 	return Users(users)
 }

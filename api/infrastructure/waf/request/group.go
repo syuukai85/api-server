@@ -16,7 +16,10 @@ type Group struct {
 	ImageURL    string `json:"imageUrl" validate:"uri,max=255,omitempty"`
 }
 
-func (g Group) ToEntity() *entity.Group {
+func (g *Group) ToEntity() *entity.Group {
+	if g == nil {
+		return nil
+	}
 	return &entity.Group{
 		ID:          entity.GroupID(fmt.Sprint(g.ID)),
 		Name:        g.Name,

@@ -14,7 +14,7 @@ func makeEntry(entityUserID entity.UserID, entityEventID entity.EventID, appRole
 	entry := model.EntryEvent{
 		UserID:    userID,
 		EventID:   eventID,
-		AppRoleID: uint64(appRoleID),
+		AppRoleID: EntityAppRoleIDToUint(appRoleID),
 	}
 
 	return entry

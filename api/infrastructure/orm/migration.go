@@ -5,7 +5,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func autoMigrate(db *gorm.DB) {
+func AutoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&model.User{},
 		&model.Like{},

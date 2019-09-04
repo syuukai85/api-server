@@ -61,7 +61,7 @@ const BasicEventListItem: React.FC<Props> = (props: Props) => {
               <GroupChip group={props.event.group} />
             </div>
             <div className={classes.userChipContainer}>
-              <OrganizerChips organizers={props.event.organizer} />
+              <OrganizerChips organizers={props.event.organizers} />
             </div>
             <label>category</label>
             <CategoryChips categories={props.event.categories} />

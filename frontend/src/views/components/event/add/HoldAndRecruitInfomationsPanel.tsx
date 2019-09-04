@@ -24,7 +24,7 @@ const organizers = [
 const venues = [{ value: 1, label: 'venue1' }, { value: 2, label: 'venue2' }, { value: 3, label: 'venue3' }];
 
 const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
-  const { values, handleChange, handleBlur } = props;
+  const { values, handleChange, handleBlur, setFieldValue } = props;
   return (
     <ExpansionPanel defaultExpanded>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">

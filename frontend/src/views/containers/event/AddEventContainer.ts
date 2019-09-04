@@ -4,7 +4,7 @@ import AddEventForm from '../../components/event/add/AddEventForm';
 import eventOparations from '../../../state/ducks/events/operations';
 import notificationOparations from '../../../state/ducks/notification/operation';
 import { VariantIconKeys } from '../../../state/ducks/notification/types';
-import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
+import { default as addEventForm, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
 import { withRouter } from 'react-router';
@@ -14,6 +14,7 @@ interface State {
     addEvent: {
       isLoading: boolean;
       error: Error;
+      addedEventId: number;
     };
   };
 }
@@ -22,6 +23,7 @@ const mapStateToProps = (state: State) => {
   return {
     isLoading: state.eventsState.addEvent.isLoading,
     error: state.eventsState.addEvent.error,
+    addedEventId: state.eventsState.addEvent.addedEventId,
   };
 };
 
@@ -47,7 +49,8 @@ const addEventFormEnhancer = withRouter(
         props.showNotification('ネットワークエラーが発生しています。時間をおいて再度実行してください', 'error');
         return;
       }
-      props.history.push('/');
+      props.history.push(`/events/${props.addedEventId}`);
+      props.showNotification('イベント作成に成功しました', 'success');
     },
   })(AddEventForm)
 );

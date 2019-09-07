@@ -1,7 +1,6 @@
 package request
 
 import (
-	"strconv"
 	"time"
 
 	"github.com/connthass/connthass/api/entity"
@@ -22,7 +21,7 @@ type AddEvent struct {
 	ColorCode        string      `json:"colorCode"`
 	Title            string      `json:"title" validate:"gte=1,lte=50"`
 	Description      string      `json:"description" validate:"max=20000,omitempty"`
-	Capacity         string      `json:"capacity" validate:"numeric,min=1,max=8,omitempty"`
+	Capacity         uint64      `json:"capacity" validate:"max=10000000,omitempty"`
 	ImageURL         string      `json:"imageUrl" validate:"uri,max=255"`
 	QRCodeURL        string      `json:"qrCodeUrl" validate:"uri,max=255"`
 	HoldStartDate    time.Time   `json:"holdStartDate" validate:"gte"`
@@ -37,12 +36,11 @@ type AddEvent struct {
 }
 
 func (ae *AddEvent) ToEntity() *entity.Event {
-	capacity, _ := strconv.ParseUint(ae.Capacity, 10, 64)
 	return &entity.Event{
 		ColorCode:        ae.ColorCode,
 		Title:            ae.Title,
 		Description:      ae.Description,
-		Capacity:         capacity,
+		Capacity:         ae.Capacity,
 		ImageURL:         ae.ImageURL,
 		QRCodeURL:        ae.QRCodeURL,
 		HoldStartDate:    ae.HoldStartDate,

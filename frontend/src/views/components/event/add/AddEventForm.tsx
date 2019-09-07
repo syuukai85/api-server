@@ -13,7 +13,7 @@ import * as H from 'history';
 interface OtherProps {
   isLoading: boolean;
   error: Error;
-  addedEventId: number;
+  addedEventId?: number;
   isExistsError: boolean;
   history: H.History;
   addEvent: (event: Event) => void;

@@ -15,7 +15,7 @@ interface State {
     addEvent: {
       isLoading: boolean;
       error: Error;
-      addedEventId: number;
+      addedEventId?: number;
     };
   };
 }

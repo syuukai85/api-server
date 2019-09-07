@@ -71,9 +71,6 @@ func TransactAndReturnData(db *gorm.DB, txFunc func(*gorm.DB) (interface{}, erro
 	}()
 
 	data, err = txFunc(tx)
-	if err != nil {
-		tx.Rollback()
-	}
 	return
 }
 

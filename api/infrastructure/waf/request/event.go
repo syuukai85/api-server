@@ -30,10 +30,10 @@ type AddEvent struct {
 	RecruitStartDate time.Time   `json:"recruitStartDate" validate:"gte"`
 	RecruitEndDate   time.Time   `json:"recruitEndDate" validate:"gte"`
 	Group            *Group      `json:"group"`
-	Venue            *Venue      `json:"venue" validate:"omitempty"`
+	Venue            *Venue      `json:"venue"`
 	Entries          []*User     `json:"entries"`
 	Organizer        []*User     `json:"organizer" validate:"min=1"`
-	Categories       []*Category `json:"categories"`
+	Categories       []*Category `json:"categories" validate:"omitempty"`
 }
 
 func (ae *AddEvent) ToEntity() *entity.Event {

@@ -25,6 +25,11 @@ export type FormValues = {
 
 export type AddEventFormInitValues = FormValues;
 
+/**
+ * 初期値を決定するpropsの値
+ *
+ * @param {AddEventFormInitValues} props 親componentから送られきたprops
+ */
 const mapPropsToValues = (props: AddEventFormInitValues) => ({
   title: props.title || '',
   description: props.description || '',
@@ -42,6 +47,9 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   group: props.group || null,
 });
 
+/**
+ * イベント追加時のvalidateSchema
+ */
 const validateSchema = Yup.object().shape({
   title: validates.stringLengthRange(
     'イベント名',

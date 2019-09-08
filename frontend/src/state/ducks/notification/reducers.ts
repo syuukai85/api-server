@@ -16,6 +16,12 @@ const initialState = {
   variant: infoVariant,
 };
 
+/**
+ * 通知の表示/非表示を扱うreducer
+ *
+ * @param {AppState} state state情報
+ * @param {NotificationAction} action action情報
+ */
 const notification = (state: AppState = initialState, action: NotificationAction): AppState => {
   switch (action.type) {
     case ActionTypes.SHOW_NOTIFICATION: {

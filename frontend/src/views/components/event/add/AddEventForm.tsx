@@ -25,6 +25,7 @@ interface OtherProps {
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
 const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (props: OtherProps & FormikProps<FormValues>) => {
+  // TODO: presentational にロジックがよりすぎ。containerに寄せられる？
   if (!props.isLoading) {
     if (props.isExistsError) {
       props.showNotificationError();

@@ -1,8 +1,5 @@
 package entity
 
-// SysRoleID システムでの役割
-type SysRoleID string
-
 const (
 	// SystemAdminID システム管理者
 	SystemAdminID SysRoleID = "1"
@@ -10,3 +7,6 @@ const (
 	// GeneralUserID 一般ユーザ
 	GeneralUserID = "1"
 )
+
+// SysRoleID システムでの役割
+type SysRoleID string

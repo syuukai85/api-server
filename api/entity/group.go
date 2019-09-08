@@ -1,5 +1,10 @@
 package entity
 
+const (
+	// UnknownGroup グループ未設定
+	UnknownGroup GroupID = "1"
+)
+
 // GroupID グループID
 type GroupID string
 
@@ -12,8 +17,3 @@ type Group struct {
 	ColorCode   string  `json:"colorCode"`
 	ImageURL    string  `json:"imageUrl"`
 }
-
-const (
-	// UnknownGroup グループ未設定
-	UnknownGroup GroupID = "1"
-)

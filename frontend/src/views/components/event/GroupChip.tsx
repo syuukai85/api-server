@@ -11,7 +11,7 @@ const GroupChip: React.FC<Props> = (props: Props) => {
   if (props.group === void 0) return <></>;
   return (
     <Chip
-      avatar={<Avatar src={props.group.imagePath} />}
+      avatar={<Avatar src={props.group.imageUrl} />}
       label={props.group.name}
     />
   );

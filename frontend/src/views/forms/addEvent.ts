@@ -32,7 +32,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   imageFile: props.imageFile || null,
   qrCodeFile: props.qrCodeFile || null,
   capacity: props.capacity || 0,
-  recruitStartDate: props.recruitStartDate || null,
+  recruitStartDate: props.recruitStartDate || new Date(),
   recruitEndDate: props.recruitEndDate || null,
   holdStartDate: props.holdStartDate || null,
   holdEndDate: props.holdEndDate || null,

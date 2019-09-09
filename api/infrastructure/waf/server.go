@@ -49,6 +49,12 @@ func (s *Server) setRouter() {
 		event.GET("/:eventId", s.getEventByID(eventController))
 		event.POST("", s.addEvent(eventController))
 	}
+
+	group := apiKeyAuth.Group("group")
+	{
+		groupController := controller.NewGroupController()
+		group.GET("/:groupId", s.getGroupByID(groupController))
+	}
 }
 
 // Run サーバを実行する

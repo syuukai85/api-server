@@ -15,7 +15,7 @@ type EventController struct {
 func NewEventController() *EventController {
 	return &EventController{
 		InputPort: interactor.NewEvent(
-			presenter.NewHTTPPresenter(),
+			presenter.NewEventPresenter(),
 			gateway.NewEvent(),
 		),
 	}

@@ -61,7 +61,10 @@ const validateSchema = Yup.object().shape({
   venue: validates.venue()
 });
 
+const isValidFileFormat = (format: string) => constants.validate.file.formats.includes(format);
+
 export default {
   mapPropsToValues,
-  validateSchema
+  validateSchema,
+  isValidFileFormat
 };

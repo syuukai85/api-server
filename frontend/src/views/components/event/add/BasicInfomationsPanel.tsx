@@ -13,6 +13,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import { AddEventFormProps } from './AddEventFormProps';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -26,18 +27,14 @@ const useStyles = makeStyles({
   }
 });
 
-const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
-  props: FormikProps<FormValues>
+const BasicInfomationsPanel: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
+  props: AddEventFormProps & FormikProps<FormValues>
 ) => {
   const classes = useStyles({});
   const { values, handleChange, handleBlur, setFieldValue } = props;
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
         <Typography>基本情報</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -67,13 +64,14 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
           <Grid item xs={12}>
             <Typography variant="overline">ヘッダー画像設定</Typography>
             <Box className={classes.headerImageSettingContainer}>
-              <SelectColor
-                colorCode={values.colorCode}
-                onChange={e => setFieldValue('colorCode', e.hex)}
-              />
+              <SelectColor colorCode={values.colorCode} onChange={e => setFieldValue('colorCode', e.hex)} />
               <Box className={classes.uploadFileButtonContainer}>
                 <UploadFileButton
-                  onChange={e => setFieldValue('imageFile', e.target.files[0])}
+                  onChange={(e: any) => {
+                    if (e.target.files.length <= 0) return;
+                    if (!props.isValidFileFormat(e.target.files[0].type)) return;
+                    setFieldValue('imageFile', e.target.files[0]);
+                  }}
                 />
               </Box>
             </Box>
@@ -81,10 +79,7 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
             <ErrorMessage name="imageFile" />
           </Grid>
           <Grid item xs={12}>
-            <PreviewHeaderImage
-              colorCode={values.colorCode}
-              imageFile={values.imageFile}
-            />
+            <PreviewHeaderImage colorCode={values.colorCode} imageFile={values.imageFile} />
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

@@ -12,6 +12,6 @@ export const validate = {
   },
   title: {
     minLength: 1,
-    maxLength: 1024
+    maxLength: 50
   }
 };

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Event } from 'typescript-fetch-api';
 import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
 import Button from '@material-ui/core/Button';
@@ -8,16 +7,11 @@ import BasicInfomationPanel from './BasicInfomationsPanel';
 import ThrowingMoneyPanel from './ThrowingMoneyPanel';
 import HoldAndRecruitInfomationsPanel from './HoldAndRecruitInfomationsPanel';
 import AdditionalInfomationPanel from './AdditionalInfomationPanel';
-
-interface OtherProps {
-  isLoading: boolean;
-  error: Error;
-  addEvent: (event: Event) => void;
-}
+import { AddEventFormProps } from './AddEventFormProps';
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
-const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (
-  props: OtherProps & FormikProps<FormValues>
+const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
+  props: AddEventFormProps & FormikProps<FormValues>
 ) => {
   const { handleSubmit, addEvent } = props;
   const effectFn = () => {

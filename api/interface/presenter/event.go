@@ -5,30 +5,30 @@ import (
 	"github.com/connthass/connthass/api/usecase/port/server"
 )
 
-type HTTPPresenter struct {
+type EventPresenter struct {
 	server.EventOutputPort
 }
 
-func NewHTTPPresenter() *HTTPPresenter {
-	return &HTTPPresenter{}
+func NewEventPresenter() *EventPresenter {
+	return &EventPresenter{}
 }
 
 // Output Port の実装
-func (p *HTTPPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, *entity.Error) {
+func (e *EventPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, *entity.Error) {
 	res := &server.SearchEventsResponse{
 		Events: events,
 	}
 	return res, nil
 }
 
-func (p *HTTPPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, *entity.Error) {
+func (e *EventPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, *entity.Error) {
 	res := &server.GetEventByIDResponse{
 		Event: event,
 	}
 	return res, nil
 }
 
-func (p *HTTPPresenter) AddEvent(event *entity.Event) (*server.AddEventResponse, *entity.Error) {
+func (e *EventPresenter) AddEvent(event *entity.Event) (*server.AddEventResponse, *entity.Error) {
 	res := &server.AddEventResponse{
 		Event: event,
 	}

@@ -18,21 +18,21 @@ type GetEventByID struct {
 }
 
 type AddEvent struct {
-	ColorCode        string      `json:"colorCode"`
-	Title            string      `json:"title" validate:"gte=1,lte=50"`
-	Description      string      `json:"description" validate:"max=20000,omitempty"`
-	Capacity         uint64      `json:"capacity" validate:"max=10000000,omitempty"`
-	ImageURL         string      `json:"imageUrl" validate:"uri,max=255"`
-	QRCodeURL        string      `json:"qrCodeUrl" validate:"uri,max=255"`
-	HoldStartDate    time.Time   `json:"holdStartDate" validate:"gte"`
-	HoldEndDate      time.Time   `json:"holdEndDate" validate:"gte"`
-	RecruitStartDate time.Time   `json:"recruitStartDate" validate:"gte"`
-	RecruitEndDate   time.Time   `json:"recruitEndDate" validate:"gte"`
-	Group            *Group      `json:"group"`
-	Venue            *Venue      `json:"venue"`
-	Entries          []*User     `json:"entries"`
-	Organizer        []*User     `json:"organizer" validate:"min=1"`
-	Categories       []*Category `json:"categories" validate:"omitempty"`
+	ColorCode        string     `json:"colorCode"`
+	Title            string     `json:"title" validate:"gte=1,lte=50"`
+	Description      string     `json:"description" validate:"max=20000,omitempty"`
+	Capacity         uint64     `json:"capacity" validate:"max=10000000,omitempty"`
+	ImageURL         string     `json:"imageUrl" validate:"uri,max=255"`
+	QRCodeURL        string     `json:"qrCodeUrl" validate:"uri,max=255"`
+	HoldStartDate    time.Time  `json:"holdStartDate" validate:"gte"`
+	HoldEndDate      time.Time  `json:"holdEndDate" validate:"gte"`
+	RecruitStartDate time.Time  `json:"recruitStartDate" validate:"gte"`
+	RecruitEndDate   time.Time  `json:"recruitEndDate" validate:"gte"`
+	Group            *Group     `json:"group"`
+	Venue            *Venue     `json:"venue"`
+	Entries          Users      `json:"entries"`
+	Organizers       Users      `json:"organizers" validate:"min=1"`
+	Categories       Categories `json:"categories" validate:"omitempty"`
 }
 
 func (ae *AddEvent) ToEntity() *entity.Event {
@@ -49,8 +49,8 @@ func (ae *AddEvent) ToEntity() *entity.Event {
 		RecruitEndDate:   ae.RecruitEndDate,
 		Group:            ae.Group.ToEntity(),
 		Venue:            ae.Venue.ToEntity(),
-		Entries:          usersToEntities(ae.Entries),
-		Organizer:        usersToEntities(ae.Organizer),
-		Categories:       categoriesToEntities(ae.Categories),
+		Entries:          ae.Entries.ToEntities(),
+		Organizers:       ae.Organizers.ToEntities(),
+		Categories:       ae.Categories.ToEntities(),
 	}
 }

@@ -21,6 +21,12 @@ type Event struct {
 	Group            *Group      `json:"group"`
 	Venue            *Venue      `json:"venue"`
 	Entries          []*User     `json:"entries"`
-	Organizer        []*User     `json:"organizer"`
+	Organizers       []*User     `json:"organizers"`
 	Categories       []*Category `json:"categories"`
+}
+
+// EntryEvent イベント参加ユーザ
+type EntryEvent struct {
+	Entries    []*User `json:"entries"`
+	Organizers []*User `json:"organizers"`
 }

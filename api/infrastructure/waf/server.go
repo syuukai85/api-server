@@ -46,8 +46,11 @@ func (s *Server) setRouter() {
 	event := apiKeyAuth.Group("/event")
 	{
 		eventController := controller.NewEventController()
+		entryEventController := controller.NewEntryEventController()
+
 		event.GET("/:eventId", s.getEventByID(eventController))
 		event.POST("", s.addEvent(eventController))
+		event.POST("/:eventId/entry", s.entryEvent(entryEventController))
 	}
 
 	group := apiKeyAuth.Group("group")

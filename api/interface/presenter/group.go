@@ -13,7 +13,7 @@ func NewGroupPresenter() *GroupPresenter {
 	return &GroupPresenter{}
 }
 
-func (e *GroupPresenter) GetGroupByID(group *entity.Group) (*server.GetGroupByIDResponse, *entity.Error) {
+func (g *GroupPresenter) GetGroupByID(group *entity.Group) (*server.GetGroupByIDResponse, *entity.Error) {
 	res := &server.GetGroupByIDResponse{
 		Group: group,
 	}

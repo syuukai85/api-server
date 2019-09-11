@@ -7,24 +7,24 @@ import (
 )
 
 type Group struct {
-	OutputPort      server.GroupOutputPort
-	GroupRepository repository.GroupRepository
+	OutputPort server.GroupOutputPort
+	Repository repository.GroupRepository
 }
 
 // NewGroup constractor
 func NewGroup(
 	outputPort server.GroupOutputPort,
-	groupRepository repository.GroupRepository,
+	repository repository.GroupRepository,
 ) *Group {
 	return &Group{
-		OutputPort:      outputPort,
-		GroupRepository: groupRepository,
+		OutputPort: outputPort,
+		Repository: repository,
 	}
 }
 
 // GetGroupByID イベントID検索
 func (e *Group) GetGroupByID(params *server.GetGroupByIDRequestParams) (*server.GetGroupByIDResponse, *entity.Error) {
-	res, err := e.GroupRepository.FindByID(params.GroupID)
+	res, err := e.Repository.FindByID(params.GroupID)
 	if err != nil {
 		return nil, err
 	}

@@ -14,21 +14,21 @@ func NewEventPresenter() *EventPresenter {
 }
 
 // Output Port の実装
-func (e *EventPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, *entity.Error) {
+func (ep *EventPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, *entity.Error) {
 	res := &server.SearchEventsResponse{
 		Events: events,
 	}
 	return res, nil
 }
 
-func (e *EventPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, *entity.Error) {
+func (ep *EventPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, *entity.Error) {
 	res := &server.GetEventByIDResponse{
 		Event: event,
 	}
 	return res, nil
 }
 
-func (e *EventPresenter) AddEvent(event *entity.Event) (*server.AddEventResponse, *entity.Error) {
+func (ep *EventPresenter) AddEvent(event *entity.Event) (*server.AddEventResponse, *entity.Error) {
 	res := &server.AddEventResponse{
 		Event: event,
 	}

@@ -19,6 +19,11 @@ var (
 		Code:   http.StatusUnprocessableEntity,
 		Errors: []string{"イベント追加に失敗しました"},
 	}
+
+	entryEventError = entity.Error{
+		Code:   http.StatusUnprocessableEntity,
+		Errors: []string{"イベント参加に失敗しました"},
+	}
 )
 
 func (s *Server) searchEvents(controller *controller.EventController) func(c *gin.Context) {
@@ -92,5 +97,38 @@ func (s *Server) addEvent(controller *controller.EventController) func(c *gin.Co
 			return
 		}
 		c.JSON(http.StatusOK, res.Event)
+	}
+}
+
+func (s *Server) entryEvent(controller *controller.EntryEventController) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		var req request.EntryEvent
+
+		if err := c.ShouldBindUri(&req); err != nil {
+			c.JSON(internalServerError.Code, internalServerError)
+			return
+		}
+
+		c.BindJSON(&req)
+		if err := validator.ValidateStruct(&req); err != nil {
+			log.Printf("%#v", err.Error())
+			c.JSON(entryEventError.Code, entryEventError)
+			// TODO: 必要であればエラーのあるフィールド名でメッセージを変える
+			return
+		}
+
+		res, err := controller.EntryEvent(&server.EntryEventRequestParams{
+			EventID: entity.EventID(req.EventID),
+			EntryEvent: &entity.EntryEvent{
+				Entries:    req.Entries.ToEntities(),
+				Organizers: req.Organizers.ToEntities(),
+			},
+		})
+		if err != nil {
+			log.Println(err)
+			c.JSON(err.Code, err)
+			return
+		}
+		c.JSON(http.StatusOK, res.EntryEvent)
 	}
 }

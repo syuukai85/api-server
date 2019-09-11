@@ -24,3 +24,9 @@ type Event struct {
 	Organizers       []*User     `json:"organizers"`
 	Categories       []*Category `json:"categories"`
 }
+
+// EntryEvent イベント参加ユーザ
+type EntryEvent struct {
+	Entries    []*User `json:"entries"`
+	Organizers []*User `json:"organizers"`
+}

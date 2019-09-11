@@ -17,6 +17,12 @@ type GetEventByID struct {
 	EventID string `uri:"eventId" binding:"required"`
 }
 
+type EntryEvent struct {
+	EventID    string `uri:"eventId" binding:"required"`
+	Entries    Users  `json:"entries" validate:"omitempty"`
+	Organizers Users  `json:"organizers" validate:"omitempty"`
+}
+
 type AddEvent struct {
 	ColorCode        string     `json:"colorCode"`
 	Title            string     `json:"title" validate:"gte=1,lte=50"`

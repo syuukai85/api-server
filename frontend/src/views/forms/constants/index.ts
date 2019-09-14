@@ -5,7 +5,7 @@ export const validate = {
   },
   capacity: {
     max: 1024,
-    min: 1
+    min: 0
   },
   description: {
     minLength: 1

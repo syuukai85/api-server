@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import * as constants from './constants';
+import * as messages from './messages';
 import * as validates from './validates';
 
 // react-selectで選択されたformの値を保持する型
@@ -43,20 +44,18 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
 });
 
 const validateSchema = Yup.object().shape({
-  title: validates.stringLengthRange(
-    'イベント名',
-    constants.validate.title.minLength,
-    constants.validate.title.maxLength
-  ),
+  title: validates
+    .stringLengthRange('イベント名', constants.validate.title.minLength, constants.validate.title.maxLength)
+    .required(messages.validate.required('イベント名')),
   description: validates.stringMinLength('説明', constants.validate.description.minLength),
   colorCode: validates.colorCode('ヘッダー画像のカラー設定'),
   imageFile: validates.file('ヘッダー画像'),
   qrCodeFile: validates.file('投げ銭QRコード画像'),
-  capacity: validates.numberRange('募集人数', constants.validate.capacity.min, constants.validate.capacity.max),
+  capacity: validates.numberMin('募集人数', constants.validate.capacity.min),
   recruitStartDate: validates.startDate('募集開始日時'),
   recruitEndDate: validates.endDate('募集終了日時', 'recruitStartDate'),
-  holdStartDate: validates.startDate('開催開始日時'),
-  holdEndDate: validates.endDate('開催終了日時', 'holdStartDate'),
+  holdStartDate: validates.startDate('開催開始日時').required(messages.validate.required('開催開始日時')),
+  holdEndDate: validates.endDate('開催終了日時', 'holdStartDate').required(messages.validate.required('開催終了日時')),
   organizers: validates.organizers(),
   venue: validates.venue()
 });

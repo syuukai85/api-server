@@ -5,18 +5,15 @@ import * as Yup from 'yup';
 export * from './addEvent';
 
 /**
- * 数字の範囲のバリデーションスキーマ
+ * 数字の最小値のバリデーションスキーマ
  *
  * @param {string} prefix メッセージのプレフィックス
  * @param {number} min 最小値
- * @param {number} max 最大値
  */
-export const numberRange = (prefix: string, min: number, max: number) =>
+export const numberMin = (prefix: string, min: number) =>
   Yup.number()
     .typeError(messages.validate.number(prefix))
-    .required(messages.validate.required(prefix))
-    .min(min, messages.validate.minNumber(min))
-    .max(max, messages.validate.maxNumber(max));
+    .min(min, messages.validate.minNumber(min));
 
 /**
  * 開始時間のバリデーションスキーマ
@@ -30,8 +27,7 @@ export const startDate = (prefix: string) =>
   Yup.date()
     .nullable()
     .typeError(messages.validate.date(prefix))
-    .min(new Date(), messages.validate.overStartDate(prefix))
-    .required(messages.validate.required(prefix));
+    .min(new Date(), messages.validate.overStartDate(prefix));
 
 /**
  * 終了時間のバリデーションスキーマ
@@ -46,8 +42,7 @@ export const endDate = (prefix: string, startDateRef: string) =>
   Yup.date()
     .nullable()
     .typeError(messages.validate.date(prefix))
-    .min(Yup.ref(startDateRef), messages.validate.overStartDate(prefix))
-    .required(messages.validate.required(prefix));
+    .min(Yup.ref(startDateRef), messages.validate.overStartDate(prefix));
 
 /**
  * 文字列の範囲のバリデーションスキーマ
@@ -58,7 +53,6 @@ export const endDate = (prefix: string, startDateRef: string) =>
  */
 export const stringLengthRange = (prefix: string, min: number, max: number) => {
   return Yup.string()
-    .required(messages.validate.required(prefix))
     .typeError(messages.validate.string(prefix))
     .min(min, messages.validate.minString(min))
     .max(max, messages.validate.maxString(max));
@@ -73,7 +67,6 @@ export const stringLengthRange = (prefix: string, min: number, max: number) => {
 export const stringMinLength = (prefix: string, min: number) =>
   Yup.string()
     .typeError(messages.validate.string(prefix))
-    .required(messages.validate.required(prefix))
     .min(min, messages.validate.minString(min));
 
 /**
@@ -85,22 +78,21 @@ export const stringMinLength = (prefix: string, min: number) =>
  */
 export const file = (prefix: string) =>
   Yup.mixed()
-    .required(messages.validate.required(prefix))
-    .test(
-      'fileSize',
-      messages.validate.fileSizeLarge(constants.validate.file.size),
-      value => value && value.size <= constants.validate.file.size
-    )
+    .nullable()
+    .test('fileSize', messages.validate.fileSizeLarge(constants.validate.file.size), value => {
+      if (value === null) return true;
+      return value && value.size <= constants.validate.file.size;
+    })
     .test(
       'fileFormat',
       messages.validate.unsupportedFormat(constants.validate.file.formats.map(format => format.replace('image/', ''))),
-      value => value && constants.validate.file.formats.includes(value.type)
+      value => {
+        if (value === null) return true;
+        return value && constants.validate.file.formats.includes(value.type);
+      }
     );
 
 /**
  * カラーコードのバリデーションスキーマ
  */
-export const colorCode = (prefix: string) =>
-  Yup.string()
-    .typeError(messages.validate.string(prefix))
-    .required(messages.validate.required(prefix));
+export const colorCode = (prefix: string) => Yup.string().typeError(messages.validate.string(prefix));

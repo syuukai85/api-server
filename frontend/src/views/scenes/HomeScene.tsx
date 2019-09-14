@@ -6,6 +6,9 @@ import RecentlyAddedEventListContainer from '../containers/event/RecentlyAddedEv
 import RecentlyFinishedEventListContainer from '../containers/event/RecentlyFinishedEventListContainer';
 import RecentlyAddedGroupListContainer from '../containers/group/RecentlyAddedGroupListContainer';
 import BottomAppBar from '../components/appBar/BottomAppBar';
+import EventIcon from '@material-ui/icons/Event';
+
+const menus = [{ icon: <EventIcon />, text: 'イベント作成', link: '/event/add' }];
 
 /**
  * Home画面
@@ -16,22 +19,16 @@ const HomeScene: React.FC = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
-            <RecentlyAddedEventListContainer
-              title="新着イベント"
-              type="basic"
-            />
+            <RecentlyAddedEventListContainer title="新着イベント" type="basic" />
             <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
             <RecentlyAddedGroupListContainer title="新着グループ" />
-            <RecentlyFinishedEventListContainer
-              title="お布施"
-              type="enrollment"
-            />
+            <RecentlyFinishedEventListContainer title="お布施" type="enrollment" />
           </Grid>
         </Grid>
       </Container>
-      <BottomAppBar />
+      <BottomAppBar menus={menus} />
     </>
   );
 };

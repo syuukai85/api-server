@@ -8,18 +8,20 @@ import ThrowingMoneyPanel from './ThrowingMoneyPanel';
 import HoldAndRecruitInfomationsPanel from './HoldAndRecruitInfomationsPanel';
 import AdditionalInfomationPanel from './AdditionalInfomationPanel';
 import { AddEventFormProps } from './AddEventFormProps';
+import { Prompt } from 'react-router';
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
 const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
   props: AddEventFormProps & FormikProps<FormValues>
 ) => {
-  const { handleSubmit, addEvent } = props;
+  const { handleSubmit, addEvent, dirty } = props;
   const effectFn = () => {
     addEvent({ title: 'sample' });
   };
   useEffect(effectFn, []);
   return (
     <form onSubmit={handleSubmit}>
+      <Prompt when={dirty} message="未保存の変更があります。終了してもよろしいですか？" />
       <BasicInfomationPanel {...props} />
       <ThrowingMoneyPanel {...props} />
       <HoldAndRecruitInfomationsPanel {...props} />

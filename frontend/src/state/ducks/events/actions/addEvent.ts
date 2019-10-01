@@ -5,14 +5,14 @@ const addEvent = (event: Event) => {
   return {
     type: ActionTypes.REQUEST_EVENT,
     isLoading: true,
-    event,
+    event
   };
 };
 
 const addSuccessEvent = () => {
   return {
     type: ActionTypes.SUCCESS_EVENT,
-    isLoading: false,
+    isLoading: false
   };
 };
 
@@ -20,7 +20,7 @@ const addErrorEvent = (error: Error) => {
   return {
     type: ActionTypes.ERROR_EVENT,
     isLoading: false,
-    error,
+    error
   };
 };
 
@@ -31,5 +31,5 @@ export type AddEventAction = ReturnType<typeof addEvent> &
 export default {
   addEvent,
   addSuccessEvent,
-  addErrorEvent,
+  addErrorEvent
 };

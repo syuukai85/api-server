@@ -19,19 +19,25 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   headerImageSettingContainer: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   uploadFileButtonContainer: {
-    marginLeft: '10px',
-  },
+    marginLeft: '10px'
+  }
 });
 
-const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
+const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (
+  props: FormikProps<FormValues>
+) => {
   const classes = useStyles({});
   const { values, handleChange, handleBlur, setFieldValue } = props;
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
         <Typography>基本情報</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -61,16 +67,24 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikP
           <Grid item xs={12}>
             <Typography variant="overline">ヘッダー画像設定</Typography>
             <Box className={classes.headerImageSettingContainer}>
-              <SelectColor colorCode={values.colorCode} onChange={e => setFieldValue('colorCode', e.hex)} />
+              <SelectColor
+                colorCode={values.colorCode}
+                onChange={e => setFieldValue('colorCode', e.hex)}
+              />
               <Box className={classes.uploadFileButtonContainer}>
-                <UploadFileButton onChange={e => setFieldValue('imageFile', e.target.files[0])} />
+                <UploadFileButton
+                  onChange={e => setFieldValue('imageFile', e.target.files[0])}
+                />
               </Box>
             </Box>
             <ErrorMessage name="colorCode" />
             <ErrorMessage name="imageFile" />
           </Grid>
           <Grid item xs={12}>
-            <PreviewHeaderImage colorCode={values.colorCode} imageFile={values.imageFile} />
+            <PreviewHeaderImage
+              colorCode={values.colorCode}
+              imageFile={values.imageFile}
+            />
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

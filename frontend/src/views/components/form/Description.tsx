@@ -16,7 +16,7 @@ const converter = new Showdown.Converter({
   tables: true,
   simplifiedAutoLink: true,
   strikethrough: true,
-  tasklists: true,
+  tasklists: true
 });
 
 const Description: React.FC<Props> = (props: Props) => {
@@ -30,7 +30,9 @@ const Description: React.FC<Props> = (props: Props) => {
         setSelectedTab(tab);
       }}
       textAreaProps={{ name: props.name, onBlur: props.onBlur }}
-      generateMarkdownPreview={markdown => Promise.resolve(converter.makeHtml(markdown))}
+      generateMarkdownPreview={markdown =>
+        Promise.resolve(converter.makeHtml(markdown))
+      }
     />
   );
 };

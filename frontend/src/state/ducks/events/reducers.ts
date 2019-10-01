@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
 import { Event } from 'typescript-fetch-api';
-import { SearchEventAction, AddEventAction, RecentlyAddedEventAction, RecentlyFinishedEventAction } from './actions';
+import {
+  SearchEventAction,
+  AddEventAction,
+  RecentlyAddedEventAction,
+  RecentlyFinishedEventAction
+} from './actions';
 import { ActionTypes } from './types';
 
 interface EventState {
@@ -23,19 +28,19 @@ const event = (
   switch (action.type) {
     case ActionTypes.REQUEST_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading,
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.SUCCESS_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        event: action.event,
+        event: action.event
       });
     }
     case ActionTypes.ERROR_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error,
+        error: action.error
       });
     }
     default: {
@@ -65,18 +70,18 @@ const addEvent = (
     case ActionTypes.REQUEST_EVENT: {
       return Object.assign({}, state, {
         event: action.event,
-        isLoading: action.isLoading,
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.SUCCESS_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading,
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.ERROR_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error,
+        error: action.error
       });
     }
     default: {
@@ -105,19 +110,19 @@ const recentlyAddedEvent = (
   switch (action.type) {
     case ActionTypes.REQUEST_NEWLY_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading,
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.SUCCESS_NEWLY_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        events: action.events,
+        events: action.events
       });
     }
     case ActionTypes.ERROR_NEWLY_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error,
+        error: action.error
       });
     }
     default: {
@@ -146,19 +151,19 @@ const recentlyFinishedEvent = (
   switch (action.type) {
     case ActionTypes.REQUEST_FINISHED_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading,
+        isLoading: action.isLoading
       });
     }
     case ActionTypes.SUCCESS_FINISHED_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        events: action.events,
+        events: action.events
       });
     }
     case ActionTypes.ERROR_FINISHED_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
-        error: action.error,
+        error: action.error
       });
     }
     default: {
@@ -171,6 +176,6 @@ const eventsReducer = combineReducers({
   event,
   addEvent,
   recentlyAddedEvent,
-  recentlyFinishedEvent,
+  recentlyFinishedEvent
 });
 export default eventsReducer;

@@ -16,7 +16,9 @@ interface OtherProps {
 }
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
-const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (props: OtherProps & FormikProps<FormValues>) => {
+const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (
+  props: OtherProps & FormikProps<FormValues>
+) => {
   const { handleSubmit, addEvent } = props;
   const effectFn = () => {
     addEvent({ title: 'sample' });

@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  listLink: { textDecoration: 'none', color: '#212121' },
+  listLink: { textDecoration: 'none', color: '#212121' }
 });
 
 interface Props {
@@ -21,7 +21,13 @@ const AppBarMenu: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   const { open, anchorEl, handleClose } = props;
   return (
-    <Menu id="simple-menu" keepMounted anchorEl={anchorEl} open={open} onClose={handleClose}>
+    <Menu
+      id="simple-menu"
+      keepMounted
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+    >
       <Link to="/event/add" className={classes.listLink}>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>

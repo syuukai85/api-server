@@ -16,12 +16,18 @@ const HomeScene: React.FC = () => {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
-            <RecentlyAddedEventListContainer title="新着イベント" type="basic" />
+            <RecentlyAddedEventListContainer
+              title="新着イベント"
+              type="basic"
+            />
             <WelcomeBoard />
           </Grid>
           <Grid item xs={12} sm={4}>
             <RecentlyAddedGroupListContainer title="新着グループ" />
-            <RecentlyFinishedEventListContainer title="お布施" type="enrollment" />
+            <RecentlyFinishedEventListContainer
+              title="お布施"
+              type="enrollment"
+            />
           </Grid>
         </Grid>
       </Container>

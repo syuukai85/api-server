@@ -17,17 +17,27 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 const organizers = [
   { value: 1, label: 'organizer1' },
   { value: 2, label: 'organizer2' },
-  { value: 3, label: 'organizer3' },
+  { value: 3, label: 'organizer3' }
 ];
 
 // 開催場所を一括で取得する処理はまた別pullreqで対応予定
-const venues = [{ value: 1, label: 'venue1' }, { value: 2, label: 'venue2' }, { value: 3, label: 'venue3' }];
+const venues = [
+  { value: 1, label: 'venue1' },
+  { value: 2, label: 'venue2' },
+  { value: 3, label: 'venue3' }
+];
 
-const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
+const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
+  props: FormikProps<FormValues>
+) => {
   const { values, handleChange, handleBlur } = props;
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+      <ExpansionPanelSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
         <Typography>開催・募集情報</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -83,7 +93,12 @@ const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (props
           </Grid>
           <Grid item xs={12}>
             <Typography variant="overline">開催場所</Typography>
-            <Select closeMenuOnSelect={false} value={values.venue} onChange={handleChange('venue')} options={venues} />
+            <Select
+              closeMenuOnSelect={false}
+              value={values.venue}
+              onChange={handleChange('venue')}
+              options={venues}
+            />
             <ErrorMessage name="venue" />
           </Grid>
         </Grid>

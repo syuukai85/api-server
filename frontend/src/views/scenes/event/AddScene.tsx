@@ -1,6 +1,8 @@
 import React from 'react';
 import AddEventContainer from '../../containers/event/AddEventContainer';
 import Container from '@material-ui/core/Container';
+import BottomAppBar from '../../components/appBar/BottomAppBar';
+import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -10,12 +12,17 @@ const useStyles = makeStyles({
   }
 });
 
+const menus = [{ icon: <HomeIcon />, text: 'ホームへ戻る', link: '/' }];
+
 const AddEventScene: React.FC = () => {
   const classes = useStyles({});
   return (
-    <Container className={classes.container}>
-      <AddEventContainer />
-    </Container>
+    <>
+      <Container className={classes.container}>
+        <AddEventContainer />
+      </Container>
+      <BottomAppBar menus={menus} />
+    </>
   );
 };
 

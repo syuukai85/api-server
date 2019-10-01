@@ -5,13 +5,13 @@ export const validate = {
   },
   capacity: {
     max: 1024,
-    min: 1
+    min: 0
   },
   description: {
     minLength: 1
   },
   title: {
     minLength: 1,
-    maxLength: 1024
+    maxLength: 50
   }
 };

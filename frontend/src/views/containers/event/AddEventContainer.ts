@@ -2,11 +2,7 @@ import { connect } from 'react-redux';
 import { Event } from 'typescript-fetch-api';
 import AddEventForm from '../../components/event/add/AddEventForm';
 import oparations from '../../../state/ducks/events/operations';
-import {
-  default as addEventForm,
-  AddEventFormInitValues,
-  FormValues
-} from '../../forms/addEvent';
+import { default as addEventForm, AddEventFormInitValues, FormValues } from '../../forms/addEvent';
 import Redux from 'redux';
 import { withFormik } from 'formik';
 
@@ -28,7 +24,8 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
   return {
-    addEvent: (event: Event) => oparations.addEvent(dispatch, event)
+    addEvent: (event: Event) => oparations.addEvent(dispatch, event),
+    isValidFileFormat: addEventForm.isValidFileFormat
   };
 };
 

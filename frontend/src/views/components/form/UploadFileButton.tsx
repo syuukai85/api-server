@@ -17,12 +17,7 @@ const UploadFileButton: React.FC<Props> = (props: Props) => {
   return (
     <Button variant="contained" component="label">
       UPLOAD FILE
-      <input
-        id="selected-image"
-        type="file"
-        onChange={props.onChange}
-        className={classes.hide}
-      />
+      <input id="selected-image" type="file" onChange={props.onChange} className={classes.hide} accept="image/*" />
     </Button>
   );
 };

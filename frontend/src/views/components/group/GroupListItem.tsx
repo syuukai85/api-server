@@ -38,7 +38,7 @@ const GroupListItem: React.FC<Props> = (props: Props) => {
     <Link to={`/groups/${props.group.id}`} className={classes.listLink}>
       <ListItem className={classes.listItem} alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar src={props.group.imagePath} />
+          <Avatar src={props.group.imageUrl} />
         </ListItemAvatar>
         <ListItemText
           primary={props.group.name}

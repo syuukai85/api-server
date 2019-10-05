@@ -41,7 +41,7 @@ const GroupDetail: React.FC<Props> = (props: Props) => {
       <DetailHeader
         title={props.group.name === void 0 ? '' : props.group.name}
         colorCode={props.group.colorCode}
-        imageUrl={props.group.imagePath}
+        imageUrl={props.group.imageUrl}
       />
       <Container>
         <Grid item xs={12}>

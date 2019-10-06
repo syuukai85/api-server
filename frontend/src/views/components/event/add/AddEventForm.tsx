@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { AddEventFormProps } from './AddEventFormProps';
+import React from 'react';
+import { AddEventFormProps } from '../../../forms/types/AddEventFormProps';
 import { Prompt } from 'react-router';
-import { Event } from 'typescript-fetch-api';
 import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
 import Button from '@material-ui/core/Button';

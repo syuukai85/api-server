@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, ReactComponentElement } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,17 +10,27 @@ import AppBarMenu from './AppBarMenu';
 const useStyles = makeStyles({
   appBar: {
     top: 'auto',
-    bottom: 0,
+    bottom: 0
   },
   grow: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 });
+
+type Menu = {
+  icon: JSX.Element;
+  text: string;
+  link: string;
+};
+
+interface Props {
+  menus: Menu[];
+}
 
 /**
  * 画面下のApp Bar
  */
-const BottomAppBar: React.FC = () => {
+const BottomAppBar: React.FC<Props> = (props: Props) => {
   const classes = useStyles({});
   const [openMenu, setOpenMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState();
@@ -38,7 +48,7 @@ const BottomAppBar: React.FC = () => {
         <IconButton onClick={handleClick} edge="start" color="inherit" aria-label="Open drawer">
           <MenuIcon />
         </IconButton>
-        <AppBarMenu open={openMenu} anchorEl={anchorEl} handleClose={handleClose} />
+        <AppBarMenu open={openMenu} anchorEl={anchorEl} handleClose={handleClose} menus={props.menus} />
         <div className={classes.grow} />
         <IconButton color="inherit">
           <SearchIcon />

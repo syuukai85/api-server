@@ -13,20 +13,23 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import { AddEventFormProps } from './AddEventFormProps';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   headerImageSettingContainer: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   uploadFileButtonContainer: {
-    marginLeft: '10px',
-  },
+    marginLeft: '10px'
+  }
 });
 
-const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
+const BasicInfomationsPanel: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
+  props: AddEventFormProps & FormikProps<FormValues>
+) => {
   const classes = useStyles({});
   const { values, handleChange, handleBlur, setFieldValue } = props;
   return (
@@ -63,7 +66,13 @@ const BasicInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikP
             <Box className={classes.headerImageSettingContainer}>
               <SelectColor colorCode={values.colorCode} onChange={e => setFieldValue('colorCode', e.hex)} />
               <Box className={classes.uploadFileButtonContainer}>
-                <UploadFileButton onChange={e => setFieldValue('imageFile', e.target.files[0])} />
+                <UploadFileButton
+                  onChange={(e: any) => {
+                    if (e.target.files.length <= 0) return;
+                    if (!props.isValidFileFormat(e.target.files[0].type)) return;
+                    setFieldValue('imageFile', e.target.files[0]);
+                  }}
+                />
               </Box>
             </Box>
             <ErrorMessage name="colorCode" />

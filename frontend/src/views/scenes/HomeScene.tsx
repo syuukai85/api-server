@@ -6,6 +6,9 @@ import RecentlyAddedEventListContainer from '../containers/event/RecentlyAddedEv
 import RecentlyFinishedEventListContainer from '../containers/event/RecentlyFinishedEventListContainer';
 import RecentlyAddedGroupListContainer from '../containers/group/RecentlyAddedGroupListContainer';
 import BottomAppBar from '../components/appBar/BottomAppBar';
+import EventIcon from '@material-ui/icons/Event';
+
+const menus = [{ icon: <EventIcon />, text: 'イベント作成', link: '/event/add' }];
 
 /**
  * Home画面
@@ -25,7 +28,7 @@ const HomeScene: React.FC = () => {
           </Grid>
         </Grid>
       </Container>
-      <BottomAppBar />
+      <BottomAppBar menus={menus} />
     </>
   );
 };

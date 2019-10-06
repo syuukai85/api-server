@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { AddEventFormProps } from './AddEventFormProps';
+import { Prompt } from 'react-router';
 import { Event } from 'typescript-fetch-api';
 import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
@@ -8,23 +10,9 @@ import BasicInfomationPanel from './BasicInfomationsPanel';
 import ThrowingMoneyPanel from './ThrowingMoneyPanel';
 import HoldAndRecruitInfomationsPanel from './HoldAndRecruitInfomationsPanel';
 import AdditionalInfomationPanel from './AdditionalInfomationPanel';
-import * as H from 'history';
-
-interface OtherProps {
-  isLoading: boolean;
-  error: Error;
-  addedEventId?: number;
-  isExistsError: boolean;
-  history: H.History;
-  addEvent: (event: Event) => void;
-  showErrorMessage: (message: string) => void;
-  showNotificationSuccess: () => void;
-  showNotificationError: () => void;
-  moveEventDetail: (addedEventId: number, history: H.History) => void;
-}
 
 // form全ての要素を平置きしてるけどblock単位に分けた方が見やすい？
-const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (props: OtherProps & FormikProps<FormValues>) => {
+const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (props: AddEventFormProps & FormikProps<FormValues>) => {
   // TODO: presentational にロジックがよりすぎ。containerに寄せられる？
   if (!props.isLoading) {
     if (props.isExistsError) {
@@ -37,6 +25,7 @@ const AddEventForm: React.FC<OtherProps & FormikProps<FormValues>> = (props: Oth
   }
   return (
     <form onSubmit={props.handleSubmit}>
+      <Prompt when={props.dirty} message="未保存の変更があります。終了してもよろしいですか？" />
       <BasicInfomationPanel {...props} />
       <ThrowingMoneyPanel {...props} />
       <HoldAndRecruitInfomationsPanel {...props} />

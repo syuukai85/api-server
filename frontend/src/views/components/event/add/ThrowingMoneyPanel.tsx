@@ -10,21 +10,24 @@ import ErrorMessage from '../../form/ErrorMessage';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { AddEventFormProps } from './AddEventFormProps';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   container: {
     marginTop: '20px',
-    marginBottom: '20px',
+    marginBottom: '20px'
   },
   image: {
     width: '100%',
     height: '300px',
-    objectFit: 'contain',
-  },
+    objectFit: 'contain'
+  }
 });
 
-const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
+const ThrowingMoneyPanel: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
+  props: AddEventFormProps & FormikProps<FormValues>
+) => {
   const { setFieldValue } = props;
   const classes = useStyles({});
   return (
@@ -37,6 +40,8 @@ const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (props: FormikProp
           <Grid item xs={12}>
             <UploadFileButton
               onChange={(e: any) => {
+                if (e.target.files.length <= 0) return;
+                if (!props.isValidFileFormat(e.target.files[0].type)) return;
                 setFieldValue('qrCodeFile', e.target.files[0]);
               }}
             />

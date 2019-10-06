@@ -1,6 +1,7 @@
 import { Event } from 'typescript-fetch-api';
+import * as H from 'history';
 
-export type AddEventFormProps = {
+export interface AddEventFormProps {
   isLoading: boolean;
   error: Error;
   addedEventId?: number;

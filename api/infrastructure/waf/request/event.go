@@ -18,19 +18,19 @@ type GetEventByID struct {
 }
 
 type AddEvent struct {
-	ColorCode        string      `json:"colorCode"`
+	ColorCode        string      `json:"colorCode" validate:"omitempty"`
 	Title            string      `json:"title" validate:"gte=1,lte=50"`
-	Description      string      `json:"description" validate:"max=20000,omitempty"`
-	Capacity         uint64      `json:"capacity" validate:"max=10000000,omitempty"`
-	ImageURL         string      `json:"imageUrl" validate:"uri,max=255"`
-	QRCodeURL        string      `json:"qrCodeUrl" validate:"uri,max=255"`
+	Description      string      `json:"description" validate:"omitempty,max=20000"`
+	Capacity         *uint64     `json:"capacity" validate:"min=1,max=10000000"`
+	ImageURL         string      `json:"imageUrl" validate:"omitempty,uri,max=255"`
+	QRCodeURL        string      `json:"qrCodeUrl" validate:"omitempty,uri,max=255"`
 	HoldStartDate    time.Time   `json:"holdStartDate" validate:"gte"`
 	HoldEndDate      time.Time   `json:"holdEndDate" validate:"gte"`
-	RecruitStartDate time.Time   `json:"recruitStartDate" validate:"gte"`
-	RecruitEndDate   time.Time   `json:"recruitEndDate" validate:"gte"`
-	Group            *Group      `json:"group"`
-	Venue            *Venue      `json:"venue"`
-	Entries          []*User     `json:"entries"`
+	RecruitStartDate time.Time   `json:"recruitStartDate" validate:"omitempty,gte"`
+	RecruitEndDate   time.Time   `json:"recruitEndDate" validate:"omitempty,gte"`
+	Group            *Group      `json:"group" validate:"omitempty"`
+	Venue            *Venue      `json:"venue" validate:"omitempty"`
+	Entries          []*User     `json:"entries" validate:"omitempty"`
 	Organizer        []*User     `json:"organizer" validate:"min=1"`
 	Categories       []*Category `json:"categories" validate:"omitempty"`
 }

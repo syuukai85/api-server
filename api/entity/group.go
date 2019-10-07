@@ -1,10 +1,5 @@
 package entity
 
-const (
-	// UnknownGroup グループ未設定
-	UnknownGroup GroupID = "1"
-)
-
 // GroupID グループID
 type GroupID string
 

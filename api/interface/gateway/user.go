@@ -26,9 +26,9 @@ func NewUser(tx *gorm.DB) *User {
 	return user
 }
 
-func entityUserIDToUint(entityUserID entity.UserID) uint64 {
+func entityUserIDToUint(entityUserID entity.UserID) *uint64 {
 	userID, _ := strconv.ParseUint(fmt.Sprint(entityUserID), 10, 64)
-	return userID
+	return &userID
 }
 
 func userToEntity(user model.User) *entity.User {

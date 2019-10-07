@@ -26,9 +26,9 @@ func NewVenue(tx *gorm.DB) *Venue {
 	return venue
 }
 
-func EntityVenueIDToUint(entityVenueID entity.VenueID) uint64 {
+func EntityVenueIDToUint(entityVenueID entity.VenueID) *uint64 {
 	venueID, _ := strconv.ParseUint(fmt.Sprint(entityVenueID), 10, 64)
-	return venueID
+	return &venueID
 }
 
 func venueToModel(venue *entity.Venue) model.Venue {
@@ -41,7 +41,7 @@ func venueToModel(venue *entity.Venue) model.Venue {
 }
 
 func venueToEntity(venue model.Venue) *entity.Venue {
-	if venue.ID == 0 {
+	if venue.ID == nil {
 		return nil
 	}
 	entityVenue := &entity.Venue{

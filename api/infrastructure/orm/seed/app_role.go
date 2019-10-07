@@ -2,8 +2,8 @@ package seed
 
 import (
 	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
+	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/jinzhu/gorm"
 )
 
@@ -34,7 +34,7 @@ func NewAppRole() AppRoles {
 
 func (ar AppRoles) seed(db *gorm.DB) {
 	for _, appRole := range ar {
-		if !db.First(&model.AppRole{}, appRole.ID).RecordNotFound() {
+		if !db.First(&model.AppRole{}, *appRole.ID).RecordNotFound() {
 			continue
 		}
 		db.Create(&appRole)

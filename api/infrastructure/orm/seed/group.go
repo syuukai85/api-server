@@ -1,9 +1,7 @@
 package seed
 
 import (
-	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
-	"github.com/connthass/connthass/api/interface/gateway"
 	"github.com/jinzhu/gorm"
 )
 
@@ -12,14 +10,8 @@ type Group []model.Group
 
 // NewGroup コンストラクタ
 func NewGroup() Group {
-	return Group{
-		{
-			Base: model.Base{
-				ID: gateway.EntityGroupIDToUint(entity.UnknownGroup),
-			},
-			Name: "unknown",
-		},
-	}
+	// TODO: シードデータを用意
+	return Group{}
 }
 
 func (g Group) seed(db *gorm.DB) {

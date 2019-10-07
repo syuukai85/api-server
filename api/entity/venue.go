@@ -1,10 +1,5 @@
 package entity
 
-const (
-	// UnknownVenue 開催場所未設定
-	UnknownVenue VenueID = "1"
-)
-
 // VenueID 会場ID
 type VenueID string
 

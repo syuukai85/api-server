@@ -29,13 +29,13 @@ func NewEvent() *Event {
 	}
 }
 
-func entityEventIDToUint(entityEventID entity.EventID) uint64 {
+func entityEventIDToUint(entityEventID entity.EventID) *uint64 {
 	envetID, _ := strconv.ParseUint(fmt.Sprint(entityEventID), 10, 64)
-	return envetID
+	return &envetID
 }
 
-func eventIDToEntityEventID(eventID uint64) entity.EventID {
-	return entity.EventID(strconv.FormatUint(eventID, 10))
+func eventIDToEntityEventID(eventID *uint64) entity.EventID {
+	return entity.EventID(strconv.FormatUint(*eventID, 10))
 }
 
 // SearchEvents 検索条件からイベントを検索する
@@ -109,7 +109,7 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 
 	data, err := orm.TransactAndReturnData(e.db, func(tx *gorm.DB) (interface{}, error) {
 		var err error
-		var modelID uint64
+		var modelID *uint64
 
 		if modelID, err = getGroupIDFromEntityEvent(tx, entityEvent); err == nil {
 			event.GroupID = modelID
@@ -147,30 +147,30 @@ func (e *Event) AddEvent(entityEvent *entity.Event) (*entity.Event, *entity.Erro
 	return data.(*entity.Event), nil
 }
 
-func getGroupIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (uint64, error) {
+func getGroupIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (*uint64, error) {
 	if entityEvent.Group != nil {
 		group := groupToModel(entityEvent.Group)
 
 		if db.First(&group).RecordNotFound() {
-			return 0, errors.New(addEventFailure)
+			return nil, errors.New(addEventFailure)
 		}
 
 		return group.ID, nil
 	}
 
-	return EntityGroupIDToUint(entity.UnknownGroup), nil
+	return nil, nil
 }
 
-func getVenueIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (uint64, error) {
+func getVenueIDFromEntityEvent(db *gorm.DB, entityEvent *entity.Event) (*uint64, error) {
 	if entityEvent.Venue != nil {
 		venue := venueToModel(entityEvent.Venue)
 
 		if db.First(&venue).RecordNotFound() {
-			return 0, errors.New(addEventFailure)
+			return nil, errors.New(addEventFailure)
 		}
 
 		return venue.ID, nil
 	}
 
-	return EntityVenueIDToUint(entity.UnknownVenue), nil
+	return nil, nil
 }

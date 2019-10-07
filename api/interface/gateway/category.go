@@ -8,9 +8,9 @@ import (
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
 
-func entityCategoryIDToUint(entityCategoryID entity.CategoryID) uint64 {
+func entityCategoryIDToUint(entityCategoryID entity.CategoryID) *uint64 {
 	categoryID, _ := strconv.ParseUint(fmt.Sprint(entityCategoryID), 10, 64)
-	return categoryID
+	return &categoryID
 }
 
 func categoriesToEntities(categories []model.Category) []*entity.Category {

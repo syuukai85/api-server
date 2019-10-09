@@ -9,7 +9,7 @@ import (
 // User ユーザ
 type User struct {
 	ID   string `json:"id" validate:"required"`
-	Name string `json:"name" validate:"gte=1,lte=50"`
+	Name string `json:"name" validate:"omitempty,gte=1,lte=50"`
 }
 
 func (u *User) ToEntity() *entity.User {

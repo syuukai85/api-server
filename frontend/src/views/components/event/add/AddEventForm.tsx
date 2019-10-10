@@ -1,6 +1,5 @@
 import React from 'react';
 import { AddEventFormProps } from '../../../forms/types/AddEventFormProps';
-import { Prompt } from 'react-router';
 import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
 import Button from '@material-ui/core/Button';
@@ -24,7 +23,6 @@ const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (pro
   }
   return (
     <form onSubmit={props.handleSubmit}>
-      <Prompt when={props.dirty} message="未保存の変更があります。終了してもよろしいですか？" />
       <BasicInfomationPanel {...props} />
       <ThrowingMoneyPanel {...props} />
       <HoldAndRecruitInfomationsPanel {...props} />

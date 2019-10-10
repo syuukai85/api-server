@@ -13033,7 +13033,7 @@ typescript-compare@^0.0.2:
     typescript-logic "^0.0.0"
 
 "typescript-fetch-api@file:gen/api":
-  version "0.0.0"
+  version "1.0.0"
 
 typescript-logic@^0.0.0:
   version "0.0.0"

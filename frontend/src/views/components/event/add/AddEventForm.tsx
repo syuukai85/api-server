@@ -16,7 +16,6 @@ const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
 ) => {
   const { handleSubmit, addEvent, dirty } = props;
   const effectFn = () => {
-    addEvent({ title: 'sample' });
   };
   useEffect(effectFn, []);
   return (

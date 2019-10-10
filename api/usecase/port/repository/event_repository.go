@@ -8,4 +8,5 @@ import (
 type EventRepository interface {
 	SearchEvents(entity.Fields, entity.Query, entity.Page, entity.PerPage) ([]entity.Event, *entity.Error)
 	FindByID(entity.EventID) (*entity.Event, *entity.Error)
+	AddEvent(*entity.Event) (*entity.Event, *entity.Error)
 }

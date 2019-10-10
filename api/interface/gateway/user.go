@@ -2,6 +2,7 @@ package gateway
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
@@ -15,10 +16,19 @@ type User struct {
 }
 
 // NewUser コンストラクタ
-func NewUser() *User {
-	return &User{
+func NewUser(tx *gorm.DB) *User {
+	user := &User{
 		db: orm.GetDB(),
 	}
+	if tx != nil {
+		user.db = tx
+	}
+	return user
+}
+
+func entityUserIDToUint(entityUserID entity.UserID) *uint64 {
+	userID, _ := strconv.ParseUint(fmt.Sprint(entityUserID), 10, 64)
+	return &userID
 }
 
 func userToEntity(user model.User) *entity.User {

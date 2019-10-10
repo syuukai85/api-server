@@ -7,6 +7,11 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	gormbulk "github.com/t-tiger/gorm-bulk-insert"
+)
+
+const (
+	defaultChunkSize = 3000
 )
 
 var (
@@ -22,7 +27,6 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
-	autoMigrate(db)
 }
 
 func getConnectionString() string {
@@ -46,4 +50,31 @@ func getConnectionString() string {
 // GetDB is called in models
 func GetDB() *gorm.DB {
 	return db
+}
+
+// TransactAndReturnData トランザクション実行し情報を受取る
+func TransactAndReturnData(db *gorm.DB, txFunc func(*gorm.DB) (interface{}, error)) (data interface{}, err error) {
+	tx := db.Begin()
+
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		} else if err != nil {
+			tx.Rollback()
+		} else {
+			err = tx.Commit().Error
+		}
+	}()
+
+	data, err = txFunc(tx)
+	return
+}
+
+// Bulkinsert 標準でbulkinsertが使えないためライブラリを利用
+func Bulkinsert(db *gorm.DB, models []interface{}) error {
+	return gormbulk.BulkInsert(db, models, defaultChunkSize)
 }

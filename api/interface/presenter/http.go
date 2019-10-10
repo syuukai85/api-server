@@ -15,13 +15,22 @@ func NewHTTPPresenter() *HTTPPresenter {
 
 // Output Port の実装
 func (p *HTTPPresenter) SearchEvents(events []entity.Event) (*server.SearchEventsResponse, *entity.Error) {
-	res := &server.SearchEventsResponse{}
-	res.Events = events
+	res := &server.SearchEventsResponse{
+		Events: events,
+	}
 	return res, nil
 }
 
 func (p *HTTPPresenter) GetEventByID(event *entity.Event) (*server.GetEventByIDResponse, *entity.Error) {
-	res := &server.GetEventByIDResponse{}
-	res.Event = event
+	res := &server.GetEventByIDResponse{
+		Event: event,
+	}
+	return res, nil
+}
+
+func (p *HTTPPresenter) AddEvent(event *entity.Event) (*server.AddEventResponse, *entity.Error) {
+	res := &server.AddEventResponse{
+		Event: event,
+	}
 	return res, nil
 }

@@ -2,10 +2,16 @@ package gateway
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 )
+
+func entityCategoryIDToUint(entityCategoryID entity.CategoryID) *uint64 {
+	categoryID, _ := strconv.ParseUint(fmt.Sprint(entityCategoryID), 10, 64)
+	return &categoryID
+}
 
 func categoriesToEntities(categories []model.Category) []*entity.Category {
 	entityCategories := make([]*entity.Category, 0)
@@ -19,4 +25,21 @@ func categoriesToEntities(categories []model.Category) []*entity.Category {
 	}
 
 	return entityCategories
+}
+
+func categoryToModel(category *entity.Category) model.Category {
+	modelCategory := model.Category{
+		Name: category.Name,
+	}
+	return modelCategory
+}
+
+func categoriesToModels(categories []*entity.Category) []model.Category {
+	modelCategories := make([]model.Category, 0)
+
+	for _, category := range categories {
+		modelCategories = append(modelCategories, categoryToModel(category))
+	}
+
+	return modelCategories
 }

@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/connthass/connthass/api/entity"
+	"github.com/connthass/connthass/api/infrastructure/orm"
 	"github.com/connthass/connthass/api/infrastructure/waf/middleware"
 	"github.com/connthass/connthass/api/interface/controller"
 	"github.com/connthass/connthass/api/interface/gateway"
@@ -34,7 +35,7 @@ func (s *Server) setRouter() {
 	v1 := s.engine.Group("/v1")
 	apiKeyAuth := v1.Group("/")
 	apiKeyAuth.Use(middleware.APIKeyAuth(interactor.NewAPIKeyAuth(
-		gateway.NewUser(),
+		gateway.NewUser(orm.GetDB()),
 	)))
 	events := apiKeyAuth.Group("/events")
 	{
@@ -46,6 +47,7 @@ func (s *Server) setRouter() {
 	{
 		eventController := controller.NewEventController()
 		event.GET("/:eventId", s.getEventByID(eventController))
+		event.POST("", s.addEvent(eventController))
 	}
 }
 

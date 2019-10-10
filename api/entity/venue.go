@@ -6,5 +6,5 @@ type VenueID string
 // Venue イベント会場
 type Venue struct {
 	ID   VenueID `json:"id"`
-	Name string  `json:"name"`
+	Name string  `json:"name" validate:"gte=1,lte=50"`
 }

@@ -79,7 +79,7 @@ const addEventFormEnhancer = withRouter(
         categories:
           formValues.categories !== [] && formValues.categories.map(category => selectedValueExceptor(category)),
         group: formValues.group !== null && selectedValueExceptor(formValues.group),
-        venue: selectedValueExceptor(formValues.venue),
+        venue: formValues.group !== null && selectedValueExceptor(formValues.venue),
       });
     },
   })(AddEventForm)

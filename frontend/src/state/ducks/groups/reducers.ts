@@ -21,7 +21,7 @@ interface GroupState {
  * @returns {GroupState} reduce後のstate情報
  */
 const group = (
-  state: GroupState = { group: {}, isLoading: true },
+  state: GroupState = { group: {name: '', description: ''}, isLoading: true },
   action: SearchGroupAction
 ): GroupState => {
   switch (action.type) {

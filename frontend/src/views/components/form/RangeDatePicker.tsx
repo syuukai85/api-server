@@ -17,8 +17,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props {
-  idPrefix: string;
   labelPrefix: string;
+  startName: string;
+  endName: string;
   startDate: Date;
   endDate: Date;
   startDateOnChange: (date: MaterialUiPickersDate) => void;
@@ -27,8 +28,9 @@ interface Props {
 
 const RangeDatePicker: React.FC<Props> = (props: Props) => {
   const {
-    idPrefix,
     labelPrefix,
+    startName,
+    endName,
     startDate,
     endDate,
     startDateOnChange,
@@ -39,7 +41,7 @@ const RangeDatePicker: React.FC<Props> = (props: Props) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <FormControl>
         <KeyboardDatePicker
-          id={`${idPrefix}StartDate`}
+          name={startName}
           label={`${labelPrefix}開始日`}
           format="yyyy/MM/dd"
           value={startDate}
@@ -49,7 +51,7 @@ const RangeDatePicker: React.FC<Props> = (props: Props) => {
       </FormControl>
       <FormControl>
         <KeyboardTimePicker
-          id={`${idPrefix}StartTime`}
+          name={startName}
           label={`${labelPrefix}開始時間`}
           value={startDate}
           onChange={startDateOnChange}
@@ -58,7 +60,7 @@ const RangeDatePicker: React.FC<Props> = (props: Props) => {
       </FormControl>
       <FormControl>
         <KeyboardDatePicker
-          id={`${idPrefix}EndDate`}
+          name={endName}
           label={`${labelPrefix}終了日`}
           format="yyyy/MM/dd"
           value={endDate}
@@ -68,7 +70,7 @@ const RangeDatePicker: React.FC<Props> = (props: Props) => {
       </FormControl>
       <FormControl>
         <KeyboardTimePicker
-          id={`${idPrefix}EndTime`}
+          name={endName}
           label={`${labelPrefix}終了時間`}
           value={endDate}
           onChange={endDateOnChange}

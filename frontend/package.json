@@ -53,7 +53,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "rm -rf gen/api && openapi-generator generate --input-spec ../../api-docs/swagger/openapi.yaml --generator-name typescript-fetch --output gen/api --config api.json && cd gen/api && npm install"
+    "api": "rm -rf gen/api && openapi-generator generate --input-spec ../../api-docs/swagger/openapi.yaml --skip-validate-spec --generator-name typescript-fetch --output gen/api --config api.json && cd gen/api && npm install"
   },
   "eslintConfig": {
     "extends": "react-app"

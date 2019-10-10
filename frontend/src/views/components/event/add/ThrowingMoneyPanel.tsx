@@ -6,9 +6,11 @@ import UploadFileButton from '../../form/UploadFileButton';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ErrorMessage from '../../form/ErrorMessage';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { AddEventFormProps } from './AddEventFormProps';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -23,18 +25,14 @@ const useStyles = makeStyles({
   }
 });
 
-const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
-  props: FormikProps<FormValues>
+const ThrowingMoneyPanel: React.FC<AddEventFormProps & FormikProps<FormValues>> = (
+  props: AddEventFormProps & FormikProps<FormValues>
 ) => {
   const { setFieldValue } = props;
   const classes = useStyles({});
   return (
     <ExpansionPanel defaultExpanded>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
         <Typography>投げ銭QRコード画像</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -42,17 +40,17 @@ const ThrowingMoneyPanel: React.FC<FormikProps<FormValues>> = (
           <Grid item xs={12}>
             <UploadFileButton
               onChange={(e: any) => {
+                if (e.target.files.length <= 0) return;
+                if (!props.isValidFileFormat(e.target.files[0].type)) return;
                 setFieldValue('qrCodeFile', e.target.files[0]);
               }}
             />
+            <ErrorMessage name="qrCodeFile" />
           </Grid>
           {props.values.qrCodeFile !== null && (
             <Grid item xs={12}>
               <Box>
-                <img
-                  className={classes.image}
-                  src={URL.createObjectURL(props.values.qrCodeFile)}
-                />
+                <img className={classes.image} src={URL.createObjectURL(props.values.qrCodeFile)} />
               </Box>
             </Grid>
           )}

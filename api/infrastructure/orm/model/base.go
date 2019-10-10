@@ -1,4 +1,4 @@
-package entity
+package model
 
 import (
 	"time"
@@ -6,7 +6,7 @@ import (
 
 // Base 共通のモデル
 type Base struct {
-	ID        uint      `gorm:"primary_key"`
+	ID        *uint64   `gorm:"primary_key"`
 	CreatedAt time.Time `gorm:"default:current_timestamp"`
 	UpdatedAt time.Time `gorm:"default:current_timestamp on update current_timestamp"`
 }

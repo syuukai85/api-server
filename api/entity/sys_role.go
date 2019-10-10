@@ -1,7 +1,12 @@
 package entity
 
-// SysRole イベント、グループ、システムの権限
-type SysRole struct {
-	Base
-	BaseRole
-}
+const (
+	// SystemAdminID システム管理者
+	SystemAdminID SysRoleID = "1"
+
+	// GeneralUserID 一般ユーザ
+	GeneralUserID = "1"
+)
+
+// SysRoleID システムでの役割
+type SysRoleID string

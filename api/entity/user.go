@@ -1,9 +1,18 @@
 package entity
 
-// User is connthass account
+// UserID ユーザID
+type UserID string
+
+// UserUID firebaseのUID
+type UserUID string
+
+// UserAPIKey ユーザ認証に必要なKey
+type UserAPIKey string
+
+// User ユーザ
 type User struct {
-	Base
-	Name      string `gorm:"size:50;not null;unique_index"`
-	Nickname  string `gorm:"size:50;not null"`
-	SysRoleID uint
+	ID     UserID     `json:"id"`
+	UID    UserUID    `json:"uid"`
+	APIKey UserAPIKey `json:"-"`
+	Name   string     `json:"name"`
 }

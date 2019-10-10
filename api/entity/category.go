@@ -1,7 +1,10 @@
 package entity
 
+// CategoryID カテゴリID
+type CategoryID string
+
 // Category 例）Go, React, もくもく
 type Category struct {
-	Base
-	Name string `gorm:"size:50;not null;unique_index"`
+	ID   CategoryID `json:"id"`
+	Name string     `json:"name"`
 }

@@ -27,7 +27,7 @@ export const startDate = (prefix: string) =>
   Yup.date()
     .nullable()
     .typeError(messages.validate.date(prefix))
-    .min(new Date(), messages.validate.overStartDate(prefix));
+    .min(new Date(), messages.validate.overNowDate(prefix));
 
 /**
  * 終了時間のバリデーションスキーマ

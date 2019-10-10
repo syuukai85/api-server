@@ -10,10 +10,10 @@ import (
 type Group struct {
 	ID          string `json:"id" validate:"required"`
 	Name        string `json:"name" validate:"gte=1,lte=50"`
-	Description string `json:"description" validate:"max=20000,omitempty"`
-	Domain      string `json:"domain" validate:"max=255,omitempty"`
-	ColorCode   string `json:"colorCode" validate:"len=7,omitempty"`
-	ImageURL    string `json:"imageUrl" validate:"uri,max=255,omitempty"`
+	Description string `json:"description" validate:"omitempty,max=20000"`
+	Domain      string `json:"domain" validate:"omitempty,max=255"`
+	ColorCode   string `json:"colorCode" validate:"omitempty,len=7"`
+	ImageURL    string `json:"imageUrl" validate:"omitempty,uri,max=255"`
 }
 
 func (g *Group) ToEntity() *entity.Group {

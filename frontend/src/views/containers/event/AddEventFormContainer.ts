@@ -47,6 +47,7 @@ const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
     moveEventDetail: (addedEventId: number, history: H.History) => {
       history.push(`/events/${addedEventId}`);
     },
+    isValidFileFormat: (format: string) => addEventForm.isValidFileFormat(format)
   };
 };
 

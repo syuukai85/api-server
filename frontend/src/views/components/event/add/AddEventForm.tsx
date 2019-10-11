@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AddEventFormProps } from '../../../forms/types/AddEventFormProps';
 import { FormValues } from '../../../forms/addEvent';
 import { FormikProps } from 'formik';
@@ -16,11 +16,13 @@ const AddEventForm: React.FC<AddEventFormProps & FormikProps<FormValues>> = (pro
     if (props.isExistsError) {
       props.showNotificationError();
     }
+  }
+  useEffect(() => {
     if (props.addedEventId !== void 0) {
       props.moveEventDetail(props.addedEventId, props.history);
       props.showNotificationSuccess();
     }
-  }
+  })
   return (
     <form onSubmit={props.handleSubmit}>
       <BasicInfomationPanel {...props} />

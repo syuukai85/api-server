@@ -7,10 +7,18 @@ import (
 	"strings"
 
 	"github.com/connthass/connthass/api/entity"
+	"github.com/connthass/connthass/api/infrastructure/validator"
 	"github.com/connthass/connthass/api/infrastructure/waf/request"
 	"github.com/connthass/connthass/api/interface/controller"
 	"github.com/connthass/connthass/api/usecase/port/server"
 	"github.com/gin-gonic/gin"
+)
+
+var (
+	addEventError = entity.Error{
+		Code:   http.StatusUnprocessableEntity,
+		Errors: []string{"イベント追加に失敗しました"},
+	}
 )
 
 func (s *Server) searchEvents(controller *controller.EventController) func(c *gin.Context) {
@@ -59,6 +67,30 @@ func (s *Server) getEventByID(controller *controller.EventController) func(c *gi
 			return
 		}
 
+		c.JSON(http.StatusOK, res.Event)
+	}
+}
+
+func (s *Server) addEvent(controller *controller.EventController) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		var req request.AddEvent
+		c.BindJSON(&req)
+
+		if err := validator.ValidateStruct(&req); err != nil {
+			log.Printf("%#v", err.Error())
+			c.JSON(addEventError.Code, addEventError)
+			// TODO: エラーのあるフィールド名でメッセージを変える
+
+			return
+		}
+		res, err := controller.AddEvent(&server.AddEventRequestParams{
+			Event: req.ToEntity(),
+		})
+		if err != nil {
+			log.Println(err)
+			c.JSON(err.Code, err)
+			return
+		}
 		c.JSON(http.StatusOK, res.Event)
 	}
 }

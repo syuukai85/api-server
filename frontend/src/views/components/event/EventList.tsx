@@ -43,10 +43,10 @@ const EventList: React.FC<Props> = (props: Props) => {
       if (props.events.length - 1 === i)
         return <EventListItem key={i} event={event} type={props.type} />;
       return (
-        <>
+        <React.Fragment key={i}>
           <EventListItem key={i} event={event} type={props.type} />
           <Divider />
-        </>
+        </React.Fragment>
       );
     });
   };

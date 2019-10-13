@@ -1,12 +1,12 @@
 package entity
 
-// SysRoleID システムでの役割
-type SysRoleID int
-
 const (
 	// SystemAdminID システム管理者
-	SystemAdminID SysRoleID = iota + 1
+	SystemAdminID SysRoleID = "1"
 
 	// GeneralUserID 一般ユーザ
-	GeneralUserID
+	GeneralUserID = "1"
 )
+
+// SysRoleID システムでの役割
+type SysRoleID string

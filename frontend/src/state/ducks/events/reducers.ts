@@ -22,7 +22,11 @@ interface EventState {
  * @returns {EventState} reduce後のstate情報
  */
 const event = (
-  state: EventState = { event: { title: '' }, isLoading: true },
+  state: EventState = { 
+    event: 
+    { title: '', holdStartDate: new Date(), holdEndDate: new Date() },
+    isLoading: true 
+  },
   action: SearchEventAction
 ): EventState => {
   switch (action.type) {
@@ -63,22 +67,27 @@ interface AddEventState {
  * @returns {EventState} reduce後のstate情報
  */
 const addEvent = (
-  state: AddEventState = { event: { title: '' }, isLoading: true },
+  state: AddEventState = { event: 
+    { title: '', holdStartDate: new Date(), holdEndDate: new Date() },
+    isLoading: true
+  },
   action: AddEventAction
 ): EventState => {
   switch (action.type) {
-    case ActionTypes.REQUEST_EVENT: {
+    case ActionTypes.REQUEST_ADD_EVENT: {
       return Object.assign({}, state, {
         event: action.event,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        error: null,
       });
     }
-    case ActionTypes.SUCCESS_EVENT: {
+    case ActionTypes.SUCCESS_ADD_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        addedEventId: action.addedEventId,
       });
     }
-    case ActionTypes.ERROR_EVENT: {
+    case ActionTypes.ERROR_ADD_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
         error: action.error

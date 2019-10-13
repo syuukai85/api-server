@@ -27,9 +27,7 @@ const venues = [
   { value: 3, label: 'venue3' }
 ];
 
-const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (
-  props: FormikProps<FormValues>
-) => {
+const HoldAndRecruitInfomationsPanel: React.FC<FormikProps<FormValues>> = (props: FormikProps<FormValues>) => {
   const { values, handleChange, handleBlur } = props;
   return (
     <ExpansionPanel defaultExpanded>

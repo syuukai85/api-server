@@ -42,10 +42,10 @@ const GroupList: React.FC<Props> = (props: Props) => {
         return <GroupListItem key={i} group={group} />;
       } else {
         return (
-          <>
+          <React.Fragment key={i}>
             <GroupListItem key={i} group={group} />
             <Divider />
-          </>
+          </React.Fragment>
         );
       }
     });

@@ -74,18 +74,20 @@ const addEvent = (
   action: AddEventAction
 ): EventState => {
   switch (action.type) {
-    case ActionTypes.REQUEST_EVENT: {
+    case ActionTypes.REQUEST_ADD_EVENT: {
       return Object.assign({}, state, {
         event: action.event,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        error: null,
       });
     }
-    case ActionTypes.SUCCESS_EVENT: {
+    case ActionTypes.SUCCESS_ADD_EVENT: {
       return Object.assign({}, state, {
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        addedEventId: action.addedEventId,
       });
     }
-    case ActionTypes.ERROR_EVENT: {
+    case ActionTypes.ERROR_ADD_EVENT: {
       return Object.assign({}, state, {
         isLoading: action.isLoading,
         error: action.error

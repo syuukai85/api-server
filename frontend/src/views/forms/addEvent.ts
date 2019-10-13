@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import * as constants from './constants';
 import * as messages from './messages';
 import * as validates from './validates';
+import moment from 'moment';
 
 // react-selectで選択されたformの値を保持する型
 // TODO: 選択されたlabelがいらない。削除して対象のカラムに対してnumberのみを保持するようにする
@@ -26,6 +27,11 @@ export type FormValues = {
 
 export type AddEventFormInitValues = FormValues;
 
+/**
+ * 初期値を決定するpropsの値
+ *
+ * @param {AddEventFormInitValues} props 親componentから送られきたprops
+ */
 const mapPropsToValues = (props: AddEventFormInitValues) => ({
   title: props.title || '',
   description: props.description || '',
@@ -34,7 +40,7 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   qrCodeFile: props.qrCodeFile || null,
   capacity: props.capacity || 0,
   recruitStartDate: props.recruitStartDate || new Date(),
-  recruitEndDate: props.recruitEndDate || null,
+  recruitEndDate: props.recruitEndDate || moment(new Date()).add(1, 'month'),
   holdStartDate: props.holdStartDate || null,
   holdEndDate: props.holdEndDate || null,
   organizers: props.organizers || [],
@@ -43,6 +49,9 @@ const mapPropsToValues = (props: AddEventFormInitValues) => ({
   group: props.group || null
 });
 
+/**
+ * イベント追加時のvalidateSchema
+ */
 const validateSchema = Yup.object().shape({
   title: validates
     .stringLengthRange('イベント名', constants.validate.title.minLength, constants.validate.title.maxLength)

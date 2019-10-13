@@ -1,5 +1,6 @@
 import React from 'react';
-import AddEventContainer from '../../containers/event/AddEventContainer';
+import AddEventFormContainer from '../../containers/event/AddEventFormContainer';
+import NotificationContainer from '../../containers/notification/NotificationContainer';
 import Container from '@material-ui/core/Container';
 import BottomAppBar from '../../components/appBar/BottomAppBar';
 import HomeIcon from '@material-ui/icons/Home';
@@ -19,7 +20,8 @@ const AddEventScene: React.FC = () => {
   return (
     <>
       <Container className={classes.container}>
-        <AddEventContainer />
+        <AddEventFormContainer />
+        <NotificationContainer />
       </Container>
       <BottomAppBar menus={menus} />
     </>

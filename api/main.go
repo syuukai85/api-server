@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
-	"github.com/connthass/connthass/api/infrastructure/orm"
-	"github.com/connthass/connthass/api/infrastructure/orm/seed"
-	"github.com/connthass/connthass/api/infrastructure/validator"
-	"github.com/connthass/connthass/api/infrastructure/waf"
+	"github.com/syuukai85/api-server/api/infrastructure/orm"
+	"github.com/syuukai85/api-server/api/infrastructure/orm/seed"
+	"github.com/syuukai85/api-server/api/infrastructure/validator"
+	"github.com/syuukai85/api-server/api/infrastructure/waf"
 	"github.com/joho/godotenv"
 )
 

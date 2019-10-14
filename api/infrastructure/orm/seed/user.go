@@ -3,9 +3,9 @@ package seed
 import (
 	"fmt"
 
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/interface/gateway"
-	"github.com/connthass/connthass/api/infrastructure/orm/model"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/interface/gateway"
+	"github.com/syuukai85/api-server/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 	uuid "github.com/satori/go.uuid"
 )

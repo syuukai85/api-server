@@ -1,4 +1,4 @@
-module github.com/connthass/connthass/api
+module github.com/syuukai85/api-server/api
 
 go 1.12
 

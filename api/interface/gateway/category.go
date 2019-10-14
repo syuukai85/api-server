@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/orm/model"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/infrastructure/orm/model"
 )
 
 func entityCategoryIDToUint(entityCategoryID entity.CategoryID) *uint64 {

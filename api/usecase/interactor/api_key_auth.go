@@ -3,9 +3,9 @@ package interactor
 import (
 	"net/http"
 
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/usecase/port/repository"
-	"github.com/connthass/connthass/api/usecase/port/server"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/usecase/port/repository"
+	"github.com/syuukai85/api-server/api/usecase/port/server"
 )
 
 const (

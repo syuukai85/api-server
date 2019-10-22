@@ -3,12 +3,12 @@ package waf
 import (
 	"net/http"
 
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/orm"
-	"github.com/connthass/connthass/api/infrastructure/waf/middleware"
-	"github.com/connthass/connthass/api/interface/controller"
-	"github.com/connthass/connthass/api/interface/gateway"
-	"github.com/connthass/connthass/api/usecase/interactor"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/infrastructure/orm"
+	"github.com/syuukai85/api-server/api/infrastructure/waf/middleware"
+	"github.com/syuukai85/api-server/api/interface/controller"
+	"github.com/syuukai85/api-server/api/interface/gateway"
+	"github.com/syuukai85/api-server/api/usecase/interactor"
 	"github.com/gin-gonic/gin"
 )
 

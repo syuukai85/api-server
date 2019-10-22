@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/connthass/connthass/api/entity"
+	"github.com/syuukai85/api-server/api/entity"
 )
 
 // APIKeyAuth Interactorで実装

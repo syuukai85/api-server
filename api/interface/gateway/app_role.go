@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/connthass/connthass/api/entity"
+	"github.com/syuukai85/api-server/api/entity"
 )
 
 func EntityAppRoleIDToUint(entityAppRoleID entity.AppRoleID) *uint64 {

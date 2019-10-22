@@ -1,7 +1,7 @@
 package orm
 
 import (
-	"github.com/connthass/connthass/api/infrastructure/orm/model"
+	"github.com/syuukai85/api-server/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
 )
 

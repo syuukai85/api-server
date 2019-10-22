@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/interface/gateway"
-	"github.com/connthass/connthass/api/interface/presenter"
-	"github.com/connthass/connthass/api/usecase/interactor"
-	"github.com/connthass/connthass/api/usecase/port/server"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/interface/gateway"
+	"github.com/syuukai85/api-server/api/interface/presenter"
+	"github.com/syuukai85/api-server/api/usecase/interactor"
+	"github.com/syuukai85/api-server/api/usecase/port/server"
 )
 
 type EventController struct {

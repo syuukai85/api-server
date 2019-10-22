@@ -1,6 +1,6 @@
 package model
 
-// User is connthass account
+// User is syuukai account
 type User struct {
 	Base
 	Name      string  `gorm:"size:50;not null"`

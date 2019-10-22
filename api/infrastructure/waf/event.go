@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/connthass/connthass/api/entity"
-	"github.com/connthass/connthass/api/infrastructure/validator"
-	"github.com/connthass/connthass/api/infrastructure/waf/request"
-	"github.com/connthass/connthass/api/interface/controller"
-	"github.com/connthass/connthass/api/usecase/port/server"
+	"github.com/syuukai85/api-server/api/entity"
+	"github.com/syuukai85/api-server/api/infrastructure/validator"
+	"github.com/syuukai85/api-server/api/infrastructure/waf/request"
+	"github.com/syuukai85/api-server/api/interface/controller"
+	"github.com/syuukai85/api-server/api/usecase/port/server"
 	"github.com/gin-gonic/gin"
 )
 

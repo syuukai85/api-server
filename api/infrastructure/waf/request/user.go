@@ -3,7 +3,7 @@ package request
 import (
 	"fmt"
 
-	"github.com/connthass/connthass/api/entity"
+	"github.com/syuukai85/api-server/api/entity"
 )
 
 // User ユーザ

@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    container_name: 'connthass-db'
+    container_name: 'syuukai-db'
     build: ./db
     volumes:
       - ./db/data:/var/lib/mysql
@@ -10,7 +10,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
   api:
-    container_name: 'connthass-api'
+    container_name: 'syuukai-api'
     build: ./api
     volumes:
       - ./api:/go/api

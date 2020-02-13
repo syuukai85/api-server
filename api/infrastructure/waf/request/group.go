@@ -6,6 +6,10 @@ import (
 	"github.com/connthass/connthass/api/entity"
 )
 
+type GetGroupByID struct {
+	GroupID string `uri:"groupId" binding:"required"`
+}
+
 // Group グループ
 type Group struct {
 	ID          string `json:"id" validate:"required"`

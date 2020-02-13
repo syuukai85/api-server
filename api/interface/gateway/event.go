@@ -59,7 +59,7 @@ func (e *Event) FindByID(eventID entity.EventID) (*entity.Event, *entity.Error) 
 	stringEventID := fmt.Sprint(eventID)
 	firstEvent := e.db.First(&event, stringEventID)
 
-	if firstEvent.RecordNotFound() {
+	if firstEvent.Error != nil {
 		return nil, &entity.Error{
 			Code:   http.StatusNotFound,
 			Errors: []string{eventNotFound}}

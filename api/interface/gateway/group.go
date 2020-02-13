@@ -2,12 +2,17 @@ package gateway
 
 import (
 	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/connthass/connthass/api/entity"
 	"github.com/connthass/connthass/api/infrastructure/orm"
 	"github.com/connthass/connthass/api/infrastructure/orm/model"
 	"github.com/jinzhu/gorm"
+)
+
+const (
+	groupNotFound = "グループが見つかりませんでした"
 )
 
 // Group DBモデルとやり取りをする
@@ -58,4 +63,30 @@ func groupToModel(group *entity.Group) model.Group {
 	modelGroup.ID = groupID
 	modelGroup.ColorCode = group.ColorCode
 	return modelGroup
+}
+
+// FindByID IDからグループを検索
+func (g *Group) FindByID(groupID entity.GroupID) (*entity.Group, *entity.Error) {
+	var group model.Group
+
+	stringGroupID := fmt.Sprint(groupID)
+	firstGroup := g.db.First(&group, stringGroupID)
+
+	if firstGroup.Error != nil {
+		return nil, &entity.Error{
+			Code:   http.StatusNotFound,
+			Errors: []string{groupNotFound},
+		}
+	}
+
+	entityGroup := &entity.Group{
+		ID:          entity.GroupID(stringGroupID),
+		ColorCode:   group.ColorCode,
+		Name:        group.Name,
+		Description: group.Description,
+		Domain:      group.Domain,
+		ImageURL:    group.ImageURL,
+	}
+
+	return entityGroup, nil
 }
